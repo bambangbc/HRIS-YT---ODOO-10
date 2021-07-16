@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_kuota,access_kuota,model_hr_kuota,base.group_user,1,1,1,1
+access_kuota_history,access_kuota_history,model_hr_kuota_history,base.group_user,1,1,1,1

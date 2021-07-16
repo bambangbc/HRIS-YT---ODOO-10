@@ -1,0 +1,26 @@
+<odoo>
+
+	<record id="mutasi_sequence" model="ir.sequence">
+		<field name="name">Mutasi</field>
+		<field name="code">hr.mutasi</field>
+		<field name="prefix"></field>
+		<field name="suffix">/SKK/YT/%(year)s</field>
+		<field name="padding">4</field>
+		<field eval="1" name="number_next"/>
+        <field eval="1" name="number_increment"/>
+	</record>
+
+    <record forcecreate="True" model="ir.cron" id="move_mutation">
+        <field name="name">Auto move mutation</field>
+        <field name="active">True</field>
+        <field name="user_id" ref="base.user_root"/>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False"/>
+        <field name="model" eval="'hr.mutasi'"/>
+        <field name="function" eval="'action_mutation'"/>
+        <field name="args" eval="'()'"/>
+    </record>
+
+</odoo>

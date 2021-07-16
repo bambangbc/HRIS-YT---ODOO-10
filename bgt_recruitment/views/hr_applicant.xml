@@ -1,0 +1,202 @@
+<odoo>
+
+        <record id="bgt_applicant_form" model="ir.ui.view">
+            <field name="name">bgt.applicant.form</field>
+            <field name="model">hr.applicant</field>
+            <field name="inherit_id" ref="hr_recruitment.crm_case_form_view_job"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+
+                <field name="partner_id" position="before">
+                    <field name="gender"/>
+                    <field name="place_of_birth"/>
+                    <field name="birthday"/>
+                    <field name="alamat_domisili"/>
+                    <field name="alamat_ktp"/>
+                    <field name="no_ktp"/>
+                    <field name="religion_id" options='{"no_create": 1, "no_create_edit": 1}'/>
+                    <field name="country_id" invisible="1"/>
+                    <field name="anak_ke"/>
+                    <field name="marital"/>
+                    <field name="hobi" invisible="1"/>
+                </field>
+                <field name="categ_ids" position="replace">
+                    <field name="categ_ids" invisible="1"/>
+                </field>
+                <field name="partner_id" position="replace">
+                    <field name="partner_id" invisible="1"/>
+                </field>
+                <field name="partner_phone" position="replace">
+                    <field name="partner_phone" invisible="1"/>
+                </field>
+                <field name="type_id" position="replace">
+                    <field name="type_id" options='{"no_create": 1, "no_create_edit": 1}'/>
+                </field>
+                <!--xpath expr="//form/sheet/separator" position="before">
+                    <separator string="Applicant's Detail Information"/>
+                    <notebook>
+                        <page string="Pendidikan Formal">
+                            <field name="education_formal_ids" mode="tree">
+                                <tree editable="bottom">
+                                    <field name="jenjang" options='{"no_create": 1, "no_create_edit": 1}'/>
+                                    <field name="name"/>
+                                    <field name="lokasi"/>
+                                    <field name="jurusan"/>
+                                    <field name="start_year"/>
+                                    <field name="end_year"/>
+                                    <field name="ipk"/>
+                                    <field name="sertifikat"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Pendidikan Non-Formal">
+                            <field name="education_nonformal_ids" mode="tree">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="lokasi"/>
+                                    <field name="keterampilan"/>
+                                    <field name="tahun"/>
+                                    <field name="sertifikat"/>
+                                    <field name="keterangan"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Keterampilan">
+                            <field name="skill_ids" mode="tree">
+                                <tree string="applicant Skills" editable="bottom">
+                                    <field name="jenis_keterampilan"/>
+                                    <field name="keterampilan"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Pengalaman Organisasi">
+                            <field name="organization_ids" mode="tree">
+                                <tree string="applicant Organization" editable="bottom">
+                                    <field name="name"/>
+                                    <field name="jabatan"/>
+                                    <field name="kegiatan"/>
+                                    <field name="usia"/>
+                                    <field name="periode"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Beasiswa">
+                            <field name="scholarship_ids" mode="tree">
+                                <tree string="applicant Scholarship" editable="bottom">
+                                    <field name="jenjang" options='{"no_create": 1, "no_create_edit": 1}'/>
+                                    <field name="lembaga"/>
+                                    <field name="tahun"/>
+                                    <field name="ikatan_dinas"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Riwayat Keluarga">
+                            <field name="family_ids" mode="tree">
+                                <tree string="applicant Family" editable="bottom">
+                                        <field name="family"/>
+                                        <field name="name"/>
+                                        <field name="jenis_kelamin"/>
+                                        <field name="jenjang"/>
+                                        <field name="age"/>
+                                        <field name="address"/>
+                                        <field name="work"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Pengalaman Bekerja">
+                            <field name="work_ids" mode="tree">
+                                <tree string="Work Experience" editable="bottom">
+                                    <field name="name"/>
+                                    <field name="bidang"/>
+                                    <field name="alamat"/>
+                                    <field name="jabatan"/>
+                                    <field name="deskripsi"/>
+                                    <field name="periode"/>
+                                    <field name="alasan_resign"/>
+                                    <field name="last_salary"/>
+                                    <field name="sertifikat"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Informasi Lain">
+                                Uraikan Kelebihan diri Anda
+                                <field name="kelebihan"/>
+
+                                Uraikan Kelemahan diri Anda
+                                <field name="kekurangan"/>
+
+                                Deskripsikan diri anda
+                                <field name="deskripsi_diri"/>
+
+                                Tujuan anda bekerja
+                                <field name="tujuan_bekerja"/>
+
+                                Mengapa Anda ingin bekerja di Perusahaan ini?
+                                <field name="alasan_memilih_perusahaan"/>
+
+                                Gaji yang diharapkan
+                                <field name="harapan_gaji"/>
+
+                                Fasilitas yang diharapkan
+                                <field name="harapan_fasilitas"/>
+
+                                <p>Kapan Anda dapat mulai bekerja</p>
+                                <field name="work_date"/>
+
+                                <p>Bagaimana cara anda bekerja d ibawah tekanan?</p>
+                                <field name="bekerja_dibawah_tekanan"/>
+
+                                Lingkungan kerja seperti apa yang anda sukai?
+                                <field name="lingkungan_yang_disukai"/>
+
+                                <p>Bersediakah Anda ditempatkan diluar daerah?</p>
+                                <field name="bekerja_diluar_daerah"/>
+
+                                <p>Bersedia jika dikontrak selama 2 tahun?</p>
+                                <field name="kontrak_2_tahun"/>
+
+                                <p>Pilih pekerjaan yang dilamar (2 pilihan)</p>
+                                <field name="pekerjaan_yang_dilamar"/>
+
+                                Gambarkan pekerjaan seperti apa pada posisi yang anda lamar
+                                <field name="gambaran_diri"/>
+
+                                <p>Pernah Mengalami Kecelakaan</p>
+                                <field name="pernah_kecelakaan"/>
+
+                                <p>Tahun Kecelakaan</p>
+                                <field name="tahun_kecelakaan"/>
+
+                                <p>Pernah Dirawat di Rumahsakit</p>
+                                <field name="pernah_dirawat_di_rumahsakit"/>
+
+                                <p>Tahun Dirawat</p>
+                                <field name="tahun_dirawat_di_rumahsakit"/>
+
+                                <p>Penyebab</p>
+                                <field name="penyebab_dirawat_di_rumahsakit"/>
+                        </page>
+                    </notebook>
+            </xpath-->
+            </field>
+        </record>
+
+    <menuitem
+        name="Recruitment"
+        id="bgt_recruitment.menu_hr_recruitment_root"
+        web_icon="hr_recruitment,static/description/icon.png"
+        groups="hr_recruitment.group_hr_recruitment_user,bgt_recruitment.group_recruitment_dept_head"
+        sequence="80"/>
+
+    <menuitem id="bgt_recruitment.menu_hr_recruitment_configuration" name="Configuration" parent="menu_hr_recruitment_root"
+        sequence="100" groups="hr_recruitment.group_hr_recruitment_user"/>
+
+    <!-- ALL JOBS REQUESTS -->
+    <menuitem parent="menu_hr_recruitment_root" id="bgt_recruitment.menu_hr_job_position" action="hr_recruitment.action_hr_job" sequence="1" groups="hr_recruitment.group_hr_recruitment_user,bgt_recruitment.group_recruitment_dept_head"/>
+    <menuitem parent="menu_hr_recruitment_configuration" id="bgt_recruitment.menu_hr_job_position_config" action="hr_recruitment.action_hr_job_config" sequence="10" groups="hr_recruitment.group_hr_recruitment_user"/>
+    <menuitem
+        name="Applications"
+        parent="menu_hr_recruitment_root"
+        id="bgt_recruitment.menu_crm_case_categ0_act_job" action="hr_recruitment.crm_case_categ0_act_job" sequence="2" groups="hr_recruitment.group_hr_recruitment_user,bgt_recruitment.group_recruitment_dept_head"/>
+
+</odoo>

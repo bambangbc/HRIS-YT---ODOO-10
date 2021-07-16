@@ -1,0 +1,38 @@
+<odoo>
+	<data>
+
+	    <record id="payroll_report_form_view" model="ir.ui.view">
+			<field name="name">payroll.report.form</field>
+			<field name="model">payroll.report.wizard</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+		        <form string="Payroll Report">
+	                <group col="4" fill="0" attrs="{'invisible':[('state_x','!=','get')]}">
+	                    <separator colspan="4" string="Excel Report Generated. Click link below to download ..."/>
+                        <field name="name" invisible="1"/>
+                        <field name="state_x" invisible="1"/>
+                        <field name="data_x" nolabel="1" width="100" filename="name"/>
+	                </group>
+	                <newline/>
+	                <group attrs="{'invisible':[('state_x','=','get')]}">
+	                	<field name="category" widget="radio" options="{'horizontal': true}"/>
+		   				<field name="calendar_id" options="{'no_create': true}" attrs="{'invisible':[('category','!=','Harian')],'required':[('category','=','Harian')]}"/>
+		            	<label for="start_date" string="Payroll Date"/>
+		   				<div>
+		   					<field name="start_date" attrs="{'invisible':[('category','!=','Staff')],'required':[('category','=','Staff')]}" class="oe_inline" placeholder="Start Date" focus="1"/> - <field name="end_date" class="oe_inline" placeholder="End Date" required="True" attrs="{'invisible':[('category','=','get')]}"/>
+		   				</div>
+
+		          	</group>
+
+	                <footer attrs="{'invisible':[('state_x','=','get')]}">
+	                    <button name="print_excel_report" string="Export Report" type="object" class="oe_highlight"/>
+	                    <label string=" or "/>
+	                    <button string="Cancel" class="oe_link" special="cancel" />
+	                </footer>
+
+		        </form>
+	    	</field>
+	    </record>
+
+     </data>
+</odoo>

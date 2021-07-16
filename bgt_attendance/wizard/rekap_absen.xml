@@ -1,0 +1,36 @@
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="view_wizard_rekap_absen">
+            <field name="name">Print Report Rekap Absensi</field>
+            <field name="model">report_rekap_absen</field>
+            <field name="arch" type="xml">
+                <form string="Report" version="7.0">
+                    <group>
+                        <field name="dates"/>
+                    </group>
+                    <footer>
+                        <button string='Proces' type='object' class="btn-primary" name='fill_table'/>
+                        or
+                        <button string="Cancel" class="btn-default" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window name="Print Report Rekap Absen"
+            res_model="report_rekap_absen"
+            view_mode="form"
+            target="new"
+            context="{}"
+            id="action_rekap_absen"/>
+
+        <!--menuitem
+            action="action_rekap_absen"
+            id="menu_rekap_absen"
+            parent="hr_attendance.menu_hr_attendance_manage_attendances"
+            name="Rekap Absen Harian"
+            sequence="100"
+        /-->
+    </data>
+</openerp>

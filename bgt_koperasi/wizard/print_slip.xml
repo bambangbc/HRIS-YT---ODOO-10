@@ -1,0 +1,25 @@
+<odoo>
+		
+	    <record id="report_slip_koperasi_view" model="ir.ui.view">
+            <field name="name">slip.koperasi.form</field>
+            <field name="model">slip.koperasi</field>
+            <field name="arch" type="xml">
+                <form string="Slip Koperasi">
+                    <p class="oe_grey">
+                        Print selected data slip...
+                    </p>
+                    <footer>
+                        <button string="Create Slip" name="action_print" type="object" default_focus="1" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window id="action_report_slip_koperasi"
+            multi="True"
+            key2="client_action_multi" name="Create Slip"
+            res_model="slip.koperasi" src_model="hr.koperasi"
+            view_mode="form" target="new" view_type="form"/>
+		
+</odoo>

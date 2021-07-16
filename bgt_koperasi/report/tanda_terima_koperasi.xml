@@ -1,0 +1,116 @@
+<?xml version="1.0"?>
+<odoo>
+
+	<report 
+	    id="bgt_koperasi_report"
+	    string="Tanda Terima"
+	    model="hr.koperasi" 
+	    report_type="qweb-pdf"
+	    file="bgt_koperasi.report_koperasi" 
+	    name="bgt_koperasi.report_koperasi" 
+	/>
+
+	<template id="report_koperasi_document">
+		<t t-call="report.html_container">
+			<t t-foreach="docs" t-as="o">
+				<div class="page">
+					<div class="row" style="font-size:16px">
+						<table width="100%" style="font-size:16px">
+							<tr>
+								<td width="100%" align="center"><strong>TANDA TERIMA PINJAMAN KOPERASI</strong></td>
+							</tr>
+							<tr>
+								<td width="100%" align="center"><strong>NO : <span t-field="o.name"/></strong></td>
+							</tr>
+						</table>
+						<p/>
+							Telah terima dari :
+						<p/>
+						<table width="100%" style="font-size:15px">
+							<tr>
+								<td width="30%" style="text-align: left;">Nama</td>
+								<td width="2%">:</td>
+								<td width="68%"><span t-field="o.employee_id.name"/></td>
+							</tr>
+							<tr>
+								<td width="30%" style="text-align: left;">NIK</td>
+								<td width="2%">:</td>
+								<td width="68%"><span t-field="o.employee_id.nik"/></td>
+							</tr>
+							<tr>
+								<td width="30%" style="text-align: left;">Divisi</td>
+								<td width="2%">:</td>
+								<td width="68%"><span t-field="o.employee_id.department_id.name"/></td>
+							</tr>
+							<tr>
+								<td width="30%" style="text-align: left;">Posisi</td>
+								<td width="2%">:</td>
+								<td width="68%"><span t-field="o.employee_id.job_id.name"/></td>
+							</tr>
+							<tr>
+								<td width="30%" style="text-align: left;">Uang sebesar</td>
+								<td width="2%">:</td>
+								<td width="68%">Rp. <t t-esc="'{0:,.2f}'.format(int(o.pinjaman))"/></td>
+							</tr>
+							<tr>
+								<td width="30%" style="text-align: left;">Tenor</td>
+								<td width="2%">:</td>
+								<td width="68%"><span t-field="o.angsuran"/></td>
+							</tr>
+
+						</table>
+						<br/>
+						<br/>
+
+						<table width="100%" style="font-size:15px">
+							<tr>
+								<td style="width:20%" align="left">Bandung, <span t-field="o.tanggal_pengajuan"/></td>
+								<td style="width:80%"/>
+							</tr>
+							<tr>
+								<td style="width:50%" align="left">Yang menyerahkan, </td>
+								<td style="width:50%" align="right">Yang Menerima,</td>
+							</tr>
+						</table>
+						<p><span style="color: #ffffff;">a</span></p>
+						<p><span style="color: #ffffff;">a</span></p>
+						<p><span style="color: #ffffff;">a</span></p>
+						<table width="100%" style="font-size:10px">
+							<tr>
+								<td style="width:50%" align="left">(<span style="color: #ffffff;">aaaaaaaaaaaaaaaaaaa</span>)</td>
+								<td style="width:50%" align="right">(<span style="color: #ffffff;">aaaaaaaaaaaaaaaaaaa</span>)</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</t>
+		</t>
+	</template>
+
+	<template id="report_koperasi">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="bgt_koperasi.report_koperasi_document" t-lang="o.create_uid.partner_id.lang"/>
+        </t>
+    </template>
+
+
+    <record id="paperformat_koperasi" model="report.paperformat">
+        <field name="name">Serah Terima Pinjaman</field>
+        <field name="default" eval="True"/>
+        <field name="format">A5</field>
+        <field name="orientation">Landscape</field>
+        <field name="margin_top">10</field>
+        <field name="margin_bottom">20</field>
+        <field name="margin_left">20</field>
+        <field name="margin_right">20</field>
+        <field name="header_line" eval="False" />
+        <field name="header_spacing">0</field>
+        <field name="dpi">96</field>
+    </record>
+
+
+    <record id="bgt_koperasi_report" model="ir.actions.report.xml">
+      	<field name="paperformat_id" ref="bgt_koperasi.paperformat_koperasi"/>
+    </record>
+
+</odoo>

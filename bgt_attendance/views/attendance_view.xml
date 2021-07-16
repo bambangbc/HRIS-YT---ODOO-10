@@ -1,0 +1,98 @@
+<odoo>
+        
+    <record id="hr_attendance_view_filter_finger" model="ir.ui.view">
+        <field name="name">hr_attendance_view_filter_finger</field>
+        <field name="model">hr.attendance</field>
+        <field name="inherit_id" ref="hr_attendance.hr_attendance_view_filter"/>
+        <field name="arch" type="xml">
+            <field name="employee_id" position="after">
+                <field name="absen_id"/>
+                <field name="no_mesin"/>
+                <field name="job_id"/>
+            </field>
+            <filter name="employee" position="after">
+                <filter name="absen_id" string="ID Absen" context="{'group_by':'absen_id'}"/>
+                <filter name="no_mesin" string="No Mesin" context="{'group_by':'no_mesin'}"/>
+                <filter name="job_id" string="Jabatan" context="{'group_by':'job_id'}"/>
+                <filter name="department_id" string="Department" context="{'group_by':'department_id'}"/>
+            </filter>
+        </field>
+    </record>
+
+    <record id="view_attendace_finger" model="ir.ui.view">
+        <field name="name">additional.form.view.hr.attendance.finger</field>
+        <field name="model">hr.attendance</field>
+        <field name="inherit_id" ref="hr_attendance.hr_attendance_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='employee_id']" position="after">
+                <field name="job_id" readonly="1"/>
+                <field name="department_id" readonly="1"/>
+            </xpath>
+            <xpath expr="//field[@name='check_in']" position="attributes">
+                <attribute name="groups">hr.group_hr_user,hr.group_hr_manager</attribute>
+            </xpath>
+            <xpath expr="//field[@name='check_out']" position="attributes">
+                <attribute name="groups">hr.group_hr_user,hr.group_hr_manager</attribute>
+            </xpath>
+            <xpath expr="/form/sheet" position="inside">
+                <group>
+                    <group>
+                        <field name="absen_id" groups="hr.group_hr_user,hr.group_hr_manager"/>
+                        <field name="no_mesin" groups="hr.group_hr_user,hr.group_hr_manager"/>
+                        <field name="status" groups="hr.group_hr_user,hr.group_hr_manager"/>
+                        <field name="telat" groups="hr.group_hr_user,hr.group_hr_manager"/>
+                    </group>
+                    <group>
+                        <field name="tanggal" groups="hr.group_hr_user,hr.group_hr_manager"/>
+                        <field name="bulan" groups="hr.group_hr_user,hr.group_hr_manager"/>
+                        <field name="tahun" groups="hr.group_hr_user,hr.group_hr_manager"/>
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_attendace_finger_tree" model="ir.ui.view">
+        <field name="name">additional.form.view.hr.attendance.finger.tree</field>
+        <field name="model">hr.attendance</field>
+        <field name="inherit_id" ref="hr_attendance.view_attendance_tree"/>
+        <field name="arch" type="xml">
+            <field name="employee_id" position="after">
+                <field name="job_id" readonly="1"/>
+                <field name="department_id" readonly="1"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_attendance_tree" model="ir.ui.view">
+        <field name="name">hr.attendance.finger.tree</field>
+        <field name="model">hr.attendance.finger</field>
+        <field name="arch" type="xml">
+            <tree string="Employee attendances finger print" editable="Top">
+                <!-- <field name="employee_id"/> -->
+                <field name="date" required="1"/>
+                <field name="absen_id" required="1"/>
+                <field name="no_mesin"/>
+                <field name="status"/>
+                <field name="telat"/>
+                <field name="tanggal"/>
+                <field name="bulan"/>
+                <field name="tahun"/>
+                <field name="notes"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="hr_attendance_action_finger" model="ir.actions.act_window">
+        <field name="name">Finger Print</field>
+        <field name="res_model">hr.attendance.finger</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree</field>
+        <field name="context">{}</field>
+        <field name="view_id" ref="view_attendance_tree" />
+    </record>
+
+        <menuitem id="menu_hr_attendancefinger" name="Finger Print" parent="hr_attendance.menu_hr_attendance_manage_attendances" sequence="90" groups="hr.group_hr_attendance" action="hr_attendance_action_finger"/>
+
+</odoo>

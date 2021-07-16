@@ -1,0 +1,365 @@
+<?xml version="1.0"?>
+<odoo>
+
+	<report
+	    id="bgt_pkwt_report"
+	    string="PKWT"
+	    model="hr.contract"
+	    report_type="qweb-pdf"
+	    file="bgt_contract.report_pkwt_document"
+	    name="bgt_contract.report_pkwt_document"
+	/>
+
+	<template id="report_pkwt_document">
+		<t t-call="report.html_container">
+			<t t-foreach="docs" t-as="o">
+				<div class="page">
+					<div class="row" style="font-size:15px">
+						<table width="100%">
+							<tr>
+							<td width="100%" align="center"><img src="/bgt_contract/static/src/image/pkwt_header.png" class="img img-responsive" /></td>
+							</tr>
+						</table>
+						<p/>
+						<table width="100%" style="font-size:14px">
+							<tr>
+								<td width="100%" align="center"><strong>SURAT PERJANJIAN KERJA UNTUK WAKTU TERTENTU</strong></td>
+							</tr>
+							<tr>
+								<td width="100%" align="center"><strong>NO : <span t-field="o.name"/></strong></td>
+							</tr>
+						</table>
+						<p/>
+	                    <p/>
+						Pada hari ini <span t-field="o.hari"/>, <span t-field="o.tanggal"/>. Bertempat di PT. Karya Utamaputra Mandiri, Jalan Cicukang F2 no 60, Cigondewah Kaler, Bandung 40214.
+	                    <p/>
+						Yang bertanda tangan di bawah ini:
+	                    <p/>
+
+						<table width="100%" style="font-size:14px">
+							<tr>
+								<td width="6%">1.</td>
+								<td width="32%">Nama</td>
+								<td width="2%">:</td>
+								<td width="60%" align="justify"><strong><span t-field="o.company_id.direktur_id.name"/></strong></td>
+							</tr>
+							<tr>
+								<td width="6%"/>
+								<td width="32%">Alamat</td>
+								<td width="2%">:</td>
+								<td width="60%" style="text-align: justify;"><span t-field="o.company_id.direktur_id.alamat_domisili"/> <span t-field="o.employee_id.kecamatan_id.name"/> <span t-field="o.employee_id.kota_id.name"/></td>
+							</tr>
+							<tr>
+								<td width="6%"/>
+								<td width="32%">Jabatan</td>
+								<td width="2%">:</td>
+								<td width="60%" align="justify"><span t-field="o.company_id.direktur_id.job_id.name"/></td>
+							</tr>
+						</table>
+						<p/>
+						<table width="100%" style="font-size:14px">
+							<tr>
+								<td width="6%"></td>
+								<td width="94%" align="justify">Dalam hal ini bertindak untuk dan atas nama:</td>
+							</tr>
+						</table>
+						<p/>
+						<table width="100%" style="font-size:14px">
+							<tr>
+								<td width="6%"></td>
+								<td width="32%">Perusahaan</td>
+								<td width="2%">:</td>
+								<td width="60%" align="justify"><span t-field="o.company_id.name"/></td>
+							</tr>
+							<tr>
+								<td width="6%"/>
+								<td width="32%">Alamat</td>
+								<td width="2%">:</td>
+								<td width="60%" style="text-align: justify;"><span t-field="o.company_id.street"/> <span t-field="o.company_id.street2"/></td>
+							</tr>
+							<tr>
+								<td width="6%"/>
+								<td width="32%">Jenis Usaha</td>
+								<td width="2%">:</td>
+								<td width="60%" align="justify">Perdagangan jasa perhiasan logam</td>
+							</tr>
+						</table>
+						<p/>
+						<table width="100%" style="font-size:14px">
+							<tr>
+								<td width="6%"></td>
+								<td width="94%" align="justify">Selanjutnya dalam perjanjian ini disebut sebagai Pihak Pertama (Pengusaha)</td>
+							</tr>
+						</table>
+						<p/>
+						<table width="100%" style="font-size:14px">
+							<tr>
+								<td width="6%">2.</td>
+								<td width="32%">Nama</td>
+								<td width="2%">:</td>
+								<td width="60%" align="justify"><strong><span t-field="o.employee_id.name"/></strong></td>
+							</tr>
+							<tr>
+								<td width="6%"/>
+								<td width="32%">Jenis Kelamin</td>
+								<td width="2%">:</td>
+								<td width="60%" align="justify"><span t-field="o.employee_id.gender"/></td>
+							</tr>
+							<tr>
+								<td width="6%"/>
+								<td width="32%">Tempat, Tanggal Lahir</td>
+								<td width="2%">:</td>
+								<td width="60%" style="text-align: justify;"><span t-field="o.employee_id.place_of_birth"/>, <span t-field="o.employee_id.birthday" t-field-options="{&quot;format&quot;: &quot;dd-MM-y&quot;}"/></td>
+							</tr>
+							<tr>
+								<td width="6%"/>
+								<td width="32%">Alamat</td>
+								<td width="2%">:</td>
+								<td width="60%" style="text-align: justify;"><span t-field="o.employee_id.alamat_domisili"/>  <span t-field="o.employee_id.kecamatan_id.name"/> <span t-field="o.employee_id.kota_id.name"/></td>
+							</tr>
+							<tr>
+								<td width="6%"/>
+								<td width="32%">No KTP</td>
+								<td width="2%">:</td>
+								<td width="60%" align="justify"><span t-field="o.employee_id.identification_id"/></td>
+							</tr>
+						</table>
+						<p/>
+						<p align="justify">Kedua belah pihak sepakat untuk membuat perjanjian kerja yang terdiri dari satu lembar dengan ketentuan dan syarat-syarat sebagai berikut:</p>
+						<p/>
+						<table width="100%" style="font-size:14px">
+							<tr>
+								<td width="100%" align="center"><strong>PASAL 1</strong></td>
+							</tr>
+						</table>
+						<p/>
+						<table width="100%" style="font-size:14px">
+							<tr>
+								<td width="6%">1.1</td>
+								<td width="94%" align="justify">Pihak Kedua diterima bekerja oleh Pihak Pertama dengan status sebagai Karyawan PKWT untuk jangka waktu selama 1 (satu) tahun, terhitung mulai tanggal <span t-field="o.date_start" t-field-options="{&quot;format&quot;: &quot;dd MMMM y&quot;}"/> sampai <span t-field="o.date_end" t-field-options="{&quot;format&quot;: &quot;dd MMMM y&quot;}"/> dan ditempatkan sebagai</td>
+							</tr>
+							<tr>
+								<td width="6%"></td>
+								<td width="94%" align="justify"><span t-field="o.employee_id.job_id.name"/></td>
+							</tr>
+						</table>
+						<p/>
+						<table width="100%" style="font-size:14px">
+							<tr>
+								<td width="100%" align="center"><strong>PASAL 2</strong></td>
+							</tr>
+						</table>
+						<table width="100%" style="font-size:14px">
+							<tr>
+								<td width="6%">2.1</td>
+								<td width="6%">a.</td>
+								<td width="88%" align="justify">Pihak Kedua bersedia mengikuti dan melaksanakan seluruh ketentuan yang telah diatur baik dalam Pedoman Peraturan dan Tata Tertib Karyawan maupun ketentuan lain yang menjadi Keputusan Direksi dan Managemen Perusahaan.</td>
+							</tr>
+							<p/>
+							<tr>
+								<td width="6%"></td>
+								<td width="6%">b.</td>
+								<td width="88%" align="justify">Pihak Kedua bersedia menyimpan dan menjaga kerahasiaan baik dokumen maupun informasi milik Pihak Pertama dan tidak diperbolehkan memberikan dokumen atau informasi yang diketahui baik secara lisan maupun tertulis kepada pihak lain yang tidak berkepentingan.</td>
+							</tr>
+							<tr>
+								<td width="6%"></td>
+								<td width="6%">c.</td>
+								<td width="88%" align="justify">Pihak Kedua bertanggung jawab penuh terhadap peralatan kerja Pihak Pertama dan wajib menjaganya dengan sebaik mungkin.</td>
+							</tr>
+						</table>
+						<p/>
+						<table width="100%" style="font-size:14px">
+							<tr>
+								<td width="100%" align="center"><strong>PASAL 3</strong></td>
+							</tr>
+						</table>
+						<p/>
+						<table width="100%" style="font-size:14px">
+							<tr>
+								<td width="6%">3.1</td>
+								<td width="94%" align="justify">Pihak Pertama dapat memutuskan hubungan kerja dengan Pihak Kedua secara sepihak apabila:</td>
+							</tr>
+						</table>
+						<table width="100%" style="font-size:14px">
+							<tr>
+								<td width="6%"></td>
+								<td width="6%">a.</td>
+								<td width="88%" align="justify">Pihak Kedua melakukan pelanggaran terhadap Peraturan Perusahaan dengan sebelumnya telah mendapat teguran dan peringatan secara patut sesuai dengan prosedur dan ketentuan perusahaan.</td>
+							</tr>
+							<tr>
+								<td width="6%"></td>
+								<td width="6%">b.</td>
+								<td width="88%" align="justify">Pihak Kedua tidak dapat menjalankan tugas, target atau sasaran kerja yang telah ditetapkan oleh Pihak Pertama.</td>
+							</tr>
+							<tr>
+								<td width="6%"></td>
+								<td width="6%">c.</td>
+								<td width="88%" align="justify">Pihak Kedua terlibat baik langsung maupun tidak langsung dalam tindak pencurian dan atau penggelapan harta / aset perusahaan maupun tindak kejahatan lain yang diancam dengan Hukum Pidana dan atau Hukum Perdata Republik Indonesia.</td>
+							</tr>
+							<tr>
+								<td width="6%"></td>
+								<td width="6%">d.</td>
+								<td width="88%" align="justify">Pihak Pertama dalam hal ini Perusahaan berada dalam situasi dan kondisi yang tidak memungkinkan lagi untuk mempekerjakan Pihak Kedua akibat memburuknya kinerja perusahaan.</td>
+							</tr>
+							<tr>
+								<td width="6%"></td>
+								<td width="6%">e.</td>
+								<td width="88%" align="justify">Mangkir selama 3 (tiga) hari kerja atau lebih tanpa keterangan secara tertulis yang dilengkapi dengan bukti yang sah.</td>
+							</tr>
+						</table>
+						<p/>
+						<table width="100%" style="font-size:14px">
+							<tr>
+								<td width="100%" align="center"><strong>PASAL 4</strong></td>
+							</tr>
+						</table>
+						<p/>
+						<table width="100%" style="font-size:14px">
+							<tr>
+								<td width="6%">4.1</td>
+								<td width="94%" align="justify">Pihak Kedua berhak atas upah sesuai dengan peraturan pemerintah yang berlaku pada saat dibuatnya surat perjanjian ini atau perjanjian lain yang menyertai perjanjian kerja ini.</td>
+							</tr>
+							<tr>
+								<td width="6%">4.2</td>
+								<td width="94%" align="justify">Pihak Kedua akan dilakukan evaluasi kerja selama 3 (tiga)  bulan pertama dalam masa perjanjian kerja ini.</td>
+							</tr>
+						</table>
+						<p/>
+						<table width="100%" style="font-size:14px">
+							<tr>
+								<td width="100%" align="center"><strong>PASAL 5</strong></td>
+							</tr>
+						</table>
+						<p/>
+						<table width="100%" style="font-size:14px">
+							<tr>
+								<td width="6%">5.1</td>
+								<td width="94%" align="justify">Surat Perjanjian Kerja ini dapat dibatalkan dan atau menjadi tidak berlaku antara lain karena :</td>
+							</tr>
+						</table>
+						<table width="100%" style="font-size:14px">
+							<tr>
+								<td width="6%"></td>
+								<td width="6%">a.</td>
+								<td width="88%" align="justify">Jangka waktu yang diperjanjikan sebagaimana tersebut dalam pasal 1 telah berakhir.</td>
+							</tr>
+							<tr>
+								<td width="6%"></td>
+								<td width="6%">b.</td>
+								<td width="88%" align="justify">Dilakukannya pemutusan hubungan kerja oleh Pihak Pertama karena hal-hal sebagaimana diatur dalam Pasal 3 Surat Perjanjian Kerja ini.</td>
+							</tr>
+							<tr>
+								<td width="6%"></td>
+								<td width="6%">c.</td>
+								<td width="88%" align="justify">Pihak Kedua  meninggal dunia.</td>
+							</tr>
+						</table>
+						<table width="100%" style="font-size:14px">
+							<tr>
+								<td width="6%">5.2</td>
+								<td width="94%" align="justify">Apabila Pihak Kedua berniat untuk mengundurkan diri maka Ia wajib mengajukan surat pengunduran diri kepada Pihak Pertama sekurang-kurangnya 3 (tiga) bulan sebelumnya.</td>
+							</tr>
+							<tr>
+								<td width="6%">5.3</td>
+								<td width="94%" align="justify">Apabila Pihak Kedua berniat untuk mengundurkan diri maka Ia wajib membayar ganti rugi sebesar sisa nilai perjanjian kerja, yaitu jumlah bulan tersisa dikalikan nilai upah (bersih) per bulan yang disepakati dalam perjanjian ini atau dalam perjanjian lain yang menyertai perjanjian ini.</td>
+							</tr>
+							<tr>
+								<td width="6%">5.4</td>
+								<td width="94%" align="justify">Pihak Pertama tidak berkewajiban untuk memberikan uang pesangon , uang jasa , atau ganti kerugian apapun kepada Pihak Kedua setelah berakhirnya masa kerja untuk waktu tertentu.</td>
+							</tr>
+						</table>
+						<p/>
+						<table width="100%" style="font-size:14px">
+							<tr>
+								<td width="100%" align="center"><strong>PASAL 6</strong></td>
+							</tr>
+						</table>
+						<p/>
+						<table width="100%" style="font-size:14px">
+							<tr>
+								<td width="6%">6.1</td>
+								<td width="94%" align="justify">Apabila dikemudian hari Surat Perjanjian Kerja ini ternyata masih terdapat hal-hal yang sekiranya bertentangan dengan Peraturan Perundang-undangan Ketenagakerjaan Republik Indonesia dan atau Perkembangan Peraturan  Perusahaan, maka akan diadakan peninjauan dan penyesuaian atas persetujuan kedua belah pihak.</td>
+							</tr>
+						</table>
+						<p/>
+						<table width="100%" style="font-size:14px">
+							<tr>
+								<td width="100%" align="center"><strong>PASAL 7</strong></td>
+							</tr>
+						</table>
+						<p/>
+						<table width="100%" style="font-size:14px">
+							<tr>
+								<td width="6%">7.1</td>
+								<td width="94%" align="justify">Apabila terjadi perselisihan dalam pelaksanaan perjanjian ini, maka kedua belah pihak akan menyelesaikan secara musyawarah untuk mufakat.</td>
+							</tr>
+							<tr>
+								<td width="6%">7.2</td>
+								<td width="94%" align="justify">Apabila penyelesaian secara musyawarah untuk mufakat tidak tercapai maka akan diselesaikan lewat jalur hukum di Pengadilan Negeri Bandung, Jawa Barat.</td>
+							</tr>
+						</table>
+						<p/>
+						<p/>
+						<p>
+							Demikian Surat Perjanjian Kerja Waktu Tertentu ini dibuat tanpa ada paksaan dari siapapun dan dibuat dalam keadaan sadar, sehat jasmani dan rohani.
+						</p>
+						<p/>
+						<p/>
+						<p/>
+						<p/>
+						<table width="100%" style="font-size:15px">
+							<tr>
+								<td style="width:30%" align="center">Pihak Pertama,</td>
+								<td style="width:40%"/>
+								<td style="width:30%" align="center">Bandung, <span t-field="o.tanggal"/></td>
+							</tr>
+						</table>
+						<table width="100%" style="font-size:15px">
+							<tr>
+								<td style="width:30%" align="center"><span t-field="o.company_id.name"/></td>
+								<td style="width:40%"/>
+								<td style="width:30%" align="center">Pihak Kedua,</td>
+							</tr>
+						</table>
+						<p><span style="color: #ffffff;">a</span></p>
+						<p><span style="color: #ffffff;">a</span></p>
+						<table width="100%" style="font-size:15px">
+							<tr>
+								<td style="width:30%" align="center"><span t-field="o.company_id.direktur_id.name"/></td>
+								<td style="width:40%"/>
+								<td style="width:30%" align="center"><span t-field="o.employee_id.name"/></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</t>
+		</t>
+	</template>
+
+	<!--template id="report_pkwt">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="bgt_contract.report_pkwt_document" t-lang="o.company_id.partner_id.lang"/>
+        </t>
+    </template-->
+
+
+    <record id="paperformat_pkwt" model="report.paperformat">
+        <field name="name">PKWT</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">10</field>
+        <field name="margin_bottom">20</field>
+        <field name="margin_left">20</field>
+        <field name="margin_right">20</field>
+        <field name="header_line" eval="False" />
+        <field name="header_spacing">0</field>
+        <field name="dpi">96</field>
+    </record>
+
+
+    <record id="bgt_pkwt_report" model="ir.actions.report.xml">
+      <field name="paperformat_id" ref="bgt_contract.paperformat_pkwt"/>
+    </record>
+
+</odoo>

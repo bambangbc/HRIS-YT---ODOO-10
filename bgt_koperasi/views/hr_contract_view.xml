@@ -1,0 +1,19 @@
+<odoo>
+
+    <record id="hr_contract_type_view_koperasi" model="ir.ui.view">
+        <field name="name">hr.contract.type.koperasi.form</field>
+        <field name="model">hr.contract.type</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_type_view_form"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <group string="Koperasi">
+                    <field name="default_nominal" />
+                    <field name="default_tenor" />
+                    <field name="default_bunga" />
+                </group>
+                <group></group>
+            </field>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,222 @@
+<odoo>       
+
+
+        <record id="kenaikan_upah_tahunan_search" model="ir.ui.view">
+            <field name="name">hr.kenaikan.upah.search</field>
+            <field name="model">hr.kenaikan.upah</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Kenaikan Upah">
+                    <field name="name" string="Number" select="True"/>
+                    <group expand="0" string="Group By...">
+                        <filter string="Tanggal Kenaikan Upah" 
+                                domain="[]" 
+                                context="{'group_by':'tanggal'}"/>
+                        <filter string="State" 
+                                domain="[]" 
+                                context="{'group_by':'state'}"/>
+                    </group>
+                </search>
+             </field>
+         </record>
+
+        <record id="kenaikan_upah_tahunan_detail_search" model="ir.ui.view">
+            <field name="name">hr.kenaikan.upah.detail.search</field>
+            <field name="model">hr.kenaikan.upah.detail</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Kenaikan Upah Details">
+                    <field name="employee_id" string="Employee" select="True"/>
+                    <field name="job_id"/>
+                    <field name="department_id"/>
+                    <group expand="0" string="Group By...">
+                        <filter string="No. Kenaikan Upah" 
+                                domain="[]" 
+                                context="{'group_by':'kenaikan_upah_id'}"/>
+                        <filter string="Employee" 
+                                domain="[]" 
+                                context="{'group_by':'employee_id'}"/>
+                        <filter string="Job" 
+                                domain="[]" 
+                                context="{'group_by':'job_id'}"/>
+                        <filter string="Department" 
+                                domain="[]" 
+                                context="{'group_by':'department_id'}"/>
+                        <filter string="State" 
+                                domain="[]" 
+                                context="{'group_by':'state'}"/>
+                        <filter string="Tanggal Kenaikan Upah" 
+                                name="tanggal"
+                                domain="[]" 
+                                context="{'group_by':'tanggal'}"/>
+                        <filter string="Pay Status" 
+                                domain="[]" 
+                                context="{'group_by':'type_id'}"/>
+                    </group>
+                </search>
+             </field>
+         </record>
+
+        <record id="kenaikan_upah_tahunan_tree" model="ir.ui.view">
+            <field name="name">hr.kenaikan.upah.tree</field>
+            <field name="model">hr.kenaikan.upah</field>
+            <field name="arch" type="xml">
+                <tree string="Kenaikan Upah">
+                    <field name="name"/>
+                    <field name="date"/>
+                    <field name="tanggal"/>
+                    <field name="state"/>
+                    <field name="user_id" invisible="1"/>                                     
+                </tree>
+            </field>
+        </record>
+
+        <record id="kenaikan_upah_tahunan_detail_tree" model="ir.ui.view">
+            <field name="name">hr.kenaikan.upah.detail.tree</field>
+            <field name="model">hr.kenaikan.upah.detail</field>
+            <field name="arch" type="xml">
+                <tree string="Kenaikan Upah Details" create="0" edit="0" delete="0">
+                    <field name="kenaikan_upah_id" invisible="1"/>
+                    <field name="tanggal" readonly="1"/>
+                    <field name="nik" readonly="1"/>
+                    <field name="employee_id" readonly="1"/>
+                    <field name="bank_account_id" readonly="1"/>
+                    <field name="work_date" readonly="1"/>
+                    <field name="job_id" readonly="1"/>
+                    <field name="department_id" readonly="1"/>
+                    <field name="type_id" readonly="1"/>
+                    <field name="tahun" readonly="1" string="TH"/>
+                    <field name="bulan" readonly="1" string="BL"/>
+                    <field name="hari" readonly="1" string="HR"/>
+                    <field name="working_days" readonly="1" string="HK"/>
+                    <field name="attendance" readonly="1" string="Hadir"/>
+                    <field name="absen" readonly="1"/>
+                    <field name="percent" readonly="1" string="%H"/>
+                    <field name="perubahan_gaji_terakhir" readonly="1"/>
+                    <field name="old_wage" string="Old Wage" readonly="1"/>
+                    <field name="old_meals" readonly="1"/>
+                    <field name="old_up" readonly="1"/>
+                    <field name="old_gapok" readonly="1"/>
+                    <field name="new_wage" readonly="1"/>
+                    <field name="new_meals" readonly="1"/>
+                    <field name="new_up" readonly="1"/>
+                    <field name="new_gapok" readonly="1"/>
+                    <field name="selisih_un" readonly="1"/>
+                    <field name="state" invisible="1"/> 
+                    <field name="contract_id" invisible="1"/>
+                    <field name="new_contract_id" invisible="1"/>                                                    
+                </tree>
+            </field>
+        </record>
+
+        <record id="kenaikan_upah_tahunan_form" model="ir.ui.view">
+            <field name="name">hr.kenaikan.upah.form</field>
+            <field name="model">hr.kenaikan.upah</field>
+            <field name="arch" type="xml">
+                <form string="Kenaikan Upah">
+                <header>          
+                        <button name="button_confirm" states="draft" string="Confirm" type="object" groups="hr.group_hr_user"/>
+                        <button name="button_approve" states="confirmed" string="Approve" type="object" groups="hr.group_hr_manager" confirm="Anda yakin data akan di approve ?"/>
+                        <button name="button_cancel" states="confirmed" string="Cancel" type="object"/>
+                        <button name="button_set_to_draft" states="cancel" string="Set to Draft" type="object" groups="hr.group_hr_manager"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confimed,done"/>
+                </header>
+                <sheet>
+                    <group>
+                        <div class="oe_title">
+                            <h1><field name="name" string="Number" nolabel="1" readonly="1"/></h1>
+                        </div>
+                    </group>
+                    <group  col="4" colspan="4">
+                        <field name="user_id" readonly="1"/>
+                        <field name="date" readonly="1"/>
+                    </group> 
+                    <group col="4" colspan="4">
+                        <field name="tanggal" required="1"/>
+                        <field name="notes"/>
+                    </group>
+                    <notebook colspan="5">
+                        <page string="Karyawan">
+                            <field col="4" colspan="4" name="employee_ids" nolabel="1" widget="one2many_list">
+                                <tree string="Karyawan" editable="top">
+                                    <field name="kenaikan_upah_id" invisible="1"/>
+                                    <field name="employee_id" options="{'no_create':True}"/>
+                                    <field name="nik" readonly="1"/>
+                                    <field name="department_id" readonly="1"/>
+                                    <field name="job_id" readonly="1"/>
+                                    <field name="old_wage"/>
+                                    <field name="new_wage"/>
+                                    <field name="state" invisible="1"/>
+                                    <field name="contract_id" invisible="1"/>
+                                    <field name="new_contract_id" invisible="1"/> 
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="kenaikan_upah_tahunan_detail_form" model="ir.ui.view">
+            <field name="name">hr.kenaikan.upah.detail.form</field>
+            <field name="model">hr.kenaikan.upah.detail</field>
+            <field name="arch" type="xml">
+                <form string="Kenaikan Upah" create="0" edit="0" delete="0">
+                    <header>          
+                            <field name="state" widget="statusbar" />
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="kenaikan_upah_id" readonly="1"/>
+                                <field name="tanggal" readonly="1"/>
+                                <field name="nik" readonly="1"/>
+                                <field name="employee_id" readonly="1"/>
+                                <field name="bank_account_id" readonly="1"/>
+                                <field name="work_date" readonly="1"/>
+                                <field name="department_id" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="job_id" readonly="1"/>
+                                <field name="type_id" readonly="1"/>
+                                <field name="old_wage" string="Old Wage" readonly="1"/>
+                                <field name="new_wage" readonly="1"/>
+                                <field name="state" invisible="1"/> 
+                                <field name="contract_id" invisible="0"/>
+                                <field name="new_contract_id" invisible="0"/>    
+                            </group>  
+                        </group>                          
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_kenaikan_upah_tahunan_form">
+            <field name="name">Kenaikan Upah</field>
+            <field name="res_model">hr.kenaikan.upah</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_kenaikan_upah_tahunan_lines_form">
+            <field name="name">Kenaikan Upah Details</field>
+            <field name="res_model">hr.kenaikan.upah.detail</field>
+             <field name="context">{'search_default_tanggal':1}</field>
+             <field name="domain">[('state','=','done')]</field>
+        </record>
+       
+        <menuitem id="menu_kenaikan_upah_tahunan_main" parent="hr.menu_hr_root" name="Kenaikan Upah Tahunan" sequence="25"/>
+
+        <menuitem id="menu_kenaikan_upah_tahunan_sub_main" parent="menu_kenaikan_upah_tahunan_main" name="Kenaikan Upah" action="action_kenaikan_upah_tahunan_form" sequence="10"/>
+
+        <menuitem id="menu_kenaikan_upah_tahunan_detail_main" parent="menu_kenaikan_upah_tahunan_main" name="Kenaikan Upah Details" action="action_kenaikan_upah_tahunan_lines_form" sequence="20"/>
+
+        
+</odoo>

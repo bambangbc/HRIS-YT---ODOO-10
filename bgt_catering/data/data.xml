@@ -1,0 +1,54 @@
+<odoo>
+
+	<record id="catering_sequence" model="ir.sequence">
+		<field name="name">Catering</field>
+		<field name="code">hr.catering</field>
+		<field name="prefix">CAT/</field>
+		<field name="suffix"></field>
+		<field name="padding">4</field>
+		<field eval="1" name="number_next"/>
+        <field eval="1" name="number_increment"/>
+	</record>
+
+	<!--record forcecreate="True" model="ir.cron" id="create_catering_pagi">
+        <field name="name">Auto Create Catering shift pagi</field>
+        <field name="active">True</field>
+        <field name="user_id" ref="base.user_root"/>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="nextcall">2019-08-12 08:30:00</field>
+        <field name="doall" eval="False"/>
+        <field name="model" eval="'hr.catering'"/>
+        <field name="function" eval="'create_catering'"/>
+        <field name="args" eval="'()'"/>
+    </record>
+
+    <record forcecreate="True" model="ir.cron" id="create_catering_siang">
+        <field name="name">Auto Create Catering shift Siang</field>
+        <field name="active">True</field>
+        <field name="user_id" ref="base.user_root"/>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="nextcall">2019-08-12 15:30:00</field>
+        <field name="doall" eval="False"/>
+        <field name="model" eval="'hr.catering'"/>
+        <field name="function" eval="'create_catering'"/>
+        <field name="args" eval="'()'"/>
+    </record-->
+
+	<!--record forcecreate="True" model="ir.cron" id="approve_catering">
+        <field name="name">Auto Approve Catering</field>
+        <field name="active">False</field>
+        <field name="user_id" ref="base.user_root"/>
+        <field name="interval_number">1</field>
+        <field name="interval_type">hours</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False"/>
+        <field name="model" eval="'hr.catering'"/>
+        <field name="function" eval="'approve_catering'"/>
+        <field name="args" eval="'()'"/>
+    </record-->
+
+</odoo>

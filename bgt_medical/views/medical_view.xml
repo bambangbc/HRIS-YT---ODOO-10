@@ -1,0 +1,178 @@
+<odoo>
+
+        <record id="medical_search" model="ir.ui.view">
+            <field name="name">hr.medical.search</field>
+            <field name="model">hr.medical</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Medical">
+                    <field name="name" string="Number" select="True"/>
+                    <field name="employee_id"  select="True"/>
+                    <field name="nik"  select="True"/>
+                    <field name="identification_id"  select="True"/>
+                    <field name="department_id"  select="True"/>
+                    <field name="job_id"  select="True"/>
+                    <group expand="0" string="Group By...">
+                        <filter string="To Approve"
+                                name="to_approve"
+                                domain="[('parent_id.user_id','=',uid),('state','=','confirmed')]"
+                                context="{}"/>
+                        <filter string="Employee" 
+                                domain="[]" 
+                                context="{'group_by':'employee_id'}"/>
+                        <filter string="Department" 
+                                domain="[]" 
+                                context="{'group_by':'department_id'}"/>
+                        <filter string="Job" 
+                                domain="[]" 
+                                context="{'group_by':'job_id'}"/>
+                        <filter string="State" 
+                                domain="[]" 
+                                context="{'group_by':'state'}"/>
+                    </group>
+                </search>
+             </field>
+         </record>
+
+        <record id="view_medical_tree" model="ir.ui.view">
+            <field name="name">hr.medical.tree</field>
+            <field name="model">hr.medical</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Medical List">
+                    <field name="name"/>
+                    <field name="nik"/>
+                    <field name="employee_id"/>
+                    <field name="user_id" invisible="1"/>
+                    <field name="department_id"/>
+                    <field name="job_id"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_medical_form" model="ir.ui.view">
+            <field name="name">hr.medical.form</field>
+            <field name="model">hr.medical</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Medical Form">
+                    <header>
+                        <button name="button_confirm" 
+                                states="draft" 
+                                string="Confirm" 
+                                type="object" 
+                                class="oe_highlight"
+                                />
+
+                        <button name="button_approve" 
+                                states="confirmed" 
+                                string="Approve" 
+                                type="object" 
+                                class="oe_highlight"
+                                groups="hr.group_hr_manager"/>
+
+                        <button name="button_claim" 
+                                states="approved" 
+                                string="Claim" 
+                                type="object" 
+                                class="oe_highlight"
+                                groups="hr.group_hr_user"/>
+
+                        <button name="button_cancel" 
+                                states="confirmed" 
+                                string="Cancel" 
+                                type="object" 
+                                class="oe_highlight"
+                                groups="hr.group_hr_manager"
+                                confirm="Anda yakin data akan dicancel ?"/>
+
+                        <button name="button_set_to_draft" 
+                                states="cancel" 
+                                string="Set to Draft" 
+                                type="object" 
+                                class="oe_highlight"
+                                groups="hr.group_hr_manager"/>
+
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,approved" statusbar_colors='{"draft":"red","confirmed":"blue"}' readonly="1"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <div class="oe_title">
+                                    <h1><field name="name" string="Number" nolabel="1" readonly="1"/></h1>
+                                </div>
+                            </group>
+                            <group>
+                                <field name="user_id" readonly="1"/> 
+                                <field name="date" readonly="1"/>
+                            </group>
+                        </group>
+                        <group> 
+                            <group>
+                            	<field name="employee_id" options="{'no_create':True}"/>
+                            	<field name="nik" readonly="1"/>
+                            	<field name="identification_id" readonly="1"/>
+                            </group>
+                            <group>
+                            	<field name="department_id" readonly="1"/>
+                                <field name="job_id" readonly="1"/>
+                                <field name="parent_id" readonly="1"/>
+                            </group>
+                        </group>
+                        <group string="Bukti Berobat" attrs="{'invisible':[('state','not in',('approved','done'))]}" groups="hr.group_hr_user"> 
+                            <group>
+                                <field name="tanggal" attrs="{'readonly':[('state','!=','approved')],'required':[('state','=','approved')]}"/>
+                                <field name="diagnosa" attrs="{'readonly':[('state','!=','approved')],'required':[('state','=','approved')]}"/>
+                            </group>
+                            <group>
+                                <field name="tanggal_berobat" attrs="{'readonly':[('state','!=','approved')],'required':[('state','=','approved')]}"/>
+                                <field name="obat" attrs="{'readonly':[('state','!=','approved')],'required':[('state','=','approved')]}"/>
+                            </group>klaim_harga
+                            <group>
+                                <field name="klaim_harga" attrs="{'readonly':[('state','!=','approved')],'required':[('state','=','approved')]}"/>
+                            </group>
+                        </group>
+                        <separator string="Notes"/>
+                        <field name="notes" placeholder="input notes here...."/>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>        
+
+
+        <record id="action_medical" model="ir.actions.act_window">
+            <field name="name">Medical</field>
+            <field name="res_model">hr.medical</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field eval="False" name="view_id"/>
+            <field name="domain">[]</field>
+            <field name="context">{"search_default_to_approve":1,}</field> 
+            <field name="search_view_id" ref="medical_search"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add an medical
+              </p><p>
+                klik tombol create untuk menambahkan data medis karyawan
+              </p>
+            </field>
+        </record>
+
+
+        <menuitem id="menu_hr_medical_root" 
+            name="Medical" sequence="95"/>
+
+        <menuitem id="medical_menu"
+                name="Employee Medical"
+                parent="menu_hr_medical_root" 
+                sequence="10"
+                action="action_medical"/>
+                
+
+
+</odoo>

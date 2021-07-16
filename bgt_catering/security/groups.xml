@@ -1,0 +1,30 @@
+<odoo noupdate="0">
+
+	    <record id="group_team_leader_catering" model="res.groups">
+	        <field name="name">Catering Team Leader</field>
+	        <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+	    </record>
+		
+	    <record id="catering_rule" model="ir.rule">
+	        <field name="name">Catering Team Leader</field>
+	        <field name="model_id" ref="model_hr_catering"/>
+	        <field name="groups" eval="[(4, [ref('group_team_leader_catering')])]"/>
+	        <field name="perm_read" eval="True"/>
+	        <field name="perm_write" eval="True"/>
+	        <field name="perm_create" eval="True"/>
+	        <field name="perm_unlink" eval="True"/>
+	        <field name="domain_force">[('employee_id.user_id.id','=',user.id)]</field>
+	    </record>
+
+	    <record id="catering_rule_hr" model="ir.rule">
+	        <field name="name">Catering HR</field>
+	        <field name="model_id" ref="model_hr_catering"/>
+	        <field name="groups" eval="[(4, [ref('hr.group_hr_user')]),(4, [ref('hr.group_hr_manager')])]"/>
+	        <field name="perm_read" eval="True"/>
+	        <field name="perm_write" eval="True"/>
+	        <field name="perm_create" eval="True"/>
+	        <field name="perm_unlink" eval="True"/>
+	        <field name="domain_force">[(1,'=',1)]</field>
+	    </record>
+
+</odoo>

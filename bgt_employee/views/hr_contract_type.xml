@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_hr_contract_type_additional_form" model="ir.ui.view">
+            <field name="name">hr.contract.type.additional.form</field>
+            <field name="model">hr.contract.type</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_type_view_form"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <group string="BPJS Kesehatan">
+                        <field name="bpjs_kes_perusahaan"/>
+                        <field name="bpjs_kes_karyawan"/>
+                        <field name="bpjs_kes_nominal_max"/>
+                        <field name="bpjs_kes_nominal_min"/>
+                    </group>
+                    <group></group>
+                    <group string="Biaya Jabatan">
+                        <field name="jabatan_biaya"/>
+                        <field name="jabatan_nominal_max"/>
+                    </group> 
+                    <group></group>                   
+                    <group string="BPJS Ketenagakerjaan">
+                        <field name="bpjs_ket_jkk"/>
+                        <field name="bpjs_ket_jkm"/>
+                    </group>
+                    <group></group>                    
+                    <group string="JHT">
+                        <field name="jht_perusahaan"/>
+                        <field name="jht_karyawan"/>
+                        <field name="jht_nominal_max"/>
+                        <field name="jht_nominal_min"/>
+                    </group>
+                    <group></group>                    
+                    <group string="Pensiun">
+                        <field name="pensiun_perusahaan"/>
+                        <field name="pensiun_karyawan"/>
+                        <field name="pensiun_nominal_max"/>
+                        <field name="pensiun_nominal_min"/>
+                    </group>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_hr_contract_type_additional_tree" model="ir.ui.view">
+            <field name="name">new.hr.contract.type.tree.view</field>
+            <field name="model">hr.contract.type</field>
+            <field name="type">tree</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_type_view_tree"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>

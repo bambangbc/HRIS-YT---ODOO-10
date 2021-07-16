@@ -1,0 +1,282 @@
+<odoo>
+
+        <record id="koperasi_search" model="ir.ui.view">
+            <field name="name">hr.koperasi.search</field>
+            <field name="model">hr.koperasi</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Koperasi">
+                    <field name="name" string="Number" select="True"/>
+                    <field name="employee_id"  select="True"/>
+                    <field name="department_id"  select="True"/>
+                    <filter string="Otomatis Payroll"
+                                name="otomatis_payroll"
+                                domain="[('mekanisme','=','otomatis')]"
+                                context="{}"/>
+                    <filter string="Manual Payroll"
+                                name="manual_payroll"
+                                domain="[('mekanisme','=','manual')]"
+                                context="{}"/>
+                    <filter string="Keanggotan Pokok"
+                                name="keanggotaan_pokok"
+                                domain="[('type','=','pokok')]"
+                                context="{}"/>
+                    <filter string="Keanggotan Wajib"
+                                name="keanggotaan_wajib"
+                                domain="[('type','=','wajib')]"
+                                context="{}"/>
+                    <group expand="0" string="Group By...">
+                        <filter string="Type Keanggotaan"
+                                domain="[]"
+                                context="{'group_by':'type'}"/>
+                        <filter string="Employee"
+                                domain="[]"
+                                context="{'group_by':'employee_id'}"/>
+                        <filter string="Job"
+                                domain="[]"
+                                context="{'group_by':'job_id'}"/>
+                        <filter string="Department"
+                                domain="[]"
+                                context="{'group_by':'department_id'}"/>
+                        <filter string="Tanggal Pengajuan"
+                                domain="[]"
+                                context="{'group_by':'tanggal_pengajuan'}"/>
+                        <filter string="Start Angsuran"
+                                domain="[]"
+                                context="{'group_by':'start_angsuran'}"/>
+                        <filter string="End Angsuran"
+                                domain="[]"
+                                context="{'group_by':'end_angsuran'}"/>
+                        <filter string="State"
+                                domain="[]"
+                                context="{'group_by':'state'}"/>
+                        <filter string="Mekanisme Bayar"
+                                domain="[]"
+                                context="{'group_by':'mekanisme'}"/>
+                    </group>
+                </search>
+             </field>
+         </record>
+
+         <record id="koperasi_detail_search" model="ir.ui.view">
+            <field name="name">hr.koperasi.detail.search</field>
+            <field name="model">hr.koperasi.detail</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Koperasi">
+                    <field name="employee_id" string="Number" select="True"/>
+                    <field name="department_id"  select="True"/>
+                    <field name="job_id"  select="True"/>
+                    <field name="tanggal_angsuran" select="True"/>
+                    <group expand="0" string="Group By...">
+                        <filter string="Employee"
+                                domain="[]"
+                                context="{'group_by':'employee_id'}"/>
+                        <filter string="Job"
+                                domain="[]"
+                                context="{'group_by':'job_id'}"/>
+                        <filter string="Department"
+                                domain="[]"
+                                context="{'group_by':'department_id'}"/>
+                        <filter string="Tanggal Angsuran"
+                                domain="[]"
+                                context="{'group_by':'tanggal_angsuran'}"/>
+                    </group>
+                </search>
+             </field>
+         </record>
+
+        <record id="view_hr_koperasi_form" model="ir.ui.view">
+            <field name="name">hr.koperasi.form</field>
+            <field name="model">hr.koperasi</field>
+            <field name="arch" type="xml">
+            <form string="Koperasi Form">
+                <header>
+                    <button name="button_confirm"
+                            states="draft"
+                            string="Confirm"
+                            type="object"
+                            class="oe_highlight"
+                            groups="bgt_koperasi.group_user_koperasi"/>
+
+                    <button name="button_validate"
+                            states="confirm"
+                            string="Validate"
+                            type="object"
+                            class="oe_highlight"
+                            groups="hr.group_hr_manager,bgt_koperasi.group_user_koperasi"/>
+
+                    <button name="button_done"
+                            states="validate"
+                            string="Done"
+                            type="object"
+                            class="oe_highlight"
+                            groups="hr.group_hr_manager,bgt_koperasi.group_user_koperasi"/>
+
+                    <button name="button_cancel"
+                            states="confirm"
+                            string="Cancel"
+                            type="object"
+                            class="oe_highlight"
+                            groups="hr.group_hr_manager,bgt_koperasi.group_user_koperasi"/>
+
+                    <button name="button_refuse"
+                            states="confirm,draft"
+                            string="Refuse"
+                            type="object"
+                            class="oe_highlight"
+                            groups="hr.group_hr_manager,bgt_koperasi.group_user_koperasi"/>
+
+                    <button name="button_set_to_draft"
+                            states="cancel,refuse"
+                            string="Set to Draft"
+                            type="object"
+                            class="oe_highlight"
+                            groups="hr.group_hr_manager,bgt_koperasi.group_user_koperasi"/>
+
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirm,validate" statusbar_colors='{"draft":"red","confirm":"blue"}' readonly="1"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="code" string="Number"/>
+                        <h1>
+                            <field name="name" nolabel="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="tanggal_dokumen"/>
+                            <field name="employee_id" options="{'no_quick_create': True, 'no_create_edit' : True}" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <!--field name="periode" attrs="{'invisible':[('type','=','wajib')],'required':[('type','=','pokok')],'readonly':[('state','!=','draft')]}"/-->
+                            <field name="tanggal_pengajuan" attrs="{'readonly':[('state','in',('validate','done','cancel'))],'invisible':[('type','=','wajib')]}"/>
+                            <field name="start_angsuran"  attrs="{'readonly':[('state','!=','draft')],'invisible':[('type','=','pokok')]}"/>
+                            <field name="end_angsuran"  attrs="{'readonly':[('state','!=','draft')],'invisible':[('type','=','pokok')]}"/>
+                            <field name="job_id" options="{'no_quick_create': True, 'no_create_edit' : True}" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <field name="department_id" options="{'no_quick_create': True, 'no_create_edit' : True}" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <field name="manager_id" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="mekanisme" attrs="{'readonly':[('state','!=','draft')]}" required="1"/>
+                            <field name="type" invisible="1"/>
+                            <field name="pinjaman" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <field name="angsuran" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <!--field name="default_bunga" invisible="1"/-->
+                            <field name="riba" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <field name="riba_percent" invisible="1"/>
+                            <field name="cicilan_period" invisible="1"/>
+                            <field name="total_pinjaman" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <field name="sisa_angsuran" readonly="1"/>
+                            <field name="sisa_cicilan" readonly="1"/>
+                            <field name="tgl_pencairan" attrs="{'required':[('pencairan','!=',0.0)]}"/>
+                            <field name="pencairan"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Detail Pinjaman">
+                            <field name="kasbon_ids" mode="tree" >
+                                <tree editable="bottom">
+                                    <field name="cicilan"/>
+                                    <field name="nominal" sum="Total"/>
+                                    <field name="paid" />
+                                    <field name="tanggal_angsuran"/>
+                                    <field name="payslip" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Ahli Waris">
+                            <field name="employee_ids" mode="tree" >
+                                <field name="employee_id"/>
+                                <field name="nik" readonly="1"/>
+                                <field name="job" readonly="1"/>
+                                <field name="department" readonly="1"/>
+                            </field>
+                        </page>
+                        <page string="Jaminan">
+                            <group>
+                                <field name="no_jaminan"/>
+                                <field name="name_jaminan"/>
+                                <field name="alamat_jaminan"/>
+                                <field name="tanggal_penyerahan"/>
+                                <field name="tanggal_pengembalian"/>
+                            </group>
+                        </page>
+                        <page string="Pendapatan Bunga">
+                            <group>
+                                <field name="keuntungan_bunga"/>
+                            </group>
+                        </page>
+                    </notebook>
+                    <field name="notes" placeholder="notes..."/>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+            </field>
+        </record>
+
+        <record id="view_hr_kasbon_tree" model="ir.ui.view">
+            <field name="name">hr.koperasi.tree</field>
+            <field name="model">hr.koperasi</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Pinjaman List">
+                    <field name="name"/>
+                    <field name="type" invisible="1"/>
+                    <field name="employee_id"/>
+                    <field name="tanggal_pengajuan" invisible="1"/>
+                    <field name="start_angsuran" invisible="1"/>
+                    <field name="end_angsuran" invisible="1"/>
+                    <field name="pinjaman"/>
+                    <field name="angsuran"/>
+                    <field name="riba" />
+                    <field name="total_pinjaman" />
+                    <field name="cicilan_period" />
+                    <field name="sisa_angsuran"/>
+                    <field name="sisa_cicilan"/>
+                    <field name="start_angsuran"/>
+                    <field name="end_angsuran"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_hr_koperasi_detail_tree" model="ir.ui.view">
+            <field name="name">hr.koperasi.detail.tree</field>
+            <field name="model">hr.koperasi.detail</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Rekap Transaksi" create="false" edit="false" delete="false">
+                    <field name="koperasi_id"/>
+                    <field name="employee_id"/>
+                    <field name="paid" invisible="1"/>
+                    <field name="type" invisible="1"/>
+                    <field name="department_id"/>
+                    <field name="job_id"/>
+                    <field name="cicilan"/>
+                    <field name="nominal" sum="Total"/>
+                    <field name="tanggal_angsuran"/>
+                    <field name="payslip"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_hr_rekap_koperasi_tree" model="ir.ui.view">
+            <field name="name">hr.rekap.koperasi.tree</field>
+            <field name="model">hr.rekap.koperasi</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Rekap List" create="false" edit="false" delete="false">
+                    <field name="sequence" widget="handle"/>
+                    <field name="date"/>
+                    <field name="description"/>
+                    <field name="type"/>
+                    <field name="debit" sum="Total"/>
+                    <field name="credit" sum="Total"/>
+                    <field name="balance"/>
+                </tree>
+            </field>
+        </record>
+
+</odoo>

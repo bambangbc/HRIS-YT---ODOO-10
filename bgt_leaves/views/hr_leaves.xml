@@ -1,0 +1,23 @@
+<odoo>
+
+    <record id="view_bgt_leaves_approval" model="ir.ui.view">
+        <field name="name">hr.holidays.approval</field>
+        <field name="model">hr.holidays</field>
+        <field name="inherit_id" ref="hr_holidays.edit_holiday_new"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//button[@name='action_approve']" position="attributes">
+                <attribute name="groups">bgt_employee.general_manager_rule,hr.group_hr_user,hr.group_hr_manager</attribute>
+            </xpath>
+
+            <xpath expr="//button[@name='action_approve']" position="attributes">
+                <attribute name="groups">bgt_employee.general_manager_rule,hr.group_hr_user,hr.group_hr_manager</attribute>
+            </xpath>
+
+            <xpath expr="//button[@name='action_refuse']" position="attributes">
+                <attribute name="groups">bgt_employee.general_manager_rule,hr.group_hr_user,hr.group_hr_manager</attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

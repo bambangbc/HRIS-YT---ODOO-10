@@ -1,0 +1,235 @@
+<odoo>
+
+        <record id="ijazah_search" model="ir.ui.view">
+            <field name="name">hr.ijazah.search</field>
+            <field name="model">hr.ijazah</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Ijazah">
+                    <field name="name" string="Number" select="True"/>
+                    <field name="no_ijazah"  select="True"/>
+                    <field name="employee_id"  select="True"/>
+                    <field name="nik"  select="True"/>
+                    <field name="almamater"  select="True"/>
+                    <field name="jenjang_id"  select="True"/>
+                    <field name="jurusan"  select="True"/>
+                    <field name="tahun_keluar"  select="True"/>
+                    <field name="department_id"  select="True"/>
+                    <field name="job_id"  select="True"/>
+                    <group expand="0" string="Group By...">
+                        <filter string="Employee" 
+                                domain="[]" 
+                                context="{'group_by':'employee_id'}"/>
+                        <filter string="Department" 
+                                domain="[]" 
+                                context="{'group_by':'department_id'}"/>
+                        <filter string="Job" 
+                                domain="[]" 
+                                context="{'group_by':'job_id'}"/>
+                        <filter string="Jenjang" 
+                                domain="[]" 
+                                context="{'group_by':'jenjang_id'}"/>
+                        <filter string="Almamater" 
+                                domain="[]" 
+                                context="{'group_by':'almamater'}"/>
+                        <filter string="Jurusan" 
+                                domain="[]" 
+                                context="{'group_by':'jurusan'}"/>
+                        <filter string="Tahun Keluar" 
+                                domain="[]" 
+                                context="{'group_by':'tahun_keluar'}"/>
+                        <filter string="Status Dokumen" 
+                                domain="[]" 
+                                context="{'group_by':'status_dokumen'}"/>
+                        <filter string="State" 
+                                domain="[]" 
+                                context="{'group_by':'state'}"/>
+                        <filter string="Tanggal Terima" 
+                                domain="[]" 
+                                context="{'group_by':'tgl_terima'}"/>
+                        <filter string="Tanggal Kembali" 
+                                domain="[]" 
+                                context="{'group_by':'tgl_dikembalikan'}"/>
+                    </group>
+                </search>
+             </field>
+         </record>
+
+        <record id="view_ijaah_tree" model="ir.ui.view">
+            <field name="name">hr.ijazah.tree</field>
+            <field name="model">hr.ijazah</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Ijazah List">
+                    <field name="name"/>
+                    <field name="nik"/>
+                    <field name="employee_id"/>
+                    <field name="user_id" invisible="1"/>
+                    <field name="department_id"/>
+                    <field name="job_id"/>
+                    <field name="no_ijazah" />
+                    <field name="jenjang_id" />
+                	<field name="almamater" />
+                	<field name="jurusan" invisible="1"/>
+                	<field name="tahun_keluar" invisible="1"/>
+                    <field name="state" invisible="1"/>
+                    <field name="tgl_terima"/>
+                    <field name="status_dokumen"/>
+                    <field name="tgl_dikembalikan"/>
+                    <field name="type" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_uijazah_form" model="ir.ui.view">
+            <field name="name">hr.ijazah.form</field>
+            <field name="model">hr.ijazah</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+            <form string="Ijazah Form">
+                <header>
+                    <button name="button_confirm" 
+                            states="draft" 
+                            string="Confirm" 
+                            type="object" 
+                            class="oe_highlight"
+                            groups="hr.group_hr_user"/>
+
+                    <button name="button_cancel" 
+                            states="confirmed" 
+                            string="Cancel" 
+                            type="object" 
+                            class="oe_highlight"
+                            groups="hr.group_hr_manager,bgt_employee.group_hr_gm"
+                            confirm="Anda yakin data akan dicancel? data education di employee ini akan ikut terhapus !"/>
+
+                    <button name="button_set_to_draft" 
+                            states="cancel" 
+                            string="Set to Draft" 
+                            type="object" 
+                            class="oe_highlight"
+                            groups="hr.group_hr_manager"/>
+
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirmed" statusbar_colors='{"draft":"red","confirmed":"blue"}' readonly="1"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <div class="oe_title">
+                                <h1><field name="name" string="Number" nolabel="1" readonly="1"/></h1>
+                            </div>
+                        </group>
+                        <group>
+                            <field name="hari_tanggal" invisible="1"/>
+                            <field name="type" invisible="1"/>
+                            <field name="user_id" readonly="1"/> 
+                            <field name="date" readonly="1"/>
+                            <field name="ijazah_sudah_diambil" invisible="1"/>
+                            <field name="ijazah_id" options="{'no_create':True}" attrs="{'invisible':[('type','!=','ambil_ijazah')],'required':[('type','=','ambil_ijazah')]}" domain="[('state','=','confirmed'), ('type','=','terima_ijazah'),('ijazah_sudah_diambil','=',False),('nik','=',nik)]"/>
+                        </group>
+                    </group>
+                    <group> 
+                        <group>
+                        	<field name="employee_id" options="{'no_create':True}" />
+                        	<field name="nik" readonly="1"/>
+                        	<field name="department_id" readonly="1"/>
+                        	<field name="job_id" readonly="1"/>
+                        </group>
+                        <group>
+                        	<field name="no_ijazah" />
+                        	<field name="jenjang_id" options="{'no_create':True}" required="1"/>
+                        	<field name="almamater" />
+                        	<field name="jurusan" />
+                        	<field name="tahun_keluar" />
+                        </group>
+                    </group>
+                    <group> 
+                        <group>
+                        	<field name="status_dokumen" required="1"/>
+                        	<field name="tgl_terima" attrs="{'invisible':['|',('status_dokumen','!=','ada'),('type','!=','terima_ijazah')]}"/>
+                        	<field name="tgl_dikembalikan" attrs="{'invisible':['|',('status_dokumen','!=','ada'),('type','!=','ambil_ijazah')],'required':[('status_dokumen','=','ada'),('type','=','ambil_ijazah')]}"/>
+                        </group>
+                        <group>
+                        </group>
+                    </group>
+                    <separator string="Notes"/>
+                    <field name="notes" placeholder="input notes here...."/>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+            </field>
+        </record>        
+
+
+        <record id="action_pengambilan_ijazah" model="ir.actions.act_window">
+            <field name="name">Pengambilan Ijazah</field>
+            <field name="res_model">hr.ijazah</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field eval="False" name="view_id"/>
+            <field name="domain">[('type','=','ambil_ijazah')]</field>
+            <field name="context">{'default_type':'ambil_ijazah'}</field> 
+            <field name="search_view_id" ref="ijazah_search"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add an Ijazah
+              </p><p>
+                klik tombol create untuk menambahkan data Ijazah
+              </p>
+            </field>
+        </record>
+
+        <record id="action_penerimaan_ijazah" model="ir.actions.act_window">
+            <field name="name">Penerimaan Ijazah</field>
+            <field name="res_model">hr.ijazah</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field eval="False" name="view_id"/>
+            <field name="domain">[('type','=','terima_ijazah')]</field>
+            <field name="context">{'default_type':'terima_ijazah'}</field> 
+            <field name="search_view_id" ref="ijazah_search"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add an Ijazah
+              </p><p>
+                klik tombol create untuk menambahkan data Ijazah
+              </p>
+            </field>
+        </record>
+
+
+
+        <menuitem id="ijazah_menu_root"
+                name="Ijazah"
+                parent="hr.menu_hr_root" 
+                sequence="50"
+                groups="hr.group_hr_user"/>
+
+        <menuitem id="penerimaan_ijazah"
+                name="Penerimaan"
+                parent="ijazah_menu_root"
+                action="action_penerimaan_ijazah"
+                sequence="10"
+                groups="hr.group_hr_user"/>
+                
+        <menuitem id="pengambilan_ijazah"
+                name="Pengambilan"
+                parent="ijazah_menu_root"
+                action="action_pengambilan_ijazah"
+                sequence="20"
+                groups="hr.group_hr_user"/>
+
+
+        <!-- contract : ganti nama dari contract ke pay status-->
+        <menuitem
+            id="hr_contract.hr_menu_contract"
+            name="Pay Status"
+            action="hr_contract.action_hr_contract"
+            parent="hr.menu_hr_root"
+            sequence="4"
+            groups="hr.group_hr_manager"/>
+
+</odoo>

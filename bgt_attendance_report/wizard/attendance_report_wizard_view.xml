@@ -1,0 +1,63 @@
+<odoo>
+	<data>
+
+	    <record id="attendance_report_form_view" model="ir.ui.view">
+			<field name="name">attendance.report.form</field>
+			<field name="model">attendance.report</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+		        <form string="Attendance Report">
+	                <group col="4" fill="0" attrs="{'invisible':[('state_x','!=','get')]}">
+	                    <separator colspan="4" string="Excel Report Generated. Click link below to download ..."/>
+                        <field name="name" invisible="1"/>
+                        <field name="state_x" invisible="1"/>
+                        <field name="data_x" nolabel="1" width="100" filename="name"/>
+	                </group>
+	                <newline/>
+	                <group attrs="{'invisible':[('state_x','=','get')]}">
+		            	<label for="start_date" string="Summary Date"/>
+		   				<div>
+		   					<field name="start_date" required="True" class="oe_inline" placeholder="Start Date" focus="1"/> - <field name="end_date" class="oe_inline" placeholder="End Date"  required="True" />
+		   				</div>
+						<field name="type" widget="radio" options="{'horizontal': true}"/>
+		   				<field name="department_ids" attrs="{'invisible':[('type','!=','bydept')],'required':[('type','=','bydept')]}"
+							   options="{'no_create':True}" widget="many2many_tags"/>
+		   				<field name="employee_ids" attrs="{'invisible':[('type','!=','byemployee')],'required':[('type','=','byemployee')]}"
+							   options="{'no_create':True}" widget="many2many_tags"/>
+						<field name="status_ids" attrs="{'invisible':[('type','!=','bystatus')],'required':[('type','=','bystatus')]}"
+							   options="{'no_create':True}" widget="many2many_tags"/>
+						<field name="job_level_ids" attrs="{'invisible':[('type','!=','byjoblevel')],'required':[('type','=','byjoblevel')]}"
+							   options="{'no_create':True}" widget="many2many_tags"/>
+						<field name="job_position_ids" attrs="{'invisible':[('type','!=','byjobposition')],'required':[('type','=','byjobposition')]}"
+							   options="{'no_create':True}" widget="many2many_tags"/>
+		          	</group>
+
+	                <footer attrs="{'invisible':[('state_x','=','get')]}">
+	                    <button name="print_excel_report" string="Export Report" type="object" class="oe_highlight"/>
+	                    <label string=" or "/>
+	                    <button string="Cancel" class="oe_link" special="cancel" />
+	                </footer>
+
+		        </form>
+	    	</field>
+	    </record>
+
+	    <record id="action_attendance_report" model="ir.actions.act_window">
+			<field name="name">Attendance Summary</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">attendance.report</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
+			<field name="view_id" ref="bgt_attendance_report.attendance_report_form_view"/>
+			<field name="target">new</field>
+	    </record>
+
+
+		<menuitem id="menu_attendance_report"
+            name="Attendance Summary"
+            action="action_attendance_report"
+            parent="hr_attendance.menu_hr_attendance_manage_attendances"
+            sequence="200"/>
+
+     </data>
+</odoo>

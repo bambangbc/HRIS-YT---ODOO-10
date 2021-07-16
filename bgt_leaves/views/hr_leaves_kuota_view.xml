@@ -1,0 +1,274 @@
+<odoo>
+
+    <record id="edit_holiday_status_legal_leaves_form_inherit" model="ir.ui.view">
+        <field name="name">hr.holidays.legal_leaves.form</field>
+        <field name="model">hr.holidays.status</field>
+        <field name="inherit_id" ref="hr_holidays.edit_holiday_status_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='limit']" position="after">
+                <field name="is_legal_leaves" help="Use this leave type for Legal Leaves"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_holiday_allocation_tree_bgt_leaves" model="ir.ui.view">
+        <field name="name">hr.holidays.legal_leaves.form</field>
+        <field name="model">hr.holidays</field>
+        <field name="inherit_id" ref="hr_holidays.view_holiday_allocation_tree"/>
+        <field name="arch" type="xml">
+            <field name="number_of_days" position="after">
+                <field name="total_leaves"/>
+                <field name="sisa_leaves"/>
+            </field>
+        </field>
+    </record>
+
+        <record id="hr_contract_type_view_form_kuota" model="ir.ui.view">
+            <field name="name">hr.contract.type.kuota.form</field>
+            <field name="model">hr.contract.type</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_type_view_form"/>
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <group string="Kuota">
+                        <field name="kuota" string="Jumlah Kuota"/>
+                        <field name="tgl_kuota" string="Tanggal Reset Kuota"/>
+                        <field name="bln_kuota" string="Bulan Reset Kuota"/>
+                        <field name="cuti_tahunan" string="jatah cuti tahunan"/>
+                    </group>
+                    <group></group>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_employee_form_inherit_kuota" model="ir.ui.view">
+            <field name="name">hr.employee.form</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//notebook/page[2]" position="after">
+                    <page string="Kuota" groups="hr.group_hr_user,hr.group_hr_manager">
+                        <separator string="Summary"/>
+                        <field col="4" colspan="4" name="kuota_ids" nolabel="1" readonly="0">
+                            <tree string="Kuota Summary">
+                                <field name="date"/>
+                                <field name="total_kuota"/>
+                                <field name="sisa_kuota"/>
+                                <field name="is_active"/>
+                            </tree>
+                        </field>
+                        <separator string="History"/>
+                        <field col="4" colspan="4" name="kuota_history_ids" nolabel="1" readonly="0">
+                            <tree string="Kuota History">
+                                <field name="date"/>
+                                <field name="holiday_id" options="{'no_create':True}"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Kuota -->
+        <record id="kuota_detail_search" model="ir.ui.view">
+            <field name="name">hr.kuota.search</field>
+            <field name="model">hr.kuota</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Kuota">
+                    <field name="employee_id"/>
+                    <field name="nik"/>
+                    <field name="department_id"/>
+                    <field name="job_id"/>
+                    <filter string="Active" 
+                                name="active"
+                                domain="[('is_active','=',True)]" 
+                                context="{}"/>
+                    <filter string="Not Active" 
+                                domain="[('is_active','!=',True)]" 
+                                context="{}"/>
+                    <group expand="0" string="Group By...">
+                        <filter string="Employee" 
+                                name="group_employee_id"
+                                domain="[]" 
+                                context="{'group_by':'employee_id'}"/>
+                        <filter string="Date" 
+                                domain="[]" 
+                                context="{'group_by':'date'}"/>
+                        <filter string="Total Kuota" 
+                                domain="[]" 
+                                context="{'group_by':'total_kuota'}"/>
+                        <filter string="Sisa Kuota" 
+                                domain="[]" 
+                                context="{'group_by':'sisa_kuota'}"/>
+                        <filter string="Department" 
+                                domain="[]" 
+                                context="{'group_by':'department_id'}"/>
+                        <filter string="Job" 
+                                domain="[]" 
+                                context="{'group_by':'job_id'}"/>
+                    </group>
+                </search>
+             </field>
+         </record>
+
+        <record id="kuota_history_detail_search" model="ir.ui.view">
+            <field name="name">hr.kuota.history.search</field>
+            <field name="model">hr.kuota.history</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Kuota History">
+                    <field name="employee_id"/>
+                    <field name="nik"/>
+                    <field name="department_id"/>
+                    <field name="job_id"/>
+                    <group expand="0" string="Group By...">
+                        <filter string="Employee" 
+                                name="group_employee_id"
+                                domain="[]" 
+                                context="{'group_by':'employee_id'}"/>
+                        <filter string="Date" 
+                                domain="[]" 
+                                context="{'group_by':'date'}"/>
+                        <filter string="Department" 
+                                domain="[]" 
+                                context="{'group_by':'department_id'}"/>
+                        <filter string="Job" 
+                                domain="[]" 
+                                context="{'group_by':'job_id'}"/>
+                    </group>
+                </search>
+             </field>
+         </record>
+
+        <record id="kuota_detail_form" model="ir.ui.view">
+            <field name="name">hr.kuota.form</field>
+            <field name="model">hr.kuota</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group string="Form Kuota">
+                        <group>
+                            <field name="nik"/>
+                            <field name="employee_id" options="{'no_create':True}" required="1"/>
+                            <field name="job_id" options="{'no_create':True}"/>
+                            <field name="department_id" options="{'no_create':True}"/>
+                        </group>
+                        <group>
+                            <field name="date"/>
+                            <field name="total_kuota"/>
+                            <field name="sisa_kuota"/>
+                            <field name="is_active"/>
+                        </group>
+                    </group>                                  
+                </form>
+            </field>
+        </record>
+
+        <record id="kuota_history_detail_form" model="ir.ui.view">
+            <field name="name">hr.kuota.history.form</field>
+            <field name="model">hr.kuota.history</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group string="Form Kuota History">
+                        <group>
+                            <field name="nik"/>
+                            <field name="employee_id" options="{'no_create':True}" required="1"/>
+                            <field name="job_id" options="{'no_create':True}"/>
+                            <field name="department_id" options="{'no_create':True}"/>
+                        </group>
+                        <group>
+                            <field name="date"/>
+                            <field name="holiday_id" options="{'no_create':True}"/>
+                        </group>
+                    </group>                                  
+                </form>
+            </field>
+        </record>
+
+        <record id="kuota_tbkuota_form" model="ir.ui.view">
+            <field name="name">tbkuota.form</field>
+            <field name="model">tbkuota</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>                                  
+                </form>
+            </field>
+        </record>
+
+        <record id="kuota_detail_tree" model="ir.ui.view">
+            <field name="name">hr.kuota.tree</field>
+            <field name="model">hr.kuota</field>
+            <field name="arch" type="xml">
+                <tree string="Kuota Details">
+                    <field name="nik"/>
+                    <field name="employee_id"/>
+                    <field name="job_id"/>
+                    <field name="department_id"/>
+                    <field name="date"/>
+                    <field name="total_kuota"/>
+                    <field name="sisa_kuota"/>
+                    <field name="is_active"/>                                  
+                </tree>
+            </field>
+        </record>
+
+        <record id="kuota_history_detail_tree" model="ir.ui.view">
+            <field name="name">hr.kuota.history.tree</field>
+            <field name="model">hr.kuota.history</field>
+            <field name="arch" type="xml">
+                <tree string="Kuota History Details">
+                    <field name="nik"/>
+                    <field name="employee_id"/>
+                    <field name="job_id"/>
+                    <field name="department_id"/>
+                    <field name="date"/>
+                    <field name="holiday_id"/>                               
+                </tree>
+            </field>
+        </record>
+
+        <record id="kuota_tbkuota_tree" model="ir.ui.view">
+            <field name="name">tbkuota.tree</field>
+            <field name="model">tbkuota</field>
+            <field name="arch" type="xml">
+                <tree string="Tidak Bisa Quota">
+                    <field name="name"/>                             
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_kouta_tree">
+            <field name="name">Kuota</field>
+            <field name="res_model">hr.kuota</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'search_default_active':1,'search_default_group_employee_id':1}</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_kouta_history_tree">
+            <field name="name">History</field>
+            <field name="res_model">hr.kuota.history</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'search_default_group_employee_id':1}</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_tbkuota_tree">
+            <field name="name">Tidak Bisa Quota</field>
+            <field name="res_model">tbkuota</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="menu_renew_contract_sub_main" parent="hr.menu_hr_root" name="Kuota" sequence="30"/>
+
+        <menuitem id="menu_renew_contract_sub_main_tbquota" parent="menu_renew_contract_sub_main" name="Tidak Bisa Quota" action="action_tbkuota_tree" sequence="10"/>
+
+        <menuitem id="menu_renew_contract_sub_main_summary" parent="menu_renew_contract_sub_main" name="Summary" action="action_kouta_tree" sequence="10"/>
+
+        <menuitem id="menu_renew_contract_sub_main_history" parent="menu_renew_contract_sub_main" name="History" action="action_kouta_history_tree" sequence="20"/>
+
+</odoo>

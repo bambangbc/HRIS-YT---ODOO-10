@@ -1,0 +1,28 @@
+<odoo>
+	<data noupdate="0">
+		
+	    <record id="izin_rule" model="ir.rule">
+	        <field name="name">Pengajuan Izin (Employee)</field>
+	        <field name="model_id" ref="model_hr_izin"/>
+	        <field name="groups" eval="[(4, [ref('base.group_user')])]"/>
+	        <field name="perm_read" eval="True"/>
+	        <field name="perm_write" eval="False"/>
+	        <field name="perm_create" eval="False"/>
+	        <field name="perm_unlink" eval="False"/>
+	        <field name="domain_force">['|',('user_id.id','=',user.id),('department_id.manager_id.user_id.id','=',user.id)]</field>
+	    </record>
+
+
+	    <record id="izin_rule_hr" model="ir.rule">
+	        <field name="name">Pengajuan Izin (HRD)</field>
+	        <field name="model_id" ref="model_hr_izin"/>
+	        <field name="groups" eval="[(4, [ref('hr.group_hr_user')]),(4, [ref('hr.group_hr_manager')])]"/>
+	        <field name="perm_read" eval="True"/>
+	        <field name="perm_write" eval="False"/>
+	        <field name="perm_create" eval="False"/>
+	        <field name="perm_unlink" eval="False"/>
+	        <field name="domain_force">[(1,'=',1)]</field>
+	    </record>
+
+	</data>
+</odoo>

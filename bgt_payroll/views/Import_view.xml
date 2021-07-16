@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="hr_payslip_import_filter" model="ir.ui.view">
+        <field name="name">hr.payslip.import.search</field>
+        <field name="model">hr.payslip.manual</field>
+        <field name="arch" type="xml">
+            <search string="Search payslip Import">
+                <field name="name" string="Date"/>
+                <field name="employee_id"/>
+                <group string="Group By">
+                    <filter name="name" string="Date" context="{'group_by':'name'}"/>
+                    <filter name="employee_id" string="employee" context="{'group_by':'employee_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="hr_payslip_import_tree" model="ir.ui.view">
+        <field name="name">hr.payslip.import.tree</field>
+        <field name="model">hr.payslip.manual</field>
+        <field name="arch" type="xml">
+            <tree string="Import Payslip">
+                <field name="name"/>
+                <field name="employee_id"/>
+                <field name="bpjs_kes"/>
+                <field name="bpjs_ket"/>
+                <field name="kasbon"/>
+                <field name="tunjangan"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="hr_payslip_borongan_tree" model="ir.ui.view">
+        <field name="name">hr.payslip.import.tree</field>
+        <field name="model">hr.payslip.manual</field>
+        <field name="arch" type="xml">
+            <tree string="Import Payslip">
+                <field name="name"/>
+                <field name="employee_id"/>
+                <field name="bpjs_kes"/>
+                <field name="bpjs_ket"/>
+                <field name="tunjangan" invisible="1"/>
+                <field name="kasbon"/>
+                <field name="status" invisible="1"/>
+                <field name="upah_br1"/>
+                <field name="upah_br2"/>
+                <field name="kerajinan1"/>
+                <field name="kerajinan2"/>
+                <field name="bns_pot1"/>
+                <field name="bns_pot2"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="hr_payslip_import_form" model="ir.ui.view">
+        <field name="name">hr.payslip.import.form</field>
+        <field name="model">hr.payslip.manual</field>
+        <field name="arch" type="xml">
+            <form string="Import payslip">
+                <group>
+                    <field name="name"/>
+                    <field name="employee_id"/>
+                    <field name="bpjs_kes"/>
+                    <field name="bpjs_ket"/>
+                    <field name="tunjangan" attrs="{'invisible':[('status','=',False)]}"/>
+                    <field name="kasbon"/>
+                    <field name="status" invisible="1"/>
+                    <field name="upah_br1" attrs="{'invisible':[('status','=',False)]}"/>
+                    <field name="upah_br2" attrs="{'invisible':[('status','=',False)]}"/>
+                    <field name="kerajinan1" attrs="{'invisible':[('status','=',False)]}"/>
+                    <field name="kerajinan2" attrs="{'invisible':[('status','=',False)]}"/>
+                    <field name="bns_pot1" attrs="{'invisible':[('status','=',False)]}"/>
+                    <field name="bns_pot2" attrs="{'invisible':[('status','=',False)]}"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_import_payslip" model="ir.actions.act_window">
+        <field name="name">Import Manual</field>
+        <field name="res_model">hr.payslip.manual</field>
+        <field name="view_type">form</field>
+        <field name="view_id" ref="hr_payslip_import_tree"/>
+        <field name="search_view_id" ref="hr_payslip_import_filter"/>
+        <field name="domain">[('status','=',False)]</field>
+    </record>
+    <menuitem action="action_import_payslip" id="menu_hr_import_payslip" parent="hr_payroll.menu_hr_payroll_root"/>
+
+    <record id="action_import_borongan" model="ir.actions.act_window">
+        <field name="name">Import Borongan</field>
+        <field name="res_model">hr.payslip.manual</field>
+        <field name="view_type">form</field>
+        <field name="view_id" ref="hr_payslip_borongan_tree"/>
+        <field name="search_view_id" ref="hr_payslip_import_filter"/>
+        <field name="domain">[('status','=',True)]</field>
+        <field name="context">{
+            'default_status':True
+            }
+        </field>
+    </record>
+    <menuitem action="action_import_borongan" id="menu_hr_import_borongsn" parent="hr_payroll.menu_hr_payroll_root"/>
+
+    <record id="hr_payslip_koreksi_filter" model="ir.ui.view">
+        <field name="name">hr.payslip.import.search</field>
+        <field name="model">hr.payslip.manual</field>
+        <field name="arch" type="xml">
+            <search string="Search payslip Import">
+                <field name="name" string="Date"/>
+                <field name="employee_id"/>
+                <group string="Group By">
+                    <filter name="name" string="Date" context="{'group_by':'name'}"/>
+                    <filter name="employee_id" string="employee" context="{'group_by':'employee_id'}"/>
+                    <filter name='state' string='Status' context="{'group_by':'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="hr_payslip_koreksi_tree" model="ir.ui.view">
+        <field name="name">hr.payslip.koreksi.tree</field>
+        <field name="model">hr.koreksi</field>
+        <field name="arch" type="xml">
+            <tree string="Import Payslip">
+                <field name="name"/>
+                <field name="employee_id"/>
+                <field name="koreksi"/>
+                <field name="state"/>
+                <button name="validate" string="Validate" type="object" icon="terp-gtk-jump-to-ltr"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="hr_payslip_koreksi_form" model="ir.ui.view">
+        <field name="name">hr.payslip.koreksi.form</field>
+        <field name="model">hr.koreksi</field>
+        <field name="arch" type="xml">
+            <form string="Import Payslip">
+                <header>
+                    <button name="validate" attrs="{'invisible':[('state','=','done')]}" string="Validate" type="object" class="oe_highlight"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,done" readonly="1"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name" attrs="{'readonly':[('state','=','done')]}"/>
+                        <field name="employee_id" attrs="{'readonly':[('state','=','done')]}"/>
+                        <field name="koreksi" attrs="{'readonly':[('state','=','done')]}"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_import_koreksian" model="ir.actions.act_window">
+        <field name="name">Import Koreksian</field>
+        <field name="res_model">hr.koreksi</field>
+        <field name="view_type">form</field>
+        <field name="view_id" ref="hr_payslip_koreksi_tree"/>
+        <field name="search_view_id" ref="hr_payslip_koreksi_filter"/>
+    </record>
+    <menuitem action="action_import_koreksian" id="menu_hr_import_koreksi" parent="hr_payroll.menu_hr_payroll_root"/>
+
+        <record id="hr_payslip_thr_filter" model="ir.ui.view">
+        <field name="name">hr.payslip.import.thr.search</field>
+        <field name="model">hr.thr</field>
+        <field name="arch" type="xml">
+            <search string="Search payslip Import">
+                <field name="tahun" string="Date"/>
+                <field name="employee_id"/>
+                <group string="Group By">
+                    <filter name="tahun" string="Date" context="{'group_by':'name'}"/>
+                    <filter name="employee_id" string="employee" context="{'group_by':'employee_id'}"/>
+                    <filter name='state' string='Status' context="{'group_by':'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="hr_payslip_thr_tree" model="ir.ui.view">
+        <field name="name">hr.payslip.thr.tree</field>
+        <field name="model">hr.thr</field>
+        <field name="arch" type="xml">
+            <tree string="Import THR" editable="top">
+                <field name="name"/>
+                <field name="tahun"/>
+                <field name="employee_id"/>
+                <field name="nik"/>
+                <field name="nominal"/>
+                <field name="state" readonly='1'/>
+                <button name="validate" string="Validate" type="object" icon="terp-gtk-jump-to-ltr"/>
+                <button name="pay" string="Pay" type="object" icon="terp-gtk-jump-to-ltr"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_payslip_form2" model="ir.ui.view">
+        <field name="name">hr.payslip.form2</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
+        <field name="arch" type="xml">
+            <field name="number" position="after">
+                <field name="cuti" invisible="1"/>
+                <field name="work_cuti" invisible="1"/>
+                <field name="paytoll_calendar_id" invisible="1"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_hr_payslip_tree1" model="ir.ui.view">
+        <field name="name">hr.payslip.tree</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="hr_payroll.view_hr_payslip_tree"/>
+        <field name="arch" type="xml">
+            <field name="state" position="after">
+                <field name="status_karyawan"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="action_import_thr" model="ir.actions.act_window">
+        <field name="name">Import THR</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.thr</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">
+                    Click to add a rolling shift
+            </p>
+        <p>klik tombol create untuk rolling shift baru</p>
+        </field>
+    </record>
+
+    <menuitem
+        id="menu_hr_import_thr"
+        name="Import THR"
+        action="action_import_thr"
+        parent="hr_payroll.menu_hr_payroll_root"/>
+
+    <record id="hr_payslip_calendar_form" model="ir.ui.view">
+        <field name="name">hr.payslip.calendar.form</field>
+        <field name="model">hr.calendarpayroll</field>
+        <field name="arch" type="xml">
+            <form string="Import Payslip">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="date"/>
+                        <field name="minggu"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="hr_payslip_calendar_tree" model="ir.ui.view">
+        <field name="name">hr.payslip.calendar.tree</field>
+        <field name="model">hr.calendarpayroll</field>
+        <field name="arch" type="xml">
+            <tree string="Payslip Calendar">
+                <field name="name"/>
+                <field name="date"/>
+                <field name="minggu"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_payslip_new_calendar" model="ir.ui.view">
+            <field name="name">Payslip Calendar</field>
+            <field name="model">hr.calendarpayroll</field>
+            <field name="arch" type="xml">
+                <calendar string="Payslip Calendar" color="minggu"
+                          date_start="date" date_stop="date"
+                          mode="month"
+                          quick_add="False" avatar_model="hr.contract.type">
+                    <field name="name"/>
+                    <field name="minggu"/>
+                </calendar>
+            </field>
+        </record>
+
+    <record model="ir.actions.act_window" id="payroll_calendar">
+        <field name="name">Payroll Calendar</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">hr.calendarpayroll</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">calendar,tree</field>
+    </record>
+
+    <menuitem
+            name="Payroll Calendar Harian"
+            parent="hr_payroll.menu_hr_payroll_configuration"
+            id="payroll_calendar_menu"
+            action="payroll_calendar"
+            sequence="20"
+            />
+
+
+</odoo>

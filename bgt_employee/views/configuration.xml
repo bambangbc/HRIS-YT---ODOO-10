@@ -1,0 +1,532 @@
+<odoo>
+	<data>
+
+        <record id="view_pkp_tree" model="ir.ui.view">
+            <field name="name">hr.pkp.tree</field>
+            <field name="model">hr.pkp</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="PKP List">
+                    <field name="kode"/>
+                    <field name="nominal_min"/>
+                    <field name="nominal_max"/>
+                    <field name="pajak"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_pkp_form" model="ir.ui.view">
+            <field name="name">hr.pkp.form</field>
+            <field name="model">hr.pkp</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+            <form string="PKP Form">
+                <sheet>
+                    <group>
+                        <field name="kode"/>
+                        <field name="nominal_min"/>
+                        <field name="nominal_max"/>
+                        <field name="pajak"/>
+                    </group>
+                </sheet>
+            </form>
+            </field>
+        </record>
+
+        <record id="action_pkp_list" model="ir.actions.act_window">
+            <field name="name">PKP List</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.pkp</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to add a pkp
+                </p>
+            <p>klik tombol create untuk membuat PKP</p>
+            </field>
+        </record>
+
+        <record id="view_religion_tree" model="ir.ui.view">
+            <field name="name">hr.religion.tree</field>
+            <field name="model">hr.religion</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Religion List">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_religion_form" model="ir.ui.view">
+            <field name="name">hr.religion.form</field>
+            <field name="model">hr.religion</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+            <form string="Religion Form">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+            </form>
+            </field>
+        </record>
+
+        <record id="action_religion_list" model="ir.actions.act_window">
+            <field name="name">Religion List</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.religion</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to add a religion
+                </p>
+            <p>klik tombol create untuk menambahkan agama</p>
+            </field>
+        </record>
+
+        <record id="view_provinsi_tree" model="ir.ui.view">
+            <field name="name">hr.provinsi.tree</field>
+            <field name="model">hr.domisili.provinsi</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Provinsi List">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_provinsi_form" model="ir.ui.view">
+            <field name="name">hr.provinsi.form</field>
+            <field name="model">hr.domisili.provinsi</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+            <form string="Provinsi Form">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+            </form>
+            </field>
+        </record>
+
+        <record id="action_provinsi_list" model="ir.actions.act_window">
+            <field name="name">Provinsi List</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.domisili.provinsi</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to add a state
+                </p>
+            <p>klik tombol create untuk menambahkan provinsi</p>
+            </field>
+        </record>
+
+        <record id="view_kota_tree" model="ir.ui.view">
+            <field name="name">hr.kota.tree</field>
+            <field name="model">hr.domisili.kota</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Kota List">
+                    <field name="name"/>
+                    <field name="provinsi_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_kota_form" model="ir.ui.view">
+            <field name="name">hr.kota.form</field>
+            <field name="model">hr.domisili.kota</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+            <form string="Kota Form">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="provinsi_id"/>
+                    </group>
+                </sheet>
+            </form>
+            </field>
+        </record>
+
+        <record id="action_kota_list" model="ir.actions.act_window">
+            <field name="name">Kota List</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.domisili.kota</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to add a city
+                </p>
+            <p>klik tombol create untuk menambahkan kota</p>
+            </field>
+        </record>
+
+        <record id="view_kecamatan_tree" model="ir.ui.view">
+            <field name="name">hr.kecamatan.tree</field>
+            <field name="model">hr.domisili.kecamatan</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Kecamatan List">
+                    <field name="name"/>
+                    <field name="kota_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_kecamatan_form" model="ir.ui.view">
+            <field name="name">hr.kecamatan.form</field>
+            <field name="model">hr.domisili.kecamatan</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+            <form string="Kecamatan Form">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="kota_id"/>
+                    </group>
+                </sheet>
+            </form>
+            </field>
+        </record>
+
+        <record id="action_kecamatan_list" model="ir.actions.act_window">
+            <field name="name">Kecamatan List</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.domisili.kecamatan</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to add a districts
+                </p>
+            <p>klik tombol create untuk menambahkan kecamatan</p>
+            </field>
+        </record>
+
+        <record id="view_kelurahan_tree" model="ir.ui.view">
+            <field name="name">hr.kelurahan.tree</field>
+            <field name="model">hr.domisili.kelurahan</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Kelurahan List">
+                    <field name="name"/>
+                    <field name="kecamatan_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_kelurahan_form" model="ir.ui.view">
+            <field name="name">hr.kelurahan.form</field>
+            <field name="model">hr.domisili.kelurahan</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+            <form string="Kelurahan Form">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="kecamatan_id"/>
+                    </group>
+                </sheet>
+            </form>
+            </field>
+        </record>
+
+        <record id="action_kelurahan_list" model="ir.actions.act_window">
+            <field name="name">Kelurahan List</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.domisili.kelurahan</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    klik tombol create untuk menambahkan kelurahan
+                </p>
+            </field>
+        </record>
+
+        <record id="hr_pay_status_tree" model="ir.ui.view">
+            <field name="name">hr.pay.status.tree</field>
+            <field name="model">hr.pay.status</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Pay Status List">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="hr_pay_status_form" model="ir.ui.view">
+            <field name="name">hr.pay.status.form</field>
+            <field name="model">hr.pay.status</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+            <form string="Pay Status Form">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+            </form>
+            </field>
+        </record>
+
+        <record id="action_pay_status_list" model="ir.actions.act_window">
+            <field name="name">Pay Status List</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.pay.status</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    klik tombol create untuk menambahkan status pembayaran
+                </p>
+            </field>
+        </record>
+
+        <record id="hr_job_level_tree" model="ir.ui.view">
+            <field name="name">hr.job.level.tree</field>
+            <field name="model">hr.job.level</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Job Level List">
+                    <field name="level"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="hr_job_level_form" model="ir.ui.view">
+            <field name="name">hr.job.level.form</field>
+            <field name="model">hr.job.level</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+            <form string="Pay Status Form">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                    <group>
+                        <field name="level"/>
+                    </group>
+                </sheet>
+            </form>
+            </field>
+        </record>
+
+        <record id="action_job_level_list" model="ir.actions.act_window">
+            <field name="name">Job Level List</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.job.level</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    klik tombol create untuk menambahkan job level
+                </p>
+            </field>
+        </record>
+
+        <record id="view_ptkp_tree" model="ir.ui.view">
+            <field name="name">hr.ptkp.tree</field>
+            <field name="model">hr.ptkp</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="PTKP List">
+                    <field name="kode"/>
+                    <field name="nominal_bulan"/>
+                    <field name="nominal_tahun"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_ptkp_form" model="ir.ui.view">
+            <field name="name">hr.ptkp.form</field>
+            <field name="model">hr.ptkp</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+            <form string="PTKP Form">
+                <sheet>
+                    <group>
+                        <field name="kode"/>
+                        <field name="nominal_bulan"/>
+                        <field name="nominal_tahun"/>
+                    </group>
+                </sheet>
+            </form>
+            </field>
+        </record>
+
+        <record id="action_ptkp_list" model="ir.actions.act_window">
+            <field name="name">PKTP List</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.ptkp</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to add a ptkp
+                </p>
+            <p>klik tombol create untuk membuat PKTP</p>
+            </field>
+        </record> 
+
+        <record id="action_employee_partner_list" model="ir.actions.act_window">
+            <field name="name">Partner</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="context">{"search_default_customer":1}</field>
+            <field name="search_view_id" ref="base.view_res_partner_filter"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add a contact in your address book.
+              </p><p>
+                Odoo helps you easily track all activities related to
+                a customer: discussions, history of business opportunities,
+                documents, etc.
+              </p>
+            </field>
+        </record>
+
+        <record id="action_employee_bank_list" model="ir.actions.act_window">
+            <field name="name">Bank Accounts</field>
+            <field name="res_model">res.partner.bank</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to create a bank account.
+              </p>
+            </field>
+        </record>
+
+    <menuitem 
+        id="settings"
+        name="Settings"
+        parent="hr.menu_hr_root"
+        sequence="101"/>
+
+    <menuitem 
+        id="ptkp"
+        name="PTKP"
+        parent="settings"
+        action="action_ptkp_list"
+        sequence="101"
+        groups="hr.group_hr_manager,hr.group_hr_user"/>
+
+    <menuitem 
+        id="pkp"
+        name="PKP"
+        parent="bgt_employee.settings"
+        action="action_pkp_list"
+        sequence="102"
+        groups="hr.group_hr_manager,hr.group_hr_user"/>
+
+    <menuitem
+        id="hr_employee_partner"
+        name="Partner"
+        action="action_employee_partner_list"
+        parent="bgt_employee.settings"
+        sequence="103"
+        groups="hr.group_hr_user"/>        
+
+    <menuitem
+        id="hr_employee_bank"
+        name="Bank Accounts"
+        action="action_employee_bank_list"
+        parent="bgt_employee.settings"
+        sequence="104"
+        groups="hr.group_hr_user"/>
+
+    <menuitem
+        id="hr_religion"
+        name="Religion"
+        action="action_religion_list"
+        parent="bgt_employee.settings"
+        sequence="105"
+        groups="hr.group_hr_user"/>
+
+    <menuitem
+        id="hr_domisili"
+        name="Domisili"
+        parent="bgt_employee.settings"
+        sequence="106"
+        groups="hr.group_hr_user"/>
+
+    <menuitem
+        id="hr_domisili_provinsi"
+        name="Provinsi"
+        action="action_provinsi_list"
+        parent="hr_domisili"
+        sequence="1"
+        groups="hr.group_hr_user"/>
+
+    <menuitem
+        id="hr_domisili_kota"
+        name="Kota / Kabupaten"
+        action="action_kota_list"
+        parent="hr_domisili"
+        sequence="2"
+        groups="hr.group_hr_user"/>
+
+    <menuitem
+        id="hr_domisili_kecamatan"
+        name="Kecamatan"
+        action="action_kecamatan_list"
+        parent="hr_domisili"
+        sequence="3"
+        groups="hr.group_hr_user"/>
+
+    <menuitem
+        id="hr_pay_job_level"
+        name="Job Level"
+        action="action_job_level_list"
+        parent="bgt_employee.settings"
+        sequence="10"
+        groups="hr.group_hr_user"/>
+
+<!--     <menuitem
+        id="hr_domisili_kelurahan"
+        name="Kelurahan"
+        action="action_kelurahan_list"
+        parent="hr_domisili"
+        sequence="4"
+        groups="hr.group_hr_user"/> -->
+
+    <menuitem
+        id="hr_pay_status"
+        name="Pay Status"
+        action="action_pay_status_list"
+        parent="bgt_employee.settings"
+        sequence="107"
+        groups="hr.group_hr_user"/>
+
+	</data>
+</odoo>

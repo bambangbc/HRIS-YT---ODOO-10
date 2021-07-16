@@ -1,0 +1,883 @@
+<odoo noupdate="0">
+
+
+    <record id="page_1" model="survey.page">
+        <field name="title">(1) PENILAIAN PRESTASI KERJA</field>
+        <field name="sequence">1</field>
+    </record>
+
+<!-- 1 -->
+        <record id="question_1_1" model="survey.question">
+            <field name="question">Kualitas Kerja : ketepatan, ketelitian, keterampilan, kebersihan</field>
+            <field name="type">simple_choice</field>
+            <field name="constr_mandatory" eval="1"/>
+            <field name="page_id" ref="page_1"/>      
+        </record>
+
+        <record id="label_1_1" model="survey.label">
+            <field name="sequence">1</field>
+            <field name="value">Selalu tidak memuaskan</field>
+            <field name="quizz_mark">1</field>    
+            <field name="question_id" ref="question_1_1"/>      
+        </record>
+
+        <record id="label_1_2" model="survey.label">
+            <field name="sequence">2</field>
+            <field name="value">Terkadang tidak memuaskan</field>
+            <field name="quizz_mark">2</field>  
+            <field name="question_id" ref="question_1_1"/>          
+        </record>
+
+        <record id="label_1_3" model="survey.label">
+            <field name="sequence">3</field>
+            <field name="value">Selalu memuaskan</field>
+            <field name="quizz_mark">3</field> 
+            <field name="question_id" ref="question_1_1"/>         
+        </record>
+
+        <record id="label_1_4" model="survey.label">
+            <field name="sequence">4</field>
+            <field name="value">Terkadang luar biasa</field>
+            <field name="quizz_mark">4</field>
+            <field name="question_id" ref="question_1_1"/>        
+        </record>
+
+        <record id="label_1_5" model="survey.label">
+            <field name="sequence">5</field>
+            <field name="value">Selalu luar biasa</field>
+            <field name="quizz_mark">5</field>
+            <field name="question_id" ref="question_1_1"/>         
+        </record>
+
+<!-- 2 -->
+        <record id="question_1_2" model="survey.question">
+            <field name="question">Kuantitas Kerja : pencapaian target yang telah ditetapkan</field>
+            <field name="type">simple_choice</field>
+            <field name="constr_mandatory" eval="1"/>
+            <field name="page_id" ref="page_1"/>      
+        </record>
+
+        <record id="label_2_1" model="survey.label">
+            <field name="sequence">1</field>
+            <field name="value">Selalu dibawah persyaratan</field>
+            <field name="quizz_mark">1</field>    
+            <field name="question_id" ref="question_1_2"/>      
+        </record>
+
+        <record id="label_2_2" model="survey.label">
+            <field name="sequence">2</field>
+            <field name="value">Seringkali dibawah persyaratan</field>
+            <field name="quizz_mark">2</field>  
+            <field name="question_id" ref="question_1_2"/>          
+        </record>
+
+        <record id="label_2_3" model="survey.label">
+            <field name="sequence">3</field>
+            <field name="value">Biasanya memenuhi persyaratan</field>
+            <field name="quizz_mark">3</field> 
+            <field name="question_id" ref="question_1_2"/>         
+        </record>
+
+        <record id="label_2_4" model="survey.label">
+            <field name="sequence">4</field>
+            <field name="value">Seringkali melebihi persyaratan</field>
+            <field name="quizz_mark">4</field>
+            <field name="question_id" ref="question_1_2"/>        
+        </record>
+
+        <record id="label_2_5" model="survey.label">
+            <field name="sequence">5</field>
+            <field name="value">Selalu melebihi persyaratan</field>
+            <field name="quizz_mark">5</field>
+            <field name="question_id" ref="question_1_2"/>         
+        </record>
+
+<!-- 3 -->
+        <record id="question_1_3" model="survey.question">
+            <field name="question">Dapat / Tidak dapat diandalkan : Mengikuti instruksi dari atasan, inisiatif, dan kerajinan</field>
+            <field name="type">simple_choice</field>
+            <field name="constr_mandatory" eval="1"/>
+            <field name="page_id" ref="page_1"/>      
+        </record>
+
+        <record id="label_3_1" model="survey.label">
+            <field name="sequence">1</field>
+            <field name="value">Selalu membutuhkan pengawasan</field>
+            <field name="quizz_mark">1</field>    
+            <field name="question_id" ref="question_1_3"/>      
+        </record>
+
+        <record id="label_3_2" model="survey.label">
+            <field name="sequence">2</field>
+            <field name="value">Terus menerus Terkadang memerlukan pengawasan</field>
+            <field name="quizz_mark">2</field>  
+            <field name="question_id" ref="question_1_3"/>          
+        </record>
+
+        <record id="label_3_3" model="survey.label">
+            <field name="sequence">3</field>
+            <field name="value">Sedikit memerlukan pengawasan</field>
+            <field name="quizz_mark">3</field> 
+            <field name="question_id" ref="question_1_3"/>         
+        </record>
+
+        <record id="label_3_4" model="survey.label">
+            <field name="sequence">4</field>
+            <field name="value">Dapat diandalkan</field>
+            <field name="quizz_mark">4</field>
+            <field name="question_id" ref="question_1_3"/>        
+        </record>
+
+        <record id="label_3_5" model="survey.label">
+            <field name="sequence">5</field>
+            <field name="value">Sepenuhnya dapat dipercaya</field>
+            <field name="quizz_mark">5</field>
+            <field name="question_id" ref="question_1_3"/>         
+        </record>
+
+<!-- 4 -->
+        <record id="question_1_4" model="survey.question">
+            <field name="question">Sikap : Sikap terhadap perusahaan, karyawan lain, pekerjaan dan kerjasama</field>
+            <field name="type">simple_choice</field>
+            <field name="constr_mandatory" eval="1"/>
+            <field name="page_id" ref="page_1"/>      
+        </record>
+
+        <record id="label_4_1" model="survey.label">
+            <field name="sequence">1</field>
+            <field name="value">Jarang kerjasama</field>
+            <field name="quizz_mark">1</field>    
+            <field name="question_id" ref="question_1_4"/>      
+        </record>
+
+        <record id="label_4_2" model="survey.label">
+            <field name="sequence">2</field>
+            <field name="value">Kurang kooperatif</field>
+            <field name="quizz_mark">2</field>  
+            <field name="question_id" ref="question_1_4"/>          
+        </record>
+
+        <record id="label_4_3" model="survey.label">
+            <field name="sequence">3</field>
+            <field name="value">Biasa bekerjasama</field>
+            <field name="quizz_mark">3</field> 
+            <field name="question_id" ref="question_1_4"/>         
+        </record>
+
+        <record id="label_4_4" model="survey.label">
+            <field name="sequence">4</field>
+            <field name="value">Antusias kerja dan mau bekerjasama</field>
+            <field name="quizz_mark">4</field>
+            <field name="question_id" ref="question_1_4"/>        
+        </record>
+
+        <record id="label_4_5" model="survey.label">
+            <field name="sequence">5</field>
+            <field name="value">Selalu antusias bekerja dan bekerjasama</field>
+            <field name="quizz_mark">5</field>
+            <field name="question_id" ref="question_1_4"/>         
+        </record>
+
+<!-- 5 -->
+        <record id="question_1_5" model="survey.question">
+            <field name="question">Kehadiran dan Disiplin Kerja : Tingkat absensi, kehadiran tepat waktu, disiplin dalam penggunaan waktu</field>
+            <field name="type">simple_choice</field>
+            <field name="constr_mandatory" eval="1"/>
+            <field name="page_id" ref="page_1"/>      
+        </record>
+
+        <record id="label_5_1" model="survey.label">
+            <field name="sequence">1</field>
+            <field name="value">Sering mangkir dan ijin tidak masuk kerja karena alasan pribadi</field>
+            <field name="quizz_mark">1</field>    
+            <field name="question_id" ref="question_1_5"/>      
+        </record>
+
+        <record id="label_5_2" model="survey.label">
+            <field name="sequence">2</field>
+            <field name="value">Kadang mangkir masuk kerja dan tidak disiplin dalam waktu kerja</field>
+            <field name="quizz_mark">2</field>  
+            <field name="question_id" ref="question_1_5"/>          
+        </record>
+
+        <record id="label_5_3" model="survey.label">
+            <field name="sequence">3</field>
+            <field name="value">Kadang mangkir masuk kerja tetapi disiplin dalam waktu kerja</field>
+            <field name="quizz_mark">3</field> 
+            <field name="question_id" ref="question_1_5"/>         
+        </record>
+
+        <record id="label_5_4" model="survey.label">
+            <field name="sequence">4</field>
+            <field name="value">Jarang mangkir dan disiplin dalam jam kerja </field>
+            <field name="quizz_mark">4</field>
+            <field name="question_id" ref="question_1_5"/>        
+        </record>
+
+        <record id="label_5_5" model="survey.label">
+            <field name="sequence">5</field>
+            <field name="value">Tidak pernah mangkir dan disiplin dalam jam kerja</field>
+            <field name="quizz_mark">5</field>
+            <field name="question_id" ref="question_1_5"/>         
+        </record>         
+                      
+<!-- 6 -->
+        <record id="question_1_6" model="survey.question">
+            <field name="question">Tanggung Jawab : Kesediaan melaksanakan tanggung jawab hingga selesai</field>
+            <field name="type">simple_choice</field>
+            <field name="constr_mandatory" eval="1"/>
+            <field name="page_id" ref="page_1"/>      
+        </record>
+
+        <record id="label_6_1" model="survey.label">
+            <field name="sequence">1</field>
+            <field name="value">Selalu menghindar dari tugas dan banyak alasan</field>
+            <field name="quizz_mark">1</field>    
+            <field name="question_id" ref="question_1_6"/>      
+        </record>
+
+        <record id="label_6_2" model="survey.label">
+            <field name="sequence">2</field>
+            <field name="value">Melaksanakan tugas tetapi selalu tidak memenuhi target</field>
+            <field name="quizz_mark">2</field>  
+            <field name="question_id" ref="question_1_6"/>          
+        </record>
+
+        <record id="label_6_3" model="survey.label">
+            <field name="sequence">3</field>
+            <field name="value">Kadang tidak memenuhi target tetapi usaha telah dilakukan</field>
+            <field name="quizz_mark">3</field> 
+            <field name="question_id" ref="question_1_6"/>         
+        </record>
+
+        <record id="label_6_4" model="survey.label">
+            <field name="sequence">4</field>
+            <field name="value">Dapat memenuhi kewajiban dengan baik sesuai tugasnya</field>
+            <field name="quizz_mark">4</field>
+            <field name="question_id" ref="question_1_6"/>        
+        </record>
+
+        <record id="label_6_5" model="survey.label">
+            <field name="sequence">5</field>
+            <field name="value">Kreatif dan selalu cepat tanggap dalam memenuhi tugasnya</field>
+            <field name="quizz_mark">5</field>
+            <field name="question_id" ref="question_1_6"/>         
+        </record>  
+        
+<!-- 7 -->
+        <record id="question_1_7" model="survey.question">
+            <field name="question">Pengetahuan : Menunjukan minat meningkatkan pengetahuan dalam pelaksanaan pekerjaan </field>
+            <field name="type">simple_choice</field>
+            <field name="constr_mandatory" eval="1"/>
+            <field name="page_id" ref="page_1"/>      
+        </record>
+
+        <record id="label_7_1" model="survey.label">
+            <field name="sequence">1</field>
+            <field name="value">Tidak menunjukan kemajuan dalam pekerjaan</field>
+            <field name="quizz_mark">1</field>    
+            <field name="question_id" ref="question_1_7"/>      
+        </record>
+
+        <record id="label_7_2" model="survey.label">
+            <field name="sequence">2</field>
+            <field name="value">Kadang ada usaha perbaikan pekerjaan tetapi tidak membawa arti</field>
+            <field name="quizz_mark">2</field>  
+            <field name="question_id" ref="question_1_7"/>          
+        </record>
+
+        <record id="label_7_3" model="survey.label">
+            <field name="sequence">3</field>
+            <field name="value">Sedikit ada kemajuan pekerjaan sebatas pekerjaan rutin</field>
+            <field name="quizz_mark">3</field> 
+            <field name="question_id" ref="question_1_7"/>         
+        </record>
+
+        <record id="label_7_4" model="survey.label">
+            <field name="sequence">4</field>
+            <field name="value">Kemajuan pekerjaan dihasilkan lebih baik</field>
+            <field name="quizz_mark">4</field>
+            <field name="question_id" ref="question_1_7"/>        
+        </record>
+
+        <record id="label_7_5" model="survey.label">
+            <field name="sequence">5</field>
+            <field name="value">Kemajuan pekerjaan sering dihasilkan lebih baik dan membawa arti</field>
+            <field name="quizz_mark">5</field>
+            <field name="question_id" ref="question_1_7"/>         
+        </record> 
+
+<!-- 8 -->
+        <record id="question_1_8" model="survey.question">
+            <field name="question">Komunikasi : Kemampuan untuk berinteraksi dengan atasan dan lingkungan</field>
+            <field name="type">simple_choice</field>
+            <field name="constr_mandatory" eval="1"/>
+            <field name="page_id" ref="page_1"/>      
+        </record>
+
+        <record id="label_8_1" model="survey.label">
+            <field name="sequence">1</field>
+            <field name="value">Pasif dan cenderung menghindar dengan atasan</field>
+            <field name="quizz_mark">1</field>    
+            <field name="question_id" ref="question_1_8"/>      
+        </record>
+
+        <record id="label_8_2" model="survey.label">
+            <field name="sequence">2</field>
+            <field name="value">Kurang memiliki kemampuan untuk berkomunikasi dengan atasan</field>
+            <field name="quizz_mark">2</field>  
+            <field name="question_id" ref="question_1_8"/>          
+        </record>
+
+        <record id="label_8_3" model="survey.label">
+            <field name="sequence">3</field>
+            <field name="value">Kadang dapat berkomunikasi dengan atasan</field>
+            <field name="quizz_mark">3</field> 
+            <field name="question_id" ref="question_1_8"/>         
+        </record>
+
+        <record id="label_8_4" model="survey.label">
+            <field name="sequence">4</field>
+            <field name="value">Dapat berkomunikasi dengan atasan</field>
+            <field name="quizz_mark">4</field>
+            <field name="question_id" ref="question_1_8"/>        
+        </record>
+
+        <record id="label_8_5" model="survey.label">
+            <field name="sequence">5</field>
+            <field name="value">Selalu berkomunikasi dengan atasan</field>
+            <field name="quizz_mark">5</field>
+            <field name="question_id" ref="question_1_8"/>         
+        </record> 
+
+<!-- 9 -->
+        <record id="question_1_9" model="survey.question">
+            <field name="question">Pemecahan Masalah dan Kreativitas : Kemampuan menyelesaikan masalah dengan idenya sendiri</field>
+            <field name="type">simple_choice</field>
+            <field name="constr_mandatory" eval="1"/>
+            <field name="page_id" ref="page_1"/>      
+        </record>
+
+        <record id="label_9_1" model="survey.label">
+            <field name="sequence">1</field>
+            <field name="value">Tidak mampu menyelesaikan masalahnya sendiri</field>
+            <field name="quizz_mark">1</field>    
+            <field name="question_id" ref="question_1_9"/>      
+        </record>
+
+        <record id="label_9_2" model="survey.label">
+            <field name="sequence">2</field>
+            <field name="value">Kurang mampu menyelesaikan masalahnya</field>
+            <field name="quizz_mark">2</field>  
+            <field name="question_id" ref="question_1_9"/>          
+        </record>
+
+        <record id="label_9_3" model="survey.label">
+            <field name="sequence">3</field>
+            <field name="value">Kadang dapat menyelesaikan masalahnya</field>
+            <field name="quizz_mark">3</field> 
+            <field name="question_id" ref="question_1_9"/>         
+        </record>
+
+        <record id="label_9_4" model="survey.label">
+            <field name="sequence">4</field>
+            <field name="value">Dapat menuntaskan masalah dengan baik</field>
+            <field name="quizz_mark">4</field>
+            <field name="question_id" ref="question_1_9"/>        
+        </record>
+
+        <record id="label_9_5" model="survey.label">
+            <field name="sequence">5</field>
+            <field name="value">Selalu mampu memecahkan masalah dengan inovatif</field>
+            <field name="quizz_mark">5</field>
+            <field name="question_id" ref="question_1_9"/>         
+        </record> 
+             
+<!-- 10 -->
+        <record id="question_1_10" model="survey.question">
+            <field name="question">Inisiatif : Kesediaan memberikan ide-ide bermanfaat bagi peningkatan kerja</field>
+            <field name="type">simple_choice</field>
+            <field name="constr_mandatory" eval="1"/>
+            <field name="page_id" ref="page_1"/>      
+        </record>
+
+        <record id="label_10_1" model="survey.label">
+            <field name="sequence">1</field>
+            <field name="value">Tidak pernah mengemukakan ide sama sekali</field>
+            <field name="quizz_mark">1</field>    
+            <field name="question_id" ref="question_1_10"/>      
+        </record>
+
+        <record id="label_10_2" model="survey.label">
+            <field name="sequence">2</field>
+            <field name="value">Kurang dapat mengemukakan ide yang bermanfaat</field>
+            <field name="quizz_mark">2</field>  
+            <field name="question_id" ref="question_1_10"/>          
+        </record>
+
+        <record id="label_10_3" model="survey.label">
+            <field name="sequence">3</field>
+            <field name="value">Kadang dapat mengemukakan ide yang baik dan bermanfaat</field>
+            <field name="quizz_mark">3</field> 
+            <field name="question_id" ref="question_1_10"/>         
+        </record>
+
+        <record id="label_10_4" model="survey.label">
+            <field name="sequence">4</field>
+            <field name="value">Dapat mengemukakan ide baik untuk peningkatan pekerjaan </field>
+            <field name="quizz_mark">4</field>
+            <field name="question_id" ref="question_1_10"/>        
+        </record>
+
+        <record id="label_10_5" model="survey.label">
+            <field name="sequence">5</field>
+            <field name="value">Selalu memberikan ide baik dan bermanfaat bagi perusahaan</field>
+            <field name="quizz_mark">5</field>
+            <field name="question_id" ref="question_1_10"/>         
+        </record> 
+
+
+    <record id="page_2" model="survey.page">
+        <field name="title">(2) PENILAIAN PRESTASI KERJA</field>
+        <field name="sequence">2</field>
+    </record>
+
+<!-- 1 -->
+        <record id="question_2_1" model="survey.question">
+            <field name="question">Apakah Ybs pernah memberikan ide-ide yang baik tanpa diminta?</field>
+            <field name="type">simple_choice</field>
+            <field name="constr_mandatory" eval="1"/>
+            <field name="page_id" ref="page_2"/>      
+        </record>
+
+        <record id="label2_1_1" model="survey.label">
+            <field name="sequence">1</field>
+            <field name="value">Tidak Pernah</field>
+            <field name="quizz_mark">1</field>    
+            <field name="question_id" ref="question_2_1"/>      
+        </record>
+
+        <record id="label2_1_2" model="survey.label">
+            <field name="sequence">2</field>
+            <field name="value">Pernah</field>
+            <field name="quizz_mark">2</field>  
+            <field name="question_id" ref="question_2_1"/>          
+        </record>
+
+        <record id="label2_1_3" model="survey.label">
+            <field name="sequence">3</field>
+            <field name="value">Selalu</field>
+            <field name="quizz_mark">3</field>  
+            <field name="question_id" ref="question_2_1"/>          
+        </record>
+
+<!-- 2 -->
+        <record id="question_2_2" model="survey.question">
+            <field name="question">Apakah Ybs pernah menunjukkan motivasi dalam bekerja?</field>
+            <field name="type">simple_choice</field>
+            <field name="constr_mandatory" eval="1"/>
+            <field name="page_id" ref="page_2"/>      
+        </record>
+
+        <record id="label2_2_1" model="survey.label">
+            <field name="sequence">1</field>
+            <field name="value">Tidak Pernah</field>
+            <field name="quizz_mark">1</field>    
+            <field name="question_id" ref="question_2_2"/>      
+        </record>
+
+        <record id="label2_2_2" model="survey.label">
+            <field name="sequence">2</field>
+            <field name="value">Pernah</field>
+            <field name="quizz_mark">2</field>  
+            <field name="question_id" ref="question_2_2"/>          
+        </record>
+
+        <record id="label2_2_3" model="survey.label">
+            <field name="sequence">3</field>
+            <field name="value">Selalu</field>
+            <field name="quizz_mark">3</field>  
+            <field name="question_id" ref="question_2_2"/>          
+        </record>
+
+<!-- 3 -->
+        <record id="question_2_3" model="survey.question">
+            <field name="question">Apakah Ybs pernah bertanggungjawab atas peralatan kerja yang dipercayakan pada dirinya?</field>
+            <field name="type">simple_choice</field>
+            <field name="constr_mandatory" eval="1"/>
+            <field name="page_id" ref="page_2"/>      
+        </record>
+
+        <record id="label2_3_1" model="survey.label">
+            <field name="sequence">1</field>
+            <field name="value">Tidak Pernah</field>
+            <field name="quizz_mark">1</field>    
+            <field name="question_id" ref="question_2_3"/>      
+        </record>
+
+        <record id="label2_3_2" model="survey.label">
+            <field name="sequence">2</field>
+            <field name="value">Pernah</field>
+            <field name="quizz_mark">2</field>  
+            <field name="question_id" ref="question_2_3"/>          
+        </record>
+
+        <record id="label2_3_3" model="survey.label">
+            <field name="sequence">3</field>
+            <field name="value">Selalu</field>
+            <field name="quizz_mark">3</field>  
+            <field name="question_id" ref="question_2_3"/>          
+        </record>
+
+<!-- 4 -->
+        <record id="question_2_4" model="survey.question">
+            <field name="question">Apakah Ybs pernah berperan aktif dalam menjaga kedisiplinan kerja?</field>
+            <field name="type">simple_choice</field>
+            <field name="constr_mandatory" eval="1"/>
+            <field name="page_id" ref="page_2"/>      
+        </record>
+
+        <record id="label2_4_1" model="survey.label">
+            <field name="sequence">1</field>
+            <field name="value">Tidak Pernah</field>
+            <field name="quizz_mark">1</field>    
+            <field name="question_id" ref="question_2_4"/>      
+        </record>
+
+        <record id="label2_4_2" model="survey.label">
+            <field name="sequence">2</field>
+            <field name="value">Pernah</field>
+            <field name="quizz_mark">2</field>  
+            <field name="question_id" ref="question_2_4"/>          
+        </record>
+
+        <record id="label2_4_3" model="survey.label">
+            <field name="sequence">3</field>
+            <field name="value">Selalu</field>
+            <field name="quizz_mark">3</field>  
+            <field name="question_id" ref="question_2_4"/>          
+        </record>
+
+<!-- 5 -->
+        <record id="question_2_5" model="survey.question">
+            <field name="question">Apakah Ybs pernah berperan serta dalam menjaga kebersihan area kerjanya?</field>
+            <field name="type">simple_choice</field>
+            <field name="constr_mandatory" eval="1"/>
+            <field name="page_id" ref="page_2"/>      
+        </record>
+
+        <record id="label2_5_1" model="survey.label">
+            <field name="sequence">1</field>
+            <field name="value">Tidak Pernah</field>
+            <field name="quizz_mark">1</field>    
+            <field name="question_id" ref="question_2_5"/>      
+        </record>
+
+        <record id="label2_5_2" model="survey.label">
+            <field name="sequence">2</field>
+            <field name="value">Pernah</field>
+            <field name="quizz_mark">2</field>  
+            <field name="question_id" ref="question_2_5"/>          
+        </record>
+
+        <record id="label2_5_3" model="survey.label">
+            <field name="sequence">3</field>
+            <field name="value">Selalu</field>
+            <field name="quizz_mark">3</field>  
+            <field name="question_id" ref="question_2_5"/>          
+        </record>
+
+<!-- 6 -->
+        <record id="question_2_6" model="survey.question">
+            <field name="question">Apakah Ybs pernah menunjukkan kemampuan dan pengetahuan yang baik tentang pekerjaannya?</field>
+            <field name="type">simple_choice</field>
+            <field name="constr_mandatory" eval="1"/>
+            <field name="page_id" ref="page_2"/>      
+        </record>
+
+        <record id="label2_6_1" model="survey.label">
+            <field name="sequence">1</field>
+            <field name="value">Tidak Pernah</field>
+            <field name="quizz_mark">1</field>    
+            <field name="question_id" ref="question_2_6"/>      
+        </record>
+
+        <record id="label2_6_2" model="survey.label">
+            <field name="sequence">2</field>
+            <field name="value">Pernah</field>
+            <field name="quizz_mark">2</field>  
+            <field name="question_id" ref="question_2_6"/>          
+        </record>
+
+        <record id="label2_6_3" model="survey.label">
+            <field name="sequence">3</field>
+            <field name="value">Selalu</field>
+            <field name="quizz_mark">3</field>  
+            <field name="question_id" ref="question_2_6"/>          
+        </record>
+
+<!-- 7 -->
+        <record id="question_2_7" model="survey.question">
+            <field name="question">Apakah Ybs pernah menunjukkan kemampuan kepemimpinan di dalam kelompoknya?</field>
+            <field name="type">simple_choice</field>
+            <field name="constr_mandatory" eval="1"/>
+            <field name="page_id" ref="page_2"/>      
+        </record>
+
+        <record id="label2_7_1" model="survey.label">
+            <field name="sequence">1</field>
+            <field name="value">Tidak Pernah</field>
+            <field name="quizz_mark">1</field>    
+            <field name="question_id" ref="question_2_7"/>      
+        </record>
+
+        <record id="label2_7_2" model="survey.label">
+            <field name="sequence">2</field>
+            <field name="value">Pernah</field>
+            <field name="quizz_mark">2</field>  
+            <field name="question_id" ref="question_2_6"/>          
+        </record>
+
+        <record id="label2_7_3" model="survey.label">
+            <field name="sequence">3</field>
+            <field name="value">Selalu</field>
+            <field name="quizz_mark">3</field>  
+            <field name="question_id" ref="question_2_7"/>          
+        </record>
+
+<!-- 8 -->
+        <record id="question_2_8" model="survey.question">
+            <field name="question">Apakah Ybs pernah mengatasi masalah yang timbul di dalam kelompoknya?</field>
+            <field name="type">simple_choice</field>
+            <field name="constr_mandatory" eval="1"/>
+            <field name="page_id" ref="page_2"/>      
+        </record>
+
+        <record id="label2_8_1" model="survey.label">
+            <field name="sequence">1</field>
+            <field name="value">Tidak Pernah</field>
+            <field name="quizz_mark">1</field>    
+            <field name="question_id" ref="question_2_8"/>      
+        </record>
+
+        <record id="label2_8_2" model="survey.label">
+            <field name="sequence">2</field>
+            <field name="value">Pernah</field>
+            <field name="quizz_mark">2</field>  
+            <field name="question_id" ref="question_2_8"/>          
+        </record>
+
+        <record id="label2_8_3" model="survey.label">
+            <field name="sequence">3</field>
+            <field name="value">Selalu</field>
+            <field name="quizz_mark">3</field>  
+            <field name="question_id" ref="question_2_8"/>          
+        </record>
+
+<!-- 9 -->
+        <record id="question_2_9" model="survey.question">
+            <field name="question">Apakah Ybs pernah menolak perintah atasan?</field>
+            <field name="type">simple_choice</field>
+            <field name="constr_mandatory" eval="1"/>
+            <field name="page_id" ref="page_2"/>      
+        </record>
+
+        <record id="label2_9_1" model="survey.label">
+            <field name="sequence">1</field>
+            <field name="value">Tidak Pernah</field>
+            <field name="quizz_mark">3</field>    
+            <field name="question_id" ref="question_2_9"/>      
+        </record>
+
+        <record id="label2_9_2" model="survey.label">
+            <field name="sequence">2</field>
+            <field name="value">Pernah</field>
+            <field name="quizz_mark">2</field>  
+            <field name="question_id" ref="question_2_9"/>          
+        </record>
+
+        <record id="label2_9_3" model="survey.label">
+            <field name="sequence">3</field>
+            <field name="value">Selalu</field>
+            <field name="quizz_mark">1</field>  
+            <field name="question_id" ref="question_2_9"/>          
+        </record>
+
+<!-- 10 -->
+        <record id="question_2_10" model="survey.question">
+            <field name="question">Apakah Ybs selalu bersikap baik dan sopan terhadap atasan?</field>
+            <field name="type">simple_choice</field>
+            <field name="constr_mandatory" eval="1"/>
+            <field name="page_id" ref="page_2"/>      
+        </record>
+
+        <record id="label2_10_1" model="survey.label">
+            <field name="sequence">1</field>
+            <field name="value">Tidak Pernah</field>
+            <field name="quizz_mark">1</field>    
+            <field name="question_id" ref="question_2_10"/>      
+        </record>
+
+        <record id="label2_10_2" model="survey.label">
+            <field name="sequence">2</field>
+            <field name="value">Pernah</field>
+            <field name="quizz_mark">2</field>  
+            <field name="question_id" ref="question_2_10"/>          
+        </record>
+
+        <record id="label2_10_3" model="survey.label">
+            <field name="sequence">3</field>
+            <field name="value">Selalu</field>
+            <field name="quizz_mark">3</field>  
+            <field name="question_id" ref="question_2_10"/>          
+        </record>
+
+<!-- 11 -->
+        <record id="question_2_11" model="survey.question">
+            <field name="question">Apakah Ybs pernah mengabaikan / lalai menjalankan tugas?</field>
+            <field name="type">simple_choice</field>
+            <field name="constr_mandatory" eval="1"/>
+            <field name="page_id" ref="page_2"/>      
+        </record>
+
+        <record id="label2_11_1" model="survey.label">
+            <field name="sequence">1</field>
+            <field name="value">Tidak Pernah</field>
+            <field name="quizz_mark">3</field>    
+            <field name="question_id" ref="question_2_11"/>      
+        </record>
+
+        <record id="label2_11_2" model="survey.label">
+            <field name="sequence">2</field>
+            <field name="value">Pernah</field>
+            <field name="quizz_mark">2</field>  
+            <field name="question_id" ref="question_2_11"/>          
+        </record>
+
+        <record id="label2_11_3" model="survey.label">
+            <field name="sequence">3</field>
+            <field name="value">Selalu</field>
+            <field name="quizz_mark">1</field>  
+            <field name="question_id" ref="question_2_11"/>          
+        </record>
+
+<!-- 12 -->
+        <record id="question_2_12" model="survey.question">
+            <field name="question">Apakah Ybs pernah mendapatkan peringatan lisan dari atasan?</field>
+            <field name="type">simple_choice</field>
+            <field name="constr_mandatory" eval="1"/>
+            <field name="page_id" ref="page_2"/>      
+        </record>
+
+        <record id="label2_12_1" model="survey.label">
+            <field name="sequence">1</field>
+            <field name="value">Tidak Pernah</field>
+            <field name="quizz_mark">3</field>    
+            <field name="question_id" ref="question_2_12"/>      
+        </record>
+
+        <record id="label2_12_2" model="survey.label">
+            <field name="sequence">2</field>
+            <field name="value">Pernah</field>
+            <field name="quizz_mark">2</field>  
+            <field name="question_id" ref="question_2_12"/>          
+        </record>
+
+        <record id="label2_12_3" model="survey.label">
+            <field name="sequence">3</field>
+            <field name="value">Selalu</field>
+            <field name="quizz_mark">1</field>  
+            <field name="question_id" ref="question_2_12"/>          
+        </record>
+
+<!-- 13 -->
+        <record id="question_2_13" model="survey.question">
+            <field name="question">Apakah Ybs pernah mendapatkan peringatan tertulis dari perusahaan?</field>
+            <field name="type">simple_choice</field>
+            <field name="constr_mandatory" eval="1"/>
+            <field name="page_id" ref="page_2"/>      
+        </record>
+
+        <record id="label2_13_1" model="survey.label">
+            <field name="sequence">1</field>
+            <field name="value">Tidak Pernah</field>
+            <field name="quizz_mark">4</field>    
+            <field name="question_id" ref="question_2_13"/>      
+        </record>
+
+        <record id="label2_13_2" model="survey.label">
+            <field name="sequence">2</field>
+            <field name="value">Pernah</field>
+            <field name="quizz_mark">2</field>  
+            <field name="question_id" ref="question_2_13"/>          
+        </record>
+
+        <record id="label2_13_3" model="survey.label">
+            <field name="sequence">3</field>
+            <field name="value">Selalu</field>
+            <field name="quizz_mark">1</field>  
+            <field name="question_id" ref="question_2_13"/>          
+        </record>
+
+
+    <record id="page_3" model="survey.page">
+        <field name="title">(3) PENILAIAN PRESTASI KERJA [skala nilai  0-100]</field>
+        <field name="sequence">3</field>
+    </record>
+
+<!-- 1 -->
+        <record id="question_3_1" model="survey.question">
+            <field name="question">Mensolder feeding sprue ke main sprue sesuai dengan target</field>
+            <field name="type">numerical_box</field>
+            <field name="constr_mandatory" eval="1"/>
+            <field name="validation_required" eval="1"/>
+            <field name="validation_min_float_value">0.0</field>
+            <field name="validation_max_float_value">100.0</field>
+            <field name="page_id" ref="page_3"/>
+        </record>
+
+<!-- 2 -->
+        <record id="question_3_2" model="survey.question">
+            <field name="question">Meletakkan main sprue, kanban, solder, adaptor, tabung sesuai maping yang telah dibuat</field>
+            <field name="type">numerical_box</field>
+            <field name="constr_mandatory" eval="1"/>
+            <field name="validation_required" eval="1"/>
+            <field name="validation_min_float_value">0.0</field>
+            <field name="validation_max_float_value">100.0</field>
+            <field name="page_id" ref="page_3"/>      
+        </record>
+
+<!-- 3 -->
+        <record id="question_3_3" model="survey.question">
+            <field name="question">Membersihkan dan mengecek solder sebelum dan setelah digunakan</field>
+            <field name="type">numerical_box</field>
+            <field name="constr_mandatory" eval="1"/>
+            <field name="validation_required" eval="1"/>
+            <field name="validation_min_float_value">0.0</field>
+            <field name="validation_max_float_value">100.0</field>
+            <field name="page_id" ref="page_3"/>      
+        </record>
+
+<!-- 4 -->
+        <record id="question_3_4" model="survey.question">
+            <field name="question">Tidak melakukan kesalahan dalam mensolder</field>
+            <field name="type">numerical_box</field>
+            <field name="constr_mandatory" eval="1"/>
+            <field name="validation_required" eval="1"/>
+            <field name="validation_min_float_value">0.0</field>
+            <field name="validation_max_float_value">100.0</field>
+            <field name="page_id" ref="page_3"/>      
+        </record>
+
+<!-- 5 -->
+        <record id="question_3_5" model="survey.question">
+            <field name="question">Pengecekan jumlah model sesuai dengan JO</field>
+            <field name="type">numerical_box</field>
+            <field name="constr_mandatory" eval="1"/>
+            <field name="validation_required" eval="1"/>
+            <field name="validation_min_float_value">0.0</field>
+            <field name="validation_max_float_value">100.0</field>
+            <field name="page_id" ref="page_3"/>      
+        </record>
+
+</odoo>

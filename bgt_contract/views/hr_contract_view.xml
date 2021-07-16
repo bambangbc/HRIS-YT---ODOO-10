@@ -1,0 +1,108 @@
+<!--  <?xml version="1.0" encoding="utf-8"?> -->
+ <odoo>
+
+     <record id="hr_contract_view_search_expired" model="ir.ui.view">
+        <field name="name">hr.contract.view.search</field>
+        <field name="model">hr.contract</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_search"/>
+        <field name="arch" type="xml">
+            <field name="state" position="after">
+                <filter string="2 Weeks Expired" name="shift" domain="[('remaining_expired_days', '&lt;=',14)]"/>
+
+            </field>
+        </field>
+    </record>
+
+        <record id="hr_contract_type_view_form_payroll" model="ir.ui.view">
+            <field name="name">hr.contract.type.payroll.form</field>
+            <field name="model">hr.contract.type</field>
+            <field name="inherit_id" ref="hr_contract.hr_contract_type_view_form"/>
+            <field name="arch" type="xml">
+                <field name="name" position="after">
+                    <group string="Payroll">
+                        <field name="gaji_pokok"/>
+                        <field name="premi_hadir"/>
+                        <field name="hari_kerja"/>
+                        <field name="bonus_bulanan"/>
+                        <field name="bonus_mingguan"/>
+                    </group>
+                    <group></group>
+                </field>
+            </field>
+        </record>
+
+    <record id="hr_contract_view_form_expired_contract" model="ir.ui.view">
+        <field name="name">hr.contract.view.form</field>
+        <field name="model">hr.contract</field>
+        <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='working_hours']" position="before">
+                <field name="remaining_expired" invisible="1"/>
+                <field name="remaining_expired_days" invisible="1"/>
+                <field name="tanggal" invisible="1"/>
+                <field name="company_id" invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='wage']" position="before">
+               <field name="umk" required="1"/>
+            </xpath>
+            <xpath expr="//notebook/page[1]" position="after">
+                <page string="Allowance &amp; Deduction" name="alw_ded">
+                    <group>
+                        <group>
+                            <field name="meals" widget="monetary"/>
+                            <field name="uang_saku" widget="monetary"/>
+                            <field name="uang_transport" widget="monetary"/>
+                            <field name="gapok" readonly="1" widget="monetary"/>
+                            <field name="upah_bersih" widget="monetary"/>
+                        </group>
+                        <group>
+                            <field name="premi_hadir" widget="monetary"/>
+                            <field name="bonus_kehadiran" widget="monetary"/>
+                            <field name="tunjangan" widget="monetary" string="Tunjangan Lain-lain"/>
+                            <field name="tmk"  widget="monetary"/>
+                        </group>
+                    </group>
+                </page>
+                <page string="Other Info">
+                    <group col="4">
+                        <field name="no_sk_pengangkatan"/>
+                        <field name="no_kesepakatan_upah"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+
+        <record id="hr_contract.hr_contract_view_tree" model="ir.ui.view">
+            <field name="name">hr.contract.tree</field>
+            <field name="model">hr.contract</field>
+            <field name="arch" type="xml">
+                <tree string="Contracts" decoration-bf="message_needaction == True" colors="orange:remaining_expired &lt; 182 and remaining_expired &gt;=91;red:remaining_expired &lt; 91 and remaining_expired &gt;=0; grey:remaining_expired &lt; 0 ;">
+                    <field name="name"/>
+                    <field name="employee_id"/>
+                    <field name="type_id"/>
+                    <field name="job_id"/>
+                    <field name="remaining_expired" invisible="1"/>
+                    <field name="remaining_expired_days" invisible="1"/>
+                    <field name="working_hours"/>
+                    <field name="date_start"/>
+                    <field name="date_end"/>
+                    <field name="wage" invisible="1"/>
+                    <field name="message_needaction" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="hr_employee_view_form_bgt_contract" model="ir.ui.view">
+            <field name="name">hr.hr.employee.view.form2</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr_contract.hr_hr_employee_view_form2"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='contracts_count']" position="attributes">
+                    <attribute name="string">Pay Status</attribute>
+                </xpath>
+            </field>
+        </record>
+
+</odoo>

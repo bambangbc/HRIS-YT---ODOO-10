@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_catering_user,access_catering_user,model_hr_catering,base.group_user,1,1,0,0
+access_catering_detail_user,access_catering_detail_user,model_hr_catering_detail,base.group_user,1,1,1,1
+access_catering_user_hr,access_catering_user_hr,model_hr_catering,hr.group_hr_user,1,1,1,1
+access_catering_detail_user_hr,access_catering_detail_user_hr,model_hr_catering_detail,hr.group_hr_user,1,1,1,1
+access_catering_teamleader,access_catering_team_leader,model_hr_catering,group_team_leader_catering,1,1,1,1
+access_catering_detail_teamleader,access_catering_detail_team_leader,model_hr_catering_detail,group_team_leader_catering,1,1,1,1

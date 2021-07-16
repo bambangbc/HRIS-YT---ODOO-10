@@ -1,0 +1,28 @@
+<odoo>
+
+    <record id="hr_attendance_view_filter_shift" model="ir.ui.view">
+        <field name="name">hr_attendance_view_filter_shift</field>
+        <field name="model">hr.attendance</field>
+        <field name="inherit_id" ref="hr_attendance.hr_attendance_view_filter"/>
+        <field name="arch" type="xml">
+            <field name="employee_id" position="after">
+                <field name="schedule_id"/>
+            </field>
+            <filter name="employee" position="after">
+                <filter name="schedule_id" string="Shcedule" context="{'group_by':'schedule_id'}"/>
+            </filter>
+        </field>
+    </record>
+
+    <record id="view_attendace_izin_tree" model="ir.ui.view">
+        <field name="name">additional.form.view.hr.attendance.izin.tree</field>
+        <field name="model">hr.attendance</field>
+        <field name="inherit_id" ref="hr_attendance.view_attendance_tree"/>
+        <field name="arch" type="xml">
+            <field name="employee_id" position="after">
+                <field name="schedule_id" readonly="1"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>

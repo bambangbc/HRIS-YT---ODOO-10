@@ -1,0 +1,168 @@
+<odoo>
+
+        <record id="izin_search" model="ir.ui.view">
+            <field name="name">hr.izin.search</field>
+            <field name="model">hr.izin</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Izin">
+                    <field name="name" string="Number" select="True"/>
+                    <field name="employee_id"  select="True"/>
+                    <field name="nik"  select="True"/>
+                    <field name="department_id"  select="True"/>
+                    <field name="job_id"  select="True"/>
+                    <group expand="0" string="Group By...">
+                        <filter string="Employee" 
+                                domain="[]" 
+                                context="{'group_by':'employee_id'}"/>
+                        <filter string="Department" 
+                                domain="[]" 
+                                context="{'group_by':'department_id'}"/>
+                        <filter string="Job" 
+                                domain="[]" 
+                                context="{'group_by':'job_id'}"/>
+                        <filter string="Tanggal Izin" 
+                                domain="[]" 
+                                context="{'group_by':'date_late'}"/>
+                        <filter string="State" 
+                                domain="[]" 
+                                context="{'group_by':'state'}"/>
+                    </group>
+                </search>
+             </field>
+         </record>
+
+        <record id="view_izin_tree" model="ir.ui.view">
+            <field name="name">hr.izin.tree</field>
+            <field name="model">hr.izin</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Izin List">
+                    <field name="name"/>
+                    <field name="nik"/>
+                    <field name="employee_id"/>
+                    <field name="user_id" invisible="1"/>
+                    <field name="department_id"/>
+                    <field name="job_id"/>
+                    <field name="date_late" />
+                    <field name="notes" />
+                    <field name="state" />
+                    <field name="type" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_izin_form" model="ir.ui.view">
+            <field name="name">hr.izin.form</field>
+            <field name="model">hr.izin</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+            <form string="Izin Form">
+                <header>
+                    <button name="button_approve" 
+                            states="draft" 
+                            string="Approve" 
+                            type="object" 
+                            class="oe_highlight"
+                            groups="hr.group_hr_manager,bgt_employee.group_hr_gm"
+                            />
+
+                    <button name="button_reject" 
+                            states="draft" 
+                            string="Reject" 
+                            type="object" 
+                            class="oe_highlight"
+                            groups="hr.group_hr_manager,bgt_employee.group_hr_gm"
+                           />
+
+                    <field name="state" widget="statusbar" statusbar_visible="draft,approved" statusbar_colors='{"draft":"red","approved":"blue"}' readonly="1"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <div class="oe_title">
+                                <h1><field name="name" string="Number" nolabel="1" readonly="1"/></h1>
+                            </div>
+                        </group>
+                        <group>
+                            <field name="type" invisible="1"/>
+                            <field name="user_id" readonly="1"/> 
+                            <field name="date" readonly="1"/>
+                        </group>
+                    </group>
+                    <group> 
+                        <group>
+                            <field name="employee_id" options="{'no_create':True}" />
+                            <field name="nik" readonly="1"/>
+                            <field name="department_id" readonly="1"/>
+                            <field name="job_id" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="date_late" string="Tanggal dan Jam" required="1"/>
+                            <field name="notes" string="Alasan" required="1"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+            </field>
+        </record>        
+
+
+        <record id="action_terlambat" model="ir.actions.act_window">
+            <field name="name">Terlambat</field>
+            <field name="res_model">hr.izin</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field eval="False" name="view_id"/>
+            <field name="domain">[('type','=','terlambat')]</field>
+            <field name="context">{'default_type':'terlambat'}</field> 
+            <field name="search_view_id" ref="izin_search"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add an data
+              </p><p>
+                klik tombol create untuk menambahkan data izin terlambat
+              </p>
+            </field>
+        </record>
+
+        <record id="action_pulang_cepat" model="ir.actions.act_window">
+            <field name="name">Pulang Cepat</field>
+            <field name="res_model">hr.izin</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field eval="False" name="view_id"/>
+            <field name="domain">[('type','=','pulang_cepat')]</field>
+            <field name="context">{'default_type':'pulang_cepat'}</field> 
+            <field name="search_view_id" ref="izin_search"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add an data
+              </p><p>
+                klik tombol create untuk menambahkan data izin pulang lebih awal
+              </p>
+            </field>
+        </record>
+
+
+        <menuitem id="menu_hr_izin_root" 
+            name="Izin" sequence="97" groups="hr.group_hr_user,bgt_employee.group_hr_gm"/>
+
+        <menuitem id="terlambat_menu"
+                name="Datang Terlambat"
+                parent="menu_hr_izin_root" 
+                sequence="10"
+                action="action_terlambat"/>
+
+        <menuitem id="pulang_cepat_menu"
+                name="Pulang Cepat"
+                parent="menu_hr_izin_root" 
+                sequence="20"
+                action="action_pulang_cepat"/>
+
+        
+</odoo>

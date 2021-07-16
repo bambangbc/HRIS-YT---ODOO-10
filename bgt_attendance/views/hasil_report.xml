@@ -1,0 +1,19 @@
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="laporan_rekap_absen_tree">
+            <field name="name">laporan rekap absen</field>
+            <field name="model">laporan.rekap.absen</field>
+            <field name="type">tree</field>
+            <field name="priority">20</field>
+            <field name="arch" type="xml">
+                <tree string="Laporan Rekap Absen Perdivisi" create="false">
+                    <field name="name"/>
+                    <field name="department_id"/>
+                    <field name="shift_id"/>
+                    <field name="log_in"/>
+                    <field name="log_out"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</openerp>

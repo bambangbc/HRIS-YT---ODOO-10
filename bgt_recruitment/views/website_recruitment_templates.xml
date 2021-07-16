@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <template id="additional_website_hr_recuitment" inherit_id="website_hr_recruitment.apply">
+      <xpath expr="//div/div/section/form/div[1]/div/label" position='replace'>
+        <label class="control-label" for="partner_name">Nama Lengkap</label>
+      </xpath>
+      <xpath expr="//div/div/section/form/div[2]" position='before'>
+            <div class="form-group form-field o_website_form_required_custom">
+              <div class="col-md-3 col-sm-4 text-right">
+                  <label class="control-label" for="gender">Jenis Kelamin</label>
+              </div>
+              <div class="col-md-7 col-sm-8">
+                  <select class="form-control o_website_form_input" name="gender" required="required">
+                    <option value="">-pilih-</option>
+                    <option value="male">Laki-Laki</option>
+                    <option value="female">Perempuan</option>
+                  </select>
+              </div>
+            </div>
+
+            <div class="form-group form-field o_website_form_required_custom">
+              <div class="col-md-3 col-sm-4 text-right">
+                  <label class="control-label" for="place_of_birth">Tempat Lahir</label>
+              </div>
+              <div class="col-md-7 col-sm-8">
+                  <input type="text" class="form-control o_website_form_input" name="place_of_birth" required="required"/>
+              </div>
+            </div>
+
+            <div class="form-group form-field o_website_form_required_custom">
+              <div class="col-md-3 col-sm-4 text-right">
+                  <label class="control-label" for="birthday">Tanggal Lahir</label>
+              </div>
+              <div class="col-md-7 col-sm-8">
+                  <input type="text" class="form-control o_website_form_input" id="datepicker" name="birthday" required="required"/>
+              </div>
+            </div>
+
+            <div class="form-group form-field o_website_form_required_custom">
+              <div class="col-md-3 col-sm-4 text-right">
+                  <label class="control-label" for="alamat_ktp">Alamat KTP</label>
+              </div>
+              <div class="col-md-7 col-sm-8">
+                  <input type="text" class="form-control o_website_form_input" name="alamat_ktp" required="required"/>
+              </div>
+            </div>
+
+            <div class="form-group form-field o_website_form_required_custom">
+              <div class="col-md-3 col-sm-4 text-right">
+                  <label class="control-label" for="alamat_domisili">Alamat Rumah Saat Ini</label>
+              </div>
+              <div class="col-md-7 col-sm-8">
+                  <input type="text" class="form-control o_website_form_input" name="alamat_domisili" required="required"/>
+              </div>
+            </div>
+
+            <div class="form-group form-field o_website_form_required_custom">
+              <div class="col-md-3 col-sm-4 text-right">
+                  <label class="control-label" for="no_ktp">NIK KTP</label>
+              </div>
+              <div class="col-md-7 col-sm-8">
+                  <input type="text" class="form-control o_website_form_input" name="no_ktp" required="required"/>
+              </div>
+            </div>
+        </xpath>
+        <xpath expr="//div/div/section/form/div[8]/div/label" position='replace'>
+            <label class="control-label" for="email_from">Email</label>
+        </xpath>
+        <xpath expr="//div/div/section/form/div[9]/div/label" position='replace'>
+            <label class="control-label" for="partner_phone">Nomor Telepon</label>
+        </xpath>
+        <xpath expr="//div/div/section/form/div[9]" position='after'>
+            <div class="form-group form-field o_website_form_required_custom">
+              <div class="col-md-3 col-sm-4 text-right">
+                  <label class="control-label" for="partner_mobile">Nomor HP</label>
+              </div>
+              <div class="col-md-7 col-sm-8">
+                  <input type="text" class="form-control o_website_form_input" name="partner_mobile" required="required"/>
+              </div>
+            </div>
+            <div class="form-group form-field o_website_form_required_custom">
+              <div class="col-md-3 col-sm-4 text-right">
+                  <label class="control-label" for="religion_id">Agama</label>
+              </div>
+              <div class="col-md-7 col-sm-8">
+                  <select class="form-control o_website_form_input" name="religion_id" required="required">
+                       <option value="">-pilih-</option>
+                       <t t-foreach="religions" t-as="religion">
+                          <option t-attf-value="#{religion.id}"><t t-esc="religion.name"/></option>
+                       </t>
+                  </select>
+              </div>
+            </div>
+            <div class="form-group form-field o_website_form_required_custom">
+              <div class="col-md-3 col-sm-4 text-right">
+                  <label class="control-label" for="country_id">Kewarganegaraan</label>
+              </div>
+              <div class="col-md-7 col-sm-8">
+                  <select class="form-control o_website_form_input" name="country_id" required="required">
+                    <option value="">-pilih-</option>
+                    <t t-foreach="countries" t-as="country">
+                        <option t-attf-value="#{country.id}"><t t-esc="country.name"/></option>
+                    </t>
+                  </select>
+              </div>
+            </div>
+            <div class="form-group form-field o_website_form_required_custom">
+              <div class="col-md-3 col-sm-4 text-right">
+                  <label class="control-label" for="anak_ke">Anak Ke</label>
+              </div>
+              <div class="col-md-7 col-sm-8">
+                  <input type="text" class="form-control o_website_form_input" name="anak_ke" required="required"/>
+              </div>
+            </div>
+            <div class="form-group form-field o_website_form_required_custom">
+              <div class="col-md-3 col-sm-4 text-right">
+                  <label class="control-label" for="hobi">Hobi</label>
+              </div>
+              <div class="col-md-7 col-sm-8">
+                  <input type="text" class="form-control o_website_form_input" name="hobi" required="required"/>
+              </div>
+            </div>
+            <div class="form-group form-field o_website_form_required_custom">
+              <div class="col-md-3 col-sm-4 text-right">
+                  <label class="control-label" for="type_id">Pendidikan</label>
+              </div>
+              <div class="col-md-7 col-sm-8">
+                  <select class="form-control o_website_form_input" name="type_id" required="required">
+                    <option value="">-pilih-</option>
+                    <t t-foreach="degrees" t-as="degree">
+                        <option t-attf-value="#{degree.id}"><t t-esc="degree.name"/></option>
+                    </t>
+                  </select>
+              </div>
+            </div>
+            <div class="form-group form-field o_website_form_required_custom">
+              <div class="col-md-3 col-sm-4 text-right">
+                  <label class="control-label" for="marital">Status</label>
+              </div>
+              <div class="col-md-7 col-sm-8">
+                  <select class="form-control o_website_form_input" name="marital" required="required">
+                    <option value="">-pilih-</option>
+                    <option value="single">Belum Menikah</option>
+                    <option value="married">Menikah</option>
+                    <option value="widow">Janda</option>
+                    <option value="widower">Duda</option>
+                  </select>
+              </div>
+            </div>
+        </xpath>
+
+            <xpath expr="//div/div/section/form" position='after'>
+              <script>
+
+                    $(document).ready(function(){  
+
+                      $('#datepicker').datepicker({
+                          dateFormat: 'dd/mm/yy',
+                          changeMonth: true,
+                          changeYear: true,
+                          yearRange: "1970:2050"
+                      });
+                           
+                   });
+              </script>
+            </xpath>  
+  </template>
+</odoo>

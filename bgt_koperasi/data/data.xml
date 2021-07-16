@@ -1,0 +1,22 @@
+<odoo noupdate="1">
+
+    <record id="sequence_koperasi" model="ir.sequence">
+        <field name="name">Koperasi</field>
+        <field name="code">hr.koperasi</field>
+        <field name="prefix">%(month)s%(y)s</field>
+        <field name="padding">4</field>  
+        <field eval="1" name="number_increment"/>  
+    </record>
+    
+    <record id="hr_rules_potongan_koperasi" model="hr.salary.rule">
+        <field name="name">Potongan Koperasi</field>
+        <field name="code">PKB</field>
+        <field name="category_id" ref="hr_payroll.DED"/>
+        <field name="condition_select">python</field>
+        <field name="condition_python">result = payslip.kasbon > 0</field>
+        <field name="amount_select">code</field>
+        <field name="sequence">114</field>
+        <field name="amount_python_compute">result = -payslip.kasbon</field>
+    </record>
+
+</odoo>

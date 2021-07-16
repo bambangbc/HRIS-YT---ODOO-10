@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_calendarpayroll_user,access_hr_calendarpayroll_user,model_hr_calendarpayroll,hr.group_hr_manager,1,1,1,1
+access_hr_thr_user,access_hr_thr_user,model_hr_thr,hr.group_hr_manager,1,1,1,1
+access_hr_koreksi_user,access_hr_koreksi_user,model_hr_koreksi,hr.group_hr_manager,1,1,1,1
+access_hr_payslip_manual_user,access_hr_payslip_manual_user,model_hr_payslip_manual,hr.group_hr_manager,1,1,1,1

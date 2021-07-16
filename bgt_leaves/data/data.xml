@@ -1,0 +1,76 @@
+<odoo>
+	<data noupdate="1">
+
+		<!-- CRON -->
+    <record model="ir.cron" id="kuota_cron">
+        <field name="name">Kuota</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="user_id" ref="base.user_root" />
+        <field name="active" eval="True"/>
+        <field name="doall" eval="False"/>
+        <field name="model" eval="'hr.contract.type'"/>
+        <field name="function" eval="'check_quota'"/>
+        <field name="args" eval="'()'" />
+    </record>
+
+    <record model="ir.cron" id="kuota_history_cron">
+        <field name="name">Kuota History</field>
+        <field name="interval_number">7</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="user_id" ref="base.user_root" />
+        <field name="active" eval="True"/>
+        <field name="doall" eval="False"/>
+        <field name="model" eval="'hr.kuota.history'"/>
+        <field name="function" eval="'check_quota_history'"/>
+        <field name="args" eval="'()'" />
+    </record>
+
+    <record model="ir.cron" id="legal_leaves_cron">
+        <field name="name">Legal Leaves</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">months</field>
+        <field name="numbercall">-1</field>
+        <field name="user_id" ref="base.user_root" />
+        <field name="active" eval="True"/>
+        <field name="doall" eval="False"/>
+        <field name="model" eval="'hr.holidays'"/>
+        <field name="function" eval="'check_legal_leaves'"/>
+        <field name="args" eval="'()'" />
+    </record>
+
+
+    <!-- DEFAULT DATA -->
+	<record id="contract_type1" model="hr.contract.type">
+		<field name="name">Staff</field>
+		<field name="kuota">4</field>
+		<field name="tgl_kuota">26</field>
+		<field name="bln_kuota">12</field>
+	</record>
+
+	<record id="contract_type2" model="hr.contract.type">
+		<field name="name">Bulanan</field>
+		<field name="kuota">8</field>
+		<field name="tgl_kuota">26</field>
+		<field name="bln_kuota">12</field>
+	</record>
+
+	<record id="contract_type3" model="hr.contract.type">
+		<field name="name">Harian</field>
+		<field name="kuota">8</field>
+		<field name="tgl_kuota">1</field>
+		<field name="bln_kuota">1</field>
+	</record>
+
+	<record id="contract_type4" model="hr.contract.type">
+		<field name="name">Training</field>
+	</record>
+
+	<record id="contract_type5" model="hr.contract.type">
+		<field name="name">Staff</field>
+	</record>
+
+	</data>
+</odoo>

@@ -1,0 +1,26 @@
+<odoo>
+
+	<record id="contract_sequence" model="ir.sequence">
+		<field name="name">Contract</field>
+		<field name="code">hr.contract</field>
+		<field name="prefix"></field>
+		<field name="suffix">/SKU/YT/%(year)s</field>
+		<field name="padding">4</field>
+		<field eval="1" name="number_next"/>
+        <field eval="1" name="number_increment"/>
+	</record>
+
+	<record forcecreate="True" model="ir.cron" id="update_contract_state">
+        <field name="name">Auto Update Contract State</field>
+        <field name="active">True</field>
+        <field name="user_id" ref="base.user_root"/>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False"/>
+        <field name="model" eval="'hr.contract'"/>
+        <field name="function" eval="'update_contract_state'"/>
+        <field name="args" eval="'()'"/>
+    </record>
+
+</odoo>

@@ -1,0 +1,21 @@
+<odoo>
+
+    <record id="bgt_view_survey_form" model="ir.ui.view">
+        <field name="name">survey.survey.form.inherit</field>
+        <field name="model">survey.survey</field>
+        <field name="inherit_id" ref="survey.survey_form"/>
+        <field name="arch" type="xml">
+            <button name="action_test_survey">
+                <button name="assign_template_page" string="Use Template" type="object" attrs="{'invisible': [('page_ids', '!=', [])]}"/>
+            </button>
+            <field name="title" position="before">
+                <field name="contract_id" options="{'no_create':True}" domain="[('state','in',('open','pending'))]" placeholder="Select Employee" class="oe_edit_only"/>
+            </field>
+
+            <field name="quizz_mode" position="after">
+                <field name="default_page_ids" options="{'no_create':True,'no_open':True}" placeholder="Select Template" domain="[('survey_id','=',False)]" widget="many2many_tags"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>

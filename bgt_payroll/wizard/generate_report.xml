@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+        <record id="payroll_rekap_wizard" model="ir.ui.view">
+            <field name="name">report.payroll.wizard</field>
+            <field name="model">report.payroll.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Calculate Rekap">
+                    <sheet>
+                        <group>
+                            <!--field name="name"/-->
+                            <label for="date_start" string="Period Gajian"/>
+                            <div>
+                                <field name="date_start" class="oe_inline"/>
+                                <label string="-" class="oe_inline"/>
+                                <field name="date_end" class="oe_inline"/>
+                            </div>
+                        </group>
+                    </sheet>
+
+                    <footer>
+                        <button name="action_print" string="Execute" type="object" class="btn-primary"/>
+                        <button special="cancel" string="Cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="show_generate_report_wizard">
+            <field name="name">Generate Report</field>
+            <field name="res_model">report.payroll.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <!--menuitem id="generate_report_payroll"
+            name="Generate Report"
+            parent="hr_payroll.menu_hr_payroll_root"
+            action="show_generate_report_wizard"/-->
+
+        <menuitem
+        id="menu_hr_import_thr"
+        name="Import THR"
+        action="action_import_thr"
+        parent="hr_payroll.menu_hr_payroll_root"/>
+
+</odoo>

@@ -1,0 +1,604 @@
+<openerp>
+    <data>
+        <!--Allowance-->
+        <record id="hr_rule_gapok_per_hari" model="hr.salary.rule">
+            <field name="name">Gaji Pokok / Hari</field>
+            <field name="sequence" eval="2"/>
+            <field name="code">GPH</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = contract.gapok > 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = contract.gapok</field>
+        </record>
+        <record id="hr_rule_premi_hadir" model="hr.salary.rule">
+            <field name="name">Premi Hadir / Hari</field>
+            <field name="sequence" eval="3"/>
+            <field name="code">PHH</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="condition_select">python</field>
+            <!-- <field name="condition_python">result = contract.type_id and contract.type_id.premi_hadir > 0.0 and contract.type_id.hari_kerja > 0.0</field> -->
+            <field name="condition_python">result = result = (((contract.wage*70)/100)/25) * (25+ worked_days.day_off.number > 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = contract.wage*(contract.type_id.premi_hadir*0.01)/contract.type_id.hari_kerja</field>
+        </record>
+        <record id="hr_rule_total_gapok" model="hr.salary.rule">
+            <field name="name">Total Gaji Pokok</field>
+            <field name="sequence" eval="4"/>
+            <field name="code">TGP</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = (contract.wage*0.7/25) * (25-worked_days.Alpha.number_of_days+worked_days.day_off.number_of_days-worked_days.kuota.number_of_days) > 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = (contract.wage*0.7/25) * (25+worked_days.day_off.number_of_days-worked_days.kuota.number_of_days-worked_days.Alpha.number_of_days) if payslip.work_cuti >= 25 else (contract.wage*0.7/25)*(worked_days.Presences.number_of_days+worked_days.day_off.number_of_days-worked_days.kuota.number_of_days-worked_days.Alpha.number_of_days)</field>
+        </record>
+        <record id="hr_rule_total_gapok_harian" model="hr.salary.rule">
+            <field name="name">Gaji Pokok Harian Minggu Ke 1</field>
+            <field name="sequence" eval="4"/>
+            <field name="code">TGPH</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result =  (contract.wage*0.65/28) * (14-worked_days.Alpha.number_of_days+worked_days.day_off.number_of_days-worked_days.kuota.number_of_days) > 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = (contract.wage*0.65/28) * (14-worked_days.Alpha.number_of_days+worked_days.day_off.number_of_days-worked_days.kuota.number_of_days)</field>
+        </record>
+        <record id="hr_rule_total_gapok_harian1" model="hr.salary.rule">
+            <field name="name">Gaji Pokok Harian Minggu Ke 1</field>
+            <field name="sequence" eval="4"/>
+            <field name="code">TGPH1</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result =  (contract.umk/24) * 6 > 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = (contract.umk/24) * 6</field>
+        </record>
+        <record id="hr_rule_total_gapok_harian2" model="hr.salary.rule">
+            <field name="name">Gaji Pokok Harian Minggu Ke 2</field>
+            <field name="sequence" eval="4"/>
+            <field name="code">TGPH2</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result =  (contract.umk/24) * 6 > 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = (contract.umk/24) * 6</field>
+        </record>
+        <record id="hr_rule_kerja_minggu" model="hr.salary.rule">
+            <field name="name">Tunjangan Kerja Minggu</field>
+            <field name="sequence" eval="5"/>
+            <field name="code">TKM</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result =  (contract.wage/24) * (worked_days.day_off_absen1.number_of_days + worked_days.day_off_absen2.number_of_days) > 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = (contract.wage/24) * (worked_days.day_off_absen1.number_of_days + worked_days.day_off_absen2.number_of_days)</field>
+        </record>
+        <record id="hr_rule_total_gapok_training" model="hr.salary.rule">
+            <field name="name">Total Gaji Pokok Training</field>
+            <field name="sequence" eval="4"/>
+            <field name="code">TGPT</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = (contract.wage/24) * (worked_days.Presences1.number_of_days+worked_days.Presences2.number_of_days) > 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = (contract.wage/24) * (worked_days.Presences1.number_of_days+worked_days.Presences2.number_of_days)</field>
+        </record>
+        <record id="hr_rule_total_premi_hadir" model="hr.salary.rule">
+            <field name="name">Total Premi Hadir</field>
+            <field name="sequence" eval="5"/>
+            <field name="code">TPH</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = (
+            contract.wage*0.2/25) * (25-worked_days.Alpha.number_of_days+worked_days.day_off.number_of_days- worked_days.kuota.number_of_days) > 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = (contract.wage*0.2/25) * (25+worked_days.day_off.number_of_days-worked_days.kuota.number_of_days-worked_days.Alpha.number_of_days) if payslip.work_cuti >= 25 else (contract.wage*0.2/25)*(worked_days.Presences.number_of_days+worked_days.day_off.number_of_days-worked_days.kuota.number_of_days-worked_days.Alpha.number_of_days)</field>
+        </record>
+        <record id="hr_rule_total_premi_hadir_harian" model="hr.salary.rule">
+            <field name="name">Premi Hadir Harian</field>
+            <field name="sequence" eval="5"/>
+            <field name="code">TPHH</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = (contract.wage*0.2/24) * (12-worked_days.Alpha.number_of_days +worked_days.day_off.number_of_days-worked_days.kuota.number_of_days) > 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = (contract.wage*0.2/24) * (12-worked_days.Alpha1.number_of_days+worked_days.day_off1.number_of_days-worked_days.kuota1.number_of_days)</field>
+        </record>
+        <record id="hr_rule_total_premi_hadir_harian1" model="hr.salary.rule">
+            <field name="name">Premi Hadir Harian Minggu Ke 1</field>
+            <field name="sequence" eval="5"/>
+            <field name="code">TPHH1</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = (contract.wage*0.2/24) * (7-worked_days.Alpha1.number_of_days +worked_days.day_off1.number_of_days-worked_days.kuota1.number_of_days) > 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = (contract.wage*0.2/24) * (worked_days.Work1001.number_of_days-worked_days.Alpha1.number_of_days+worked_days.day_off1.number_of_days-worked_days.kuota1.number_of_days)</field>
+        </record>
+        <record id="hr_rule_total_premi_hadir_harian2" model="hr.salary.rule">
+            <field name="name">Premi Hadir Harian Minggu Ke 2</field>
+            <field name="sequence" eval="5"/>
+            <field name="code">TPHH2</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = (contract.wage*0.2/24) * (7-worked_days.Alpha2.number_of_days +worked_days.day_off2.number_of_days-worked_days.kuota2.number_of_days) > 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = (contract.wage*0.2/24) * (worked_days.Work1001.number_of_days-worked_days.Alpha2.number_of_days+worked_days.day_off2.number_of_days-worked_days.kuota2.number_of_days)</field>
+        </record>
+        <record id="hr_rule_tj_lain" model="hr.salary.rule">
+            <field name="name">Tj lain-lain</field>
+            <field name="sequence" eval="5"/>
+            <field name="code">TJL</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = ((contract.wage - contract.umk)/24) * (worked_days.Work1001.number_of_days + worked_days.Work1002.number_of_days) > 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = ((contract.wage - contract.umk)/24) * (worked_days.Work1001.number_of_days + worked_days.Work1002.number_of_days)</field>
+        </record>
+        <record id="hr_rule_bonus_bulanan" model="hr.salary.rule">
+            <field name="name">Bonus Bulanan</field>
+            <field name="sequence" eval="6"/>
+            <field name="code">BBL</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = worked_days.Alpha.number_of_days == 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = contract.wage*0.1 if worked_days.Alpha.number_of_days == 0 else 0</field>
+        </record>
+        <record id="hr_rule_bonus_bulanan_harian" model="hr.salary.rule">
+            <field name="name">Bonus Bulanan Harian</field>
+            <field name="sequence" eval="6"/>
+            <field name="code">BBLH</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = worked_days.BM1.number_of_days != 0 and worked_days.BM2.number_of_days != 0  and inputs.BBH.amount > 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = inputs.BBH.amount if worked_days.BM1.number_of_days != 0 and worked_days.BM2.number_of_days != 0 else 0</field>
+        </record>
+        <record id="hr_rule_bonus_mingguan" model="hr.salary.rule">
+            <field name="name">Bonus Mingguan Minggu Ke 2</field>
+            <field name="sequence" eval="6"/>
+            <field name="code">BM</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = worked_days.BM.number_of_days >= 1 </field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = contract.wage*0.0125*worked_days.BM.number_of_days if worked_days.BM2.number_of_days >= 1  else 0</field>
+        </record>
+        <record id="hr_rule_bonus_mingguan1" model="hr.salary.rule">
+            <field name="name">Bonus Mingguan Minggu Ke 1</field>
+            <field name="sequence" eval="6"/>
+            <field name="code">BM1</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = worked_days.BM1.number_of_days >= 1 </field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = contract.wage*0.0125*worked_days.BM1.number_of_days if worked_days.BM1.number_of_days >= 1  else 0</field>
+        </record>
+        <record id="hr_rule_bonus_mingguan2" model="hr.salary.rule">
+            <field name="name">Bonus Mingguan Minggu Ke 2</field>
+            <field name="sequence" eval="6"/>
+            <field name="code">BM2</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = worked_days.BM2.number_of_days >= 1 </field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = contract.wage*0.0125*worked_days.BM2.number_of_days if worked_days.BM2.number_of_days >= 1  else 0</field>
+        </record>
+
+        <record id="hr_rule_overtime_staff" model="hr.salary.rule">
+            <field name="name">Overtime Staff</field>
+            <field name="sequence" eval="10"/>
+            <field name="code">OVTS</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = worked_days.Overtime.number_of_days > 0.0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = (worked_days.Overtime.number_of_days) * 20000</field>
+        </record>
+
+        <record id="hr_rule_overtime_bulanan" model="hr.salary.rule">
+            <field name="name">Overtime Bulanan</field>
+            <field name="sequence" eval="10"/>
+            <field name="code">OVTB</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = worked_days.Overtime.number_of_hours > 0.0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = (worked_days.Overtime.number_of_hours) * (contract.umk/56/4*1.5) if contract.wage > contract.umk else (worked_days.Overtime.number_of_hours) * (contract.wage/56/4*1.5) </field>
+        </record>
+
+        <record id="hr_rule_overtime_mingguan1" model="hr.salary.rule">
+            <field name="name">Overtime Mingguan Minggu Ke 1</field>
+            <field name="sequence" eval="10"/>
+            <field name="code">OVM1</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = worked_days.Overtime1.number_of_hours > 0.0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = (worked_days.Overtime1.number_of_hours) * (contract.umk/56/4*1.5) if contract.wage > contract.umk else (worked_days.Overtime1.number_of_hours) * (contract.wage/56/4*1.5) </field>
+        </record>
+
+        <record id="hr_rule_overtime_mingguan2" model="hr.salary.rule">
+            <field name="name">Overtime Mingguan Minggu Ke 2</field>
+            <field name="sequence" eval="10"/>
+            <field name="code">OVM2</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = worked_days.Overtime2.number_of_hours > 0.0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = (worked_days.Overtime2.number_of_hours) * (contract.umk/56/4*1.5) if contract.wage > contract.umk else (worked_days.Overtime2.number_of_hours) * (contract.wage/56/4*1.5) </field>
+        </record>
+
+        <record id="hr_rule_overtime_training" model="hr.salary.rule">
+            <field name="name">Overtime Training</field>
+            <field name="sequence" eval="10"/>
+            <field name="code">OVTT</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = (worked_days.Overtime1.number_of_hours+worked_days.Overtime2.number_of_hours) > 0.0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = (worked_days.Overtime1.number_of_hours+worked_days.Overtime2.number_of_hours) * (contract.umk/56/4*1.5) if contract.wage > contract.umk else (worked_days.Overtime1.number_of_hours + worked_days.Overtime2.number_of_hours) * (contract.wage/56/4*1.5)</field>
+        </record>
+
+
+        <record id="hr_rule_thr" model="hr.salary.rule">
+            <field name="name">THR</field>
+            <field name="code">THR</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="sequence">20</field>
+            <field name="amount_python_compute">result = inputs.THR.amount </field>
+        </record>
+        <record id="hr_rule_bonus" model="hr.salary.rule">
+            <field name="name">Bonus</field>
+            <field name="code">BNS</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="sequence">21</field>
+            <field name="amount_python_compute">result = inputs.BNS.amount </field>
+        </record>
+        <record id="hr_rule_adjustment" model="hr.salary.rule">
+            <field name="name">Adjustment</field>
+            <field name="code">ADJS</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="condition_select">none</field>
+            <field name="amount_select">code</field>
+            <field name="sequence">22</field>
+            <field name="amount_python_compute">result = inputs.ADJS.amount </field>
+        </record>
+        <record id="hr_rule_tunjangan" model="hr.salary.rule">
+            <field name="name">Tunjangan</field>
+            <field name="code">TJ</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result =  inputs.TUN.amount > 0</field>
+            <field name="amount_select">code</field>
+            <field name="sequence">22</field>
+            <field name="amount_python_compute">result = inputs.TUN.amount </field>
+        </record>
+        <record id="hr_rule_koreksian" model="hr.salary.rule">
+            <field name="name">Koreksian</field>
+            <field name="code">KRSN</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result =  inputs.KRS.amount != 0</field>
+            <field name="amount_select">code</field>
+            <field name="sequence">50</field>
+            <field name="amount_python_compute">result = inputs.KRS.amount </field>
+        </record>
+        <record id="hr_rule_upahbr1" model="hr.salary.rule">
+            <field name="name">Upah Br Minggu Ke 1</field>
+            <field name="code">UBR1</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result =  inputs.UPB1.amount > 0</field>
+            <field name="amount_select">code</field>
+            <field name="sequence">23</field>
+            <field name="amount_python_compute">result = inputs.UPB1.amount </field>
+        </record>
+        <record id="hr_rule_upahbr2" model="hr.salary.rule">
+            <field name="name">Upah Br Minggu Ke 2</field>
+            <field name="code">UBR2</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result =  inputs.UPB2.amount > 0</field>
+            <field name="amount_select">code</field>
+            <field name="sequence">24</field>
+            <field name="amount_python_compute">result = inputs.UPB2.amount </field>
+        </record>
+        <record id="hr_rule_kerajinan1" model="hr.salary.rule">
+            <field name="name">Kerajinan Minggu Ke 1</field>
+            <field name="code">KRJN1</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result =  inputs.KJN1.amount > 0</field>
+            <field name="amount_select">code</field>
+            <field name="sequence">25</field>
+            <field name="amount_python_compute">result = inputs.KJN1.amount </field>
+        </record>
+        <record id="hr_rule_kerajinan2" model="hr.salary.rule">
+            <field name="name">Kerajinan Minggu Ke 2</field>
+            <field name="code">KRJN2</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result =  inputs.KJN2.amount > 0</field>
+            <field name="amount_select">code</field>
+            <field name="sequence">26</field>
+            <field name="amount_python_compute">result = inputs.KJN2.amount </field>
+        </record>
+        <record id="hr_rule_transport" model="hr.salary.rule">
+            <field name="name">Upah Transport Minggu Ke 1</field>
+            <field name="code">TRSN1</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result =  contract.uang_transport * worked_days.Presences1.number_of_days > 0</field>
+            <field name="amount_select">code</field>
+            <field name="sequence">27</field>
+            <field name="amount_python_compute">result = contract.uang_transport * worked_days.Presences1.number_of_days </field>
+        </record>
+        <record id="hr_rule_transport2" model="hr.salary.rule">
+            <field name="name">Upah Transport Minggu Ke 1</field>
+            <field name="code">TRSN2</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result =  contract.uang_transport * worked_days.Presences2.number_of_days > 0</field>
+            <field name="amount_select">code</field>
+            <field name="sequence">28</field>
+            <field name="amount_python_compute">result = contract.uang_transport * worked_days.Presences2.number_of_days </field>
+        </record>
+        <record id="hr_rule_bonpot1" model="hr.salary.rule">
+            <field name="name">Bonus/Potongan Minggu Ke 1</field>
+            <field name="code">BNPT1</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result =  inputs.BPOT1.amount != 0</field>
+            <field name="amount_select">code</field>
+            <field name="sequence">29</field>
+            <field name="amount_python_compute">result = inputs.BPOT1.amount </field>
+        </record>
+        <record id="hr_rule_bonpot2" model="hr.salary.rule">
+            <field name="name">Bonus/Potongan Minggu Ke 2</field>
+            <field name="code">BNPT2</field>
+            <field name="category_id" ref="hr_payroll.ALW"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result =  inputs.BPOT2.amount != 0</field>
+            <field name="amount_select">code</field>
+            <field name="sequence">30</field>
+            <field name="amount_python_compute">result = inputs.BPOT2.amount </field>
+        </record>
+
+
+
+        <!--Deduction-->
+
+        <record id="hr_rule_meals" model="hr.salary.rule">
+            <field name="name">Pot. Uang Makan</field>
+            <field name="sequence" eval="101"/>
+            <field name="code">MEALS</field>
+            <field name="category_id" ref="hr_payroll.DED"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = contract.meals * (worked_days.Presences.number_of_days+worked_days.day_off.number_of_days) > 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = -contract.meals * (25+worked_days.day_off.number_of_days-worked_days.kuota.number_of_days-payslip.cuti-worked_days.Alpha.number_of_days) if payslip.work_cuti >= 25 else -contract.meals * (worked_days.Presences.number_of_days+worked_days.day_off.number_of_days-worked_days.kuota.number_of_days-payslip.cuti-worked_days.Alpha.number_of_days)</field>
+        </record>
+
+        <record id="hr_rule_meals_harian" model="hr.salary.rule">
+            <field name="name">Pot. Uang Makan Harian </field>
+            <field name="sequence" eval="101"/>
+            <field name="code">MEALS1</field>
+            <field name="category_id" ref="hr_payroll.DED"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = contract.meals * (worked_days.Presences1.number_of_days+worked_days.Presences2.number_of_days+worked_days.day_off1.number_of_days+worked_days.day_off2.number_of_days) > 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = -contract.meals * (worked_days.Presences1.number_of_days+worked_days.Presences2.number_of_days+worked_days.day_off1.number_of_days+worked_days.day_off2.number_of_days)</field>
+        </record>
+
+        <record id="hr_rule_unpaid_leave" model="hr.salary.rule">
+            <field name="name">Unpaid Leave</field>
+            <field name="sequence" eval="102"/>
+            <field name="code">UNPAID</field>
+            <field name="category_id" ref="hr_payroll.DED"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = worked_days.Unpaid</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = -(worked_days.Unpaid.number_of_days / 30 * (contract.wage))</field>
+        </record>
+        <record id="hr_rule_alpha" model="hr.salary.rule">
+            <field name="name">Absensi</field>
+            <field name="sequence" eval="103"/>
+            <field name="code">ABSN</field>
+            <field name="category_id" ref="hr_payroll.DED"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = (contract.wage/24)*(worked_days.Alpha1.number_of_days+worked_days.Alpha2.number_of_days) != 0</field>
+            <field name="amount_select">code</field>
+            <field name="amount_python_compute">result = -(contract.wage/24)*(worked_days.Alpha1.number_of_days+worked_days.Alpha2.number_of_days)</field>
+        </record>
+
+        <record id="hr_rule_simpanan_wajib" model="hr.salary.rule">
+            <field name="name">Simpanan Wajib</field>
+            <field name="code">SW</field>
+            <field name="category_id" ref="hr_payroll.DED"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = inputs.SIWA.amount != 0</field>
+            <field name="amount_select">code</field>
+            <field name="sequence">104</field>
+            <field name="amount_python_compute">result = -inputs.SIWA.amount </field>
+        </record>
+
+        <record id="hr_rule_simpanan_pokok" model="hr.salary.rule">
+            <field name="name">Simpanan pokok</field>
+            <field name="code">SP</field>
+            <field name="category_id" ref="hr_payroll.DED"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = inputs.SIPO.amount != 0</field>
+            <field name="amount_select">code</field>
+            <field name="sequence">105</field>
+            <field name="amount_python_compute">result = -inputs.SIPO.amount </field>
+        </record>
+
+        <record id="hr_rule_bpjs_kesehatan" model="hr.salary.rule">
+            <field name="name">BPJS Kesehatan</field>
+            <field name="code">BPKES</field>
+            <field name="category_id" ref="hr_payroll.DED"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = inputs.BPKES.amount != 0</field>
+            <field name="amount_select">code</field>
+            <field name="sequence">106</field>
+            <field name="amount_python_compute">result = inputs.BPKES.amount </field>
+        </record>
+
+        <record id="hr_rule_bpjs_ketenagakerjaan" model="hr.salary.rule">
+            <field name="name">BPJS Ketenagakerjaan</field>
+            <field name="code">BPTEN</field>
+            <field name="category_id" ref="hr_payroll.DED"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = inputs.BPTEN.amount != 0</field>
+            <field name="amount_select">code</field>
+            <field name="sequence">107</field>
+            <field name="amount_python_compute">result = inputs.BPTEN.amount </field>
+        </record>
+
+        <record id="hr_rule_kasbon" model="hr.salary.rule">
+            <field name="name">Kasbon</field>
+            <field name="code">KAS</field>
+            <field name="category_id" ref="hr_payroll.DED"/>
+            <field name="condition_select">python</field>
+            <field name="condition_python">result = inputs.KAS.amount != 0</field>
+            <field name="amount_select">code</field>
+            <field name="sequence">108</field>
+            <field name="amount_python_compute">result = inputs.KAS.amount </field>
+        </record>
+
+        <!--record id="hr_payroll_rules_input_thr" model="hr.rule.input">
+            <field name="name">THR</field>
+            <field name="code">THR</field>
+            <field name="sequence">24</field>
+            <field name="input_id" ref="hr_rules_thr"/>
+        </record-->
+
+        <!--record model="hr.payroll.structure" id="general_salary_structure" >
+            <field name="name">General Salary Structure</field>
+            <field name="code">GSS</field>
+            <field name="parent_id" ref="hr_payroll.structure_base"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field eval="[(6, 0, [
+            ref('hr_rule_total_gapok'),
+            ref('hr_rule_unpaid_leave'),
+            ref('hr_rule_alpha'),
+             ])]" name="rule_ids"/>
+        </record-->
+
+        <record model="hr.payroll.structure" id="general_salary_structure_staff" >
+            <field name="name">Staff Salary Structure</field>
+            <field name="code">SSS</field>
+            <field name="parent_id" ref="hr_payroll.structure_base"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field eval="[(6, 0, [
+                ref('hr_rule_total_gapok'),
+                ref('hr_rule_total_premi_hadir'),
+                ref('hr_rule_bonus_bulanan'),
+                ref('hr_rule_overtime_staff'),
+                ref('hr_rule_tunjangan'),
+                ref('hr_rule_simpanan_wajib'),
+                ref('hr_rule_simpanan_pokok'),
+                ref('hr_rule_bpjs_kesehatan'),
+                ref('hr_rule_bpjs_ketenagakerjaan'),
+                ref('hr_rule_kasbon'),
+                ref('hr_rule_koreksian'),
+             ])]" name="rule_ids"/>
+        </record>
+
+        <record model="hr.payroll.structure" id="general_salary_structure_bulanan" >
+            <field name="name">Bulanan Salary Structure</field>
+            <field name="code">BSS</field>
+            <field name="parent_id" ref="hr_payroll.structure_base"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field eval="[(6, 0, [
+                ref('hr_rule_total_gapok'),
+                ref('hr_rule_total_premi_hadir'),
+                ref('hr_rule_tunjangan'),
+                ref('hr_rule_overtime_bulanan'),
+                ref('hr_rule_bonus_bulanan'),
+                ref('hr_rule_tunjangan'),
+                ref('hr_rule_meals'),
+                ref('hr_rule_simpanan_wajib'),
+                ref('hr_rule_simpanan_pokok'),
+                ref('hr_rule_bpjs_kesehatan'),
+                ref('hr_rule_bpjs_ketenagakerjaan'),
+                ref('hr_rule_kasbon'),
+                ref('hr_rule_koreksian'),
+             ])]" name="rule_ids"/>
+        </record>
+
+        <record model="hr.payroll.structure" id="general_salary_structure_harian" >
+            <field name="name">Harian Salary Structure</field>
+            <field name="code">HSS</field>
+            <field name="parent_id" ref="hr_payroll.structure_base"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field eval="[(6, 0, [
+                ref('hr_rule_total_gapok_harian1'),
+                ref('hr_rule_total_gapok_harian2'),
+                ref('hr_rule_tj_lain'),
+                ref('hr_rule_kerja_minggu'),
+                ref('hr_rule_overtime_mingguan1'),
+                ref('hr_rule_overtime_mingguan2'),
+                ref('hr_rule_tunjangan'),
+                ref('hr_rule_meals_harian'),
+                ref('hr_rule_simpanan_wajib'),
+                ref('hr_rule_simpanan_pokok'),
+                ref('hr_rule_bpjs_kesehatan'),
+                ref('hr_rule_bpjs_ketenagakerjaan'),
+                ref('hr_rule_alpha'),
+                ref('hr_rule_kasbon'),
+                ref('hr_rule_koreksian'),
+                ref('hr_rule_kasbon'),
+             ])]" name="rule_ids"/>
+        </record>
+
+        <record model="hr.payroll.structure" id="general_salary_structure_training" >
+            <field name="name">Training Salary Structure</field>
+            <field name="code">TSS</field>
+            <field name="parent_id" ref="hr_payroll.structure_base"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field eval="[(6, 0, [
+                ref('hr_rule_overtime_training'),
+                ref('hr_rule_total_gapok_training'),
+                ref('hr_rule_tunjangan'),
+                ref('hr_rule_meals_harian'),
+                ref('hr_rule_simpanan_wajib'),
+                ref('hr_rule_simpanan_pokok'),
+                ref('hr_rule_bpjs_kesehatan'),
+                ref('hr_rule_bpjs_ketenagakerjaan'),
+                ref('hr_rule_kasbon'),
+                ref('hr_rule_koreksian'),
+             ])]" name="rule_ids"/>
+        </record>
+
+        <record model="hr.payroll.structure" id="general_salary_structure_borongan" >
+            <field name="name">Borongan Salary Structure</field>
+            <field name="code">BRSS</field>
+            <field name="parent_id" ref="hr_payroll.structure_base"/>
+            <field name="company_id" ref="base.main_company"/>
+            <field eval="[(6, 0, [
+                ref('hr_rule_upahbr1'),
+                ref('hr_rule_upahbr2'),
+                ref('hr_rule_kerajinan1'),
+                ref('hr_rule_kerajinan2'),
+                ref('hr_rule_tunjangan'),
+                ref('hr_rule_transport'),
+                ref('hr_rule_transport2'),
+                ref('hr_rule_bonpot1'),
+                ref('hr_rule_bonpot2'),
+                ref('hr_rule_simpanan_wajib'),
+                ref('hr_rule_simpanan_pokok'),
+                ref('hr_rule_bpjs_kesehatan'),
+                ref('hr_rule_bpjs_ketenagakerjaan'),
+                ref('hr_rule_kasbon'),
+                ref('hr_rule_koreksian'),
+             ])]" name="rule_ids"/>
+        </record>
+
+
+    </data>
+</openerp>

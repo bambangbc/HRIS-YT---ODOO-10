@@ -1,0 +1,4 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_hr_koperasi","access_hr_koperasi","model_hr_koperasi","group_user_koperasi",1,1,1,1
+"access_hr_koperasi_detail","access_hr_koperasi_detail","model_hr_koperasi_detail","group_user_koperasi",1,1,1,1
+"access_hr_rekap_koperasi","access_hr_rekap_koperasi","model_hr_rekap_koperasi","group_user_koperasi",1,1,1,1

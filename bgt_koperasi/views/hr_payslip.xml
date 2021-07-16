@@ -1,0 +1,14 @@
+<odoo>
+        <record id="additional_form_hr_payslip_koperasi" model="ir.ui.view">
+            <field name="name">additional.form.view.hr.payslip.koperasi</field>
+            <field name="model">hr.payslip</field>
+            <field name="inherit_id" ref="hr_payroll.view_hr_payslip_form"/>
+            <field name="arch" type="xml">
+                <field name="struct_id" position="after">
+                    <field name="kasbon" invisible="1"/>
+                    <field name="piutang_perusahaan" invisible="1"/>
+                </field>
+            </field>
+        </record>
+
+</odoo>

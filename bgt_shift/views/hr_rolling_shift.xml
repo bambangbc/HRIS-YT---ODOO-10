@@ -1,0 +1,280 @@
+<odoo>
+
+         <record id="rolling_shift_search" model="ir.ui.view">
+            <field name="name">hr.rolling.shift.search</field>
+            <field name="model">hr.rolling.shift</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Rolling Shift">
+                    <field name="code" string="Number" select="True"/>
+                    <field name="employee_id"/>
+                    <field name="shift_berjalan"/>
+                    <field name="department_id"/>
+                    <group expand="0" string="Group By...">
+                        <filter string="Employee"
+                                domain="[]"
+                                context="{'group_by':'employee_id'}"/>
+                        <filter string="Department"
+                                domain="[]"
+                                context="{'group_by':'department_id'}"/>
+                        <filter string="Shift"
+                                domain="[]"
+                                context="{'group_by':'shift_berjalan'}"/>
+                        <filter string="Date Start"
+                                domain="[]"
+                                context="{'group_by':'date_start'}"/>
+                        <filter string="Date End"
+                                domain="[]"
+                                context="{'group_by':'date_end'}"/>
+                        <filter string="State"
+                                domain="[]"
+                                context="{'group_by':'state'}"/>
+                    </group>
+                </search>
+             </field>
+         </record>
+
+         <record id="rolling_shift_detail_search" model="ir.ui.view">
+            <field name="name">hr.rolling.shift.detail.search</field>
+            <field name="model">hr.rolling.shift.detail</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Rolling Shift">
+                    <field name="employee_id"/>
+                    <field name="department"/>
+                    <field name="rolling_shift_id" string="Number" select="True"/>
+                    <group expand="0" string="Group By...">
+                        <filter string="Employee"
+                                domain="[]"
+                                context="{'group_by':'employee_id'}"/>
+                        <filter string="Department"
+                                domain="[]"
+                                context="{'group_by':'department'}"/>
+                        <filter string="Date Start"
+                                domain="[]"
+                                context="{'group_by':'date_start'}"/>
+                        <filter string="Date End"
+                                domain="[]"
+                                context="{'group_by':'date_end'}"/>
+                        <filter string="State"
+                                domain="[]"
+                                context="{'group_by':'state'}"/>
+                    </group>
+                </search>
+             </field>
+         </record>
+
+        <record id="view_rolling_shift_tree" model="ir.ui.view">
+            <field name="name">hr.rolling.shift.tree</field>
+            <field name="model">hr.rolling.shift</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Rolling Shift List">
+                    <field name="code"/>
+                    <field name="shift_berjalan"/>
+                    <field name="employee_id"/>
+                    <field name="department_id"/>
+                    <field name="date_start"/>
+                    <field name="date_end"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_rolling_shift_form" model="ir.ui.view">
+            <field name="name">hr.rolling.shift.form</field>
+            <field name="model">hr.rolling.shift</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+            <form string="Rolling Shift Form">
+                <header>
+                        <button name="button_send_to_confirm"
+                                states="draft"
+                                string="Send to Confirm"
+                                type="object"
+                                class="oe_highlight"/>
+
+                        <button name="button_confirm"
+                                states="waiting"
+                                string="Confirm"
+                                type="object"
+                                class="oe_highlight"
+                                groups="bgt_employee.group_hr_gm,hr.group_hr_manager"/>
+
+                        <button name="button_cancel"
+                                states="waiting"
+                                string="Cancel"
+                                type="object"
+                                groups="hr.group_hr_manager,bgt_employee.group_hr_gm"/>
+
+                        <button name="button_cancel"
+                                states="confirmed"
+                                string="Cancel"
+                                type="object"
+                                groups="hr.group_hr_manager"/>
+
+                        <button name="button_validate"
+                                states="confirmed"
+                                string="Validate"
+                                type="object"
+                                class="oe_highlight"
+                                groups="hr.group_hr_manager"/>
+
+                        <button name="button_cancel"
+                                states="done"
+                                string="Cancel"
+                                type="object"
+                                groups="hr.group_hr_manager"/>
+
+                        <button name="button_set_to_draft"
+                                states="cancel"
+                                string="Set to Draft"
+                                type="object"
+                                class="oe_highlight"
+                                groups="hr.group_hr_manager,bgt_employee.group_hr_gm"/>
+
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,done" statusbar_colors='{"draft":"red","confirmed":"blue"}' readonly="1"/>
+                    </header>
+                <sheet>
+                    <group>
+                            <group>
+                                <div class="oe_title">
+                                    <h1><field name="code" string="Number" nolabel="1" readonly="1"/></h1>
+                                </div>
+                            </group>
+                            <group>
+                                <field name="user_id" readonly="1"/>
+                                <field name="date" readonly="1"/>
+                            </group>
+                        </group>
+                    <group>
+                        <group>
+                            <field name="employee_id" required="1"/>
+                            <field name="department_id" readonly="1"/>
+                            <field name="active" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="shift_berjalan" options="{'no_create':True}" required="1"/>
+                            <field name="date_start" required="1"/>
+                            <field name="date_end" required="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Employee">
+                            <group>
+                                <field name="employee_count"/>
+                            </group>
+                            <field name="rolling_shift_detail_ids" mode="tree">
+                                <tree string="Employee" editable="bottom">
+                                    <field name="employee_id" domain="[('department_id','=',parent.department_id)]"/>
+                                    <field name="nik" readonly="1"/>
+                                    <field name="job" readonly="1"/>
+                                    <field name="department" readonly="1"/>
+                                    <field name="rolling_shift_exist_id" readonly="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                    <separator string="Notes"/>
+                    <field name="notes" placeholder="input notes here...."/>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_report_shift_tree" model="ir.ui.view">
+            <field name="name">hr.rolling.shift.tree</field>
+            <field name="model">hr.rolling.shift.detail</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Report Shift List" editable="botom">
+                    <!--field name="rolling_shift_id" /-->
+                    <field name="employee_id" />
+                    <field name="job" />
+                    <field name="department" />
+                    <field name="schedule_id"/>
+                    <field name="date_start" />
+                    <field name="date_end" />
+                    <!--field name="state" /-->
+                </tree>
+            </field>
+        </record>
+
+        <record id="action_rolling_shift_list" model="ir.actions.act_window">
+            <field name="name">Shift List</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.rolling.shift</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to add a rolling shift
+                </p>
+            <p>klik tombol create untuk rolling shift baru</p>
+            </field>
+        </record>
+
+        <record id="action_resource_calendar_list" model="ir.actions.act_window">
+            <field name="name">Shift List</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">resource.calendar</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to add a master shift
+                </p>
+            <p>klik tombol create untuk master shift baru</p>
+            </field>
+        </record>
+
+        <record id="action_report_shift" model="ir.actions.act_window">
+            <field name="name">Report Shift</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.rolling.shift.detail</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to add a rolling shift
+                </p>
+            <p>klik tombol create untuk rolling shift baru</p>
+            </field>
+        </record>
+
+
+        <menuitem id="rolling_shift"
+                name="Shift Management"
+                sequence="60"
+                groups="hr.group_hr_manager,hr.group_hr_user,bgt_shift.group_user_shift,bgt_employee.group_hr_gm"/>
+
+        <!--menuitem
+            id="hr_menu_rolling_shift"
+            name="Shift"
+            action="action_rolling_shift_list"
+            parent="rolling_shift"
+            groups="hr.group_hr_manager,hr.group_hr_user,bgt_shift.group_user_shift,bgt_employee.group_hr_gm"
+            sequence="5"/-->
+
+        <menuitem
+            id="hr_resource_calendar"
+            name="Master"
+            action="action_resource_calendar_list"
+            parent="rolling_shift"
+            groups="hr.group_hr_manager,hr.group_hr_user"
+            sequence="10"/>
+
+        <menuitem
+            id="hr_report_shift"
+            name="Shift"
+            action="action_report_shift"
+            parent="rolling_shift"
+            groups="hr.group_hr_manager"
+            sequence="5"/>
+
+</odoo>

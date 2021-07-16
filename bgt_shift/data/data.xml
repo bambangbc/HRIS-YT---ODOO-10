@@ -1,0 +1,28 @@
+<odoo noupdate="1">
+
+    <record id="mutasi_sequence" model="ir.sequence">
+        <field name="name">Rolling Shift</field>
+        <field name="code">hr.rolling.shift</field>
+        <field name="prefix">RS/YT/</field>
+        <field name="suffix"></field>
+        <field name="padding">4</field>
+        <field eval="1" name="number_next"/>
+        <field eval="1" name="number_increment"/>
+    </record>
+
+        <!-- scheduler : process import -->
+<!--         <record forcecreate="True" model="ir.cron" id="process_import_invoice">
+            <field name="name">Auto rolling shift</field>
+            <field name="active">True</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">7</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="model" eval="'hr.rolling.shift'"/>
+            <field name="function" eval="'cron_rolling_shift'"/>
+            <field name="args" eval="'()'"/>
+        </record>   -->  
+           
+
+</odoo>

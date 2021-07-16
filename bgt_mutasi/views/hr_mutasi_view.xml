@@ -1,0 +1,172 @@
+<odoo>
+
+        <record id="mutasi_search" model="ir.ui.view">
+            <field name="name">hr.mutasi.search</field>
+            <field name="model">hr.mutasi</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Mutasi">
+                    <field name="name" string="Number" select="True"/>
+                    <field name="employee_id"  select="True"/>
+                    <field name="nik"  select="True"/>
+                    <field name="department_id"  select="True"/>
+                    <field name="job_id"  select="True"/>
+                    <field name="new_department_id"  select="True"/>
+                    <field name="new_job_id"  select="True"/>
+                    <group expand="0" string="Group By...">
+                        <filter string="Employee"
+                                domain="[]"
+                                context="{'group_by':'employee_id'}"/>
+                        <filter string="Department"
+                                domain="[]"
+                                context="{'group_by':'department_id'}"/>
+                        <filter string="Job"
+                                domain="[]"
+                                context="{'group_by':'job_id'}"/>
+                        <filter string="New Department"
+                                domain="[]"
+                                context="{'group_by':'new_department_id'}"/>
+                        <filter string="New ob"
+                                domain="[]"
+                                context="{'group_by':'new_job_id'}"/>
+                        <filter string="State"
+                                domain="[]"
+                                context="{'group_by':'state'}"/>
+                    </group>
+                </search>
+             </field>
+         </record>
+
+        <record id="view_mutasi_tree" model="ir.ui.view">
+            <field name="name">hr.mutasi.tree</field>
+            <field name="model">hr.mutasi</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Mutasi List">
+                    <field name="name"/>
+                    <field name="nik"/>
+                    <field name="employee_id"/>
+                    <field name="user_id" invisible="1"/>
+                    <field name="department_id"/>
+                    <field name="job_id"/>
+                    <field name="new_department_id"/>
+                    <field name="new_job_id"/>
+                    <field name="state" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_mutasi_form" model="ir.ui.view">
+            <field name="name">hr.mutasi.form</field>
+            <field name="model">hr.mutasi</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Mutasi Form">
+                    <header>
+                        <button name="button_confirm"
+                                states="draft"
+                                string="Confirm"
+                                type="object"
+                                class="oe_highlight"
+                                groups="hr.group_hr_user"/>
+
+                        <button name="button_approve"
+                                states="confirmed"
+                                string="Approve"
+                                type="object"
+                                class="oe_highlight"
+                                groups="hr.group_hr_manager"/>
+
+                        <button name="button_cancel"
+                                states="confirmed"
+                                string="Cancel"
+                                type="object"
+                                class="oe_highlight"
+                                groups="hr.group_hr_manager"
+                                confirm="Anda yakin data akan dicancel? data kontrak baru atas employee ini akan ikut terhapus !"/>
+
+                        <button name="button_set_to_draft"
+                                states="cancel"
+                                string="Set to Draft"
+                                type="object"
+                                class="oe_highlight"
+                                groups="hr.group_hr_manager"/>
+
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,done" statusbar_colors='{"draft":"red","confirmed":"blue"}' readonly="1"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <div class="oe_title">
+                                    <h1><field name="name" string="Number" nolabel="1" readonly="1"/></h1>
+                                </div>
+                            </group>
+                            <group>
+                                <field name="user_id" readonly="1"/>
+                                <field name="date" readonly="1"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                            	<field name="employee_id" options="{'no_create':True}" />
+                            	<field name="nik" readonly="1"/>
+                            	<field name="department_id" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            	<field name="job_id" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            </group>
+                            <group>
+                            	<field name="new_department_id" options="{'no_create':True}" required="1"/>
+                                <field name="new_job_id" options="{'no_create':True}" required="1"/>
+                                <field name="date_mutation" required="1"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                            	<field name="contract_id" attrs="{'invisible':[('contract_id','=',False)]}" domain="[('employee_id','=',employee_id)]" options="{'no_create':True}"/>
+                                <field name="pay_status_id" attrs="{'invisible':[('pay_status_id','=',False)]}" readonly="1"/>
+                            </group>
+                            <group >
+                                <field name="new_contract_id" attrs="{'invisible':[('new_contract_id','=',False)]}" readonly="1"/>
+                                <field name="new_pay_status_id" attrs="{'invisible':[('new_pay_status_id','=',False)]}" readonly="1"/>
+                            </group>
+                        </group>
+                        <separator string="Notes"/>
+                        <field name="notes" placeholder="input notes here...."/>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="action_mutasi" model="ir.actions.act_window">
+            <field name="name">Mutasi Karyawan</field>
+            <field name="res_model">hr.mutasi</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field eval="False" name="view_id"/>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="search_view_id" ref="mutasi_search"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add an Mutasi
+              </p><p>
+                klik tombol create untuk menambahkan data Mutasi
+              </p>
+            </field>
+        </record>
+
+
+        <menuitem id="mutasi_menu_root"
+                name="Mutasi"
+                parent="hr.menu_hr_root"
+                sequence="40"
+                action="action_mutasi"
+                groups="hr.group_hr_user"/>
+
+
+
+</odoo>

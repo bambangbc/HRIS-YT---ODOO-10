@@ -1,0 +1,14 @@
+<odoo>
+
+    <record id="view_attendace_overtime_tree" model="ir.ui.view">
+        <field name="name">additional.form.view.hr.attendance.overtime.tree</field>
+        <field name="model">hr.attendance</field>
+        <field name="inherit_id" ref="hr_attendance.view_attendance_tree"/>
+        <field name="arch" type="xml">
+            <field name="check_out" position="after">
+                <field name="overtime" readonly="1"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>

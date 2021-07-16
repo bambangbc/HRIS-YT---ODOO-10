@@ -1,0 +1,168 @@
+<?xml version="1.0"?>
+<odoo>
+
+	<report 
+	    id="bgt_sk_pengangkatan_report"
+	    string="SK Pengangkatan"
+	    model="hr.contract" 
+	    report_type="qweb-pdf"
+	    file="bgt_contract.report_sk_pengangkatan" 
+	    name="bgt_contract.report_sk_pengangkatan" 
+	/>
+
+	<template id="report_sk_pengangkatan_document">
+		<t t-call="report.html_container">
+			<t t-foreach="docs" t-as="o">
+				<div class="page">
+					<div class="row" style="font-size:15px">
+						<table width="100%">
+							<tr>
+							<td width="100%" align="center"><img src="/bgt_contract/static/src/image/pkwt_header.png" class="img img-responsive" /></td>
+							</tr>
+						</table>
+						<p/>
+						<p/>
+						<table width="100%" style="font-size:14px">
+							<tr>
+								<td width="100%" align="center"><strong>SURAT KEPUTUSAN PENGANGKATAN KARYAWAN TETAP</strong></td>
+							</tr>
+							<tr>
+								<td width="100%" align="center"><strong>NO : <span t-field="o.no_sk_pengangkatan"/></strong></td>
+							</tr>
+						</table>
+						<p/>
+	                    <table width="100%" style="font-size:14px">
+							<tr>
+								<td width="18%">Mengingat</td>
+								<td width="2%">:</td>
+								<td width="80%" align="justify">Kemampuan dan potensi yang dapat dikembangkan pada karyawan yang memang telah memenuhi syarat kepegawaian dan kecakapan yang berlaku.</td>
+							</tr>
+						</table>
+	                    <p/>
+						<table width="100%" style="font-size:14px">
+							<tr>
+								<td width="18%">MEMUTUSKAN</td>
+								<td width="2%">:</td>
+								<td width="80%"/>
+							</tr>
+						</table>
+	                    <p/>
+						<table width="100%" style="font-size:14px">
+							<tr>
+								<td width="6%">1.</td>
+								<td width="94%">Mengangkat saudara:</td>
+							</tr>
+						</table>
+						<p/>
+
+						<table width="100%" style="font-size:14px">
+							<tr>
+								<td width="6%"></td>
+								<td width="32%">Nama</td>
+								<td width="2%">:</td>
+								<td width="60%" align="justify"><span t-field="o.employee_id.name"/></td>
+							</tr>
+							<tr>
+								<td width="6%"/>
+								<td width="32%">NIK</td>
+								<td width="2%">:</td>
+								<td width="60%" style="text-align: justify;"><span t-field="o.employee_id.nik"/></td>
+							</tr>
+							<tr>
+								<td width="6%"/>
+								<td width="32%">Divisi</td>
+								<td width="2%">:</td>
+								<td width="60%" align="justify"><span t-field="o.employee_id.department_id.name"/></td>
+							</tr>
+							<tr>
+								<td width="6%"/>
+								<td width="32%">Posisi</td>
+								<td width="2%">:</td>
+								<td width="60%" align="justify"><span t-field="o.employee_id.job_id.name"/></td>
+							</tr>
+						</table>
+						<p/>
+						<table width="100%" style="font-size:14px">
+							<tr>
+								<td width="6%">2.</td>
+								<td width="94%" align="justify">Setelah menerima surat ini agar saudara bertanggung jawab penuh atas tugas dan kewajiban yang telah diberikan kepada saudara.</td>
+							</tr>
+						</table>
+						<p/>
+						<table width="100%" style="font-size:14px">
+							<tr>
+								<td width="6%">3.</td>
+								<td width="94%" align="justify">Surat pengangkatan ini berlaku sejak tanggal <span t-field="o.date_start" t-field-options="{&quot;format&quot;: &quot;dd-MM-y&quot;}"/> sehingga dengan demikian surat pengangkatan sebelumnya sudah tidak berlaku lagi.</td>
+							</tr>
+						</table>
+						<p/>
+							Demikian surat pengangkatan ini diputuskan, apabila terdapat kekurangan dan kekeliruan dikemudian hari akan diadakan peninjauan.
+						<p/>
+
+						<table width="100%" style="font-size:14px">
+							<tr>
+								<td width="18%">Ditetapkan di</td>
+								<td width="2%">:</td>
+								<td width="80%" align="justify">Bandung</td>
+							</tr>
+							<tr>
+								<td width="28%">Tanggal</td>
+								<td width="2%">:</td>
+								<td width="70%" align="justify"><span t-field="o.tanggal"/></td>
+							</tr>
+						</table>
+						<p/>
+						<p/>
+						<p/>
+						<p/>
+						<table width="100%" style="font-size:15px">
+							<tr>
+								<td style="width:33%" align="center">Menyetujui,</td>
+								<td style="width:33%" />
+								<td style="width:33%" align="center">Mengetahui,</td>
+							</tr>
+						</table>
+						<p><span style="color: #ffffff;">a</span></p>
+						<p><span style="color: #ffffff;">a</span></p>
+						<p><span style="color: #ffffff;">a</span></p>
+						<p><span style="color: #ffffff;">a</span></p>
+						<table width="100%" style="font-size:15px">
+							<tr>
+								<td style="width:33%" align="center"><span t-field="o.employee_id.name"/></td>
+								<td style="width:33%" />
+								<td style="width:33%" align="center"><span t-field="o.company_id.direktur_id.name"/></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</t>
+		</t>
+	</template>
+
+	<template id="report_sk_pengangkatan">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="bgt_contract.report_sk_pengangkatan_document" t-lang="o.company_id.partner_id.lang"/>
+        </t>
+    </template>
+
+
+    <record id="paperformat_sk_pengangkatan" model="report.paperformat">
+        <field name="name">SK Pengangkatan</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">10</field>
+        <field name="margin_bottom">20</field>
+        <field name="margin_left">20</field>
+        <field name="margin_right">20</field>
+        <field name="header_line" eval="False" />
+        <field name="header_spacing">0</field>
+        <field name="dpi">96</field>
+    </record>
+
+
+    <record id="bgt_sk_pengangkatan_report" model="ir.actions.report.xml">
+      <field name="paperformat_id" ref="bgt_contract.paperformat_sk_pengangkatan"/>
+    </record>
+
+</odoo>

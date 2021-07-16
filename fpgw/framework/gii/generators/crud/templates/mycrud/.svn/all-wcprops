@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 27
+/repos/!svn/ver/8042/mycrud
+END
+_view.php
+K 25
+svn:wc:ra_dav:version-url
+V 37
+/repos/!svn/ver/7986/mycrud/_view.php
+END
+view.php
+K 25
+svn:wc:ra_dav:version-url
+V 36
+/repos/!svn/ver/8042/mycrud/view.php
+END
+INSTALL.txt
+K 25
+svn:wc:ra_dav:version-url
+V 39
+/repos/!svn/ver/7899/mycrud/INSTALL.txt
+END
+_form.php
+K 25
+svn:wc:ra_dav:version-url
+V 37
+/repos/!svn/ver/8042/mycrud/_form.php
+END
+update.php
+K 25
+svn:wc:ra_dav:version-url
+V 38
+/repos/!svn/ver/7986/mycrud/update.php
+END
+controller.php
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/repos/!svn/ver/8042/mycrud/controller.php
+END
+create.php
+K 25
+svn:wc:ra_dav:version-url
+V 38
+/repos/!svn/ver/7898/mycrud/create.php
+END
+_search.php
+K 25
+svn:wc:ra_dav:version-url
+V 39
+/repos/!svn/ver/7898/mycrud/_search.php
+END
+index.php
+K 25
+svn:wc:ra_dav:version-url
+V 37
+/repos/!svn/ver/7898/mycrud/index.php
+END
+admin.php
+K 25
+svn:wc:ra_dav:version-url
+V 37
+/repos/!svn/ver/8042/mycrud/admin.php
+END

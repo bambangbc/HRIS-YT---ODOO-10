@@ -1,0 +1,13 @@
+<odoo>
+
+	<record id="medical_sequence" model="ir.sequence">
+		<field name="name">Medical</field>
+		<field name="code">hr.medical</field>
+		<field name="prefix"></field>
+		<field name="suffix">/SPB/YT/%(year)s</field>
+		<field name="padding">4</field>
+		<field eval="1" name="number_next"/>
+        <field eval="1" name="number_increment"/>
+	</record>
+
+</odoo>

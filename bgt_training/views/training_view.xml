@@ -1,0 +1,150 @@
+<odoo>
+
+
+        <record id="training_search" model="ir.ui.view">
+            <field name="name">hr.training.search</field>
+            <field name="model">hr.training</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Medical">
+                    <field name="name" string="Number" select="True"/>
+                    <field name="register"  select="True"/>
+                    <field name="topik"  select="True"/>
+                    <field name="tempat_pelatihan"  select="True"/>
+                    <group expand="0" string="Group By...">
+                        <filter string="Type Training"
+                                domain="[]"
+                                context="{'group_by':'type'}"/>
+                        <filter string="Jenis Training"
+                                domain="[]"
+                                context="{'group_by':'jenis_training'}"/>
+                        <filter string="State"
+                                domain="[]"
+                                context="{'group_by':'state'}"/>
+                    </group>
+                </search>
+             </field>
+         </record>
+
+        <record id="view_training_tree" model="ir.ui.view">
+            <field name="name">hr.training.tree</field>
+            <field name="model">hr.training</field>
+            <field name="arch" type="xml">
+                <tree string="Training">
+                    <field name="name"/>
+                    <field name="jenis_training"/>
+                    <field name="type"/>
+                    <field name="topik"/>
+                    <field name="tgl_berlaku"/>
+                    <field name="tgl_revisi"/>
+                    <field name="tgl_training"/>
+                    <field name="tempat_pelatihan"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_training_form" model="ir.ui.view">
+            <field name="name">hr.training.form</field>
+            <field name="model">hr.training</field>
+            <field name="arch" type="xml">
+                <form string="Training">
+                <header>
+                        <button name="verify" states="draft" string="Verify" type="object"/>
+                        <button name="approve" states="verify" string="Approve" type="object"/>
+                        <button name="reject" states="verify" string="Reject" type="object"/>
+                        <button name="cancel" states="verify" string="Cancel" type="object"/>
+                        <button name="evaluation" states="approve" string="Evaluation" type="object"/>
+                        <button name="done" states="evaluation" string="Done" type="object"/>
+				        <field name="state" widget="statusbar" statusbar_visible="draft,verify,approve,done"/>
+                </header>
+                <sheet>
+                    <group  col="4" colspan="4">
+                        <field name="user_id" readonly="1"/>
+                        <field name="date" readonly="1"/>
+                    </group>
+                    <group string="Reference" col="4" colspan="4">
+                        <field name="name" colspan="4" readonly="1"/>
+						<field name="tgl_berlaku"/>
+						<field name="tgl_revisi"/>
+						<field name="register" colspan="4"/>
+                    </group>
+                    <group string="Training" col="4" colspan="4">
+                        <field name="jenis_training" colspan="4"/>
+                        <field name="tgl_training"/>
+                        <field name="tgl_akhir_training"/>
+                        <field name="topik" colspan="4"/>
+                        <field name="alasan" colspan="4"/>
+                    </group>
+                    <group string="Instruktur" col="4" colspan="4">
+                        <field name="type" widget="radio" options="{'horizontal': true}"/>
+                        <field name="instruktur" required="1"/>
+                        <field name="tempat_pelatihan" required="1"/>
+                        <field name="department_id" options="{'no_create':True}" attrs="{'invisible':[('type','=','eksternal')]}"/>
+                    </group>
+	                <group col="4" colspan="4" attrs="{'invisible':[('type','!=','eksternal')]}">
+						<field name="instansi" colspan="4"/>
+	                    <field name="keterangan" colspan="4"/>
+	            	</group>
+                    <group string="Penolakan" attrs="{'invisible':[('state','!=','reject')]}">
+                        <field name="menolak"/>
+                        <field name="alasan_menolak" />
+                    </group>
+                    <notebook colspan="5">
+                        <page string="Karyawan">
+                            <field col="4" colspan="4" name="employee_ids" nolabel="1" widget="one2many_list">
+                                <tree string="Karyawan" editable="top">
+                                    <field name="training_id" invisible="1"/>
+                                    <field name="employee_id" options="{'no_create':True}"/>
+					                <field name="nik" readonly="1"/>
+                                    <field name="identification_id" readonly="1"/>
+					                <field name="department_id" readonly="1"/>
+					                <field name="job_id" readonly="1"/>
+                                    <field name="point"/>
+					                <field name="keterangan"/>
+                                    <field name="state" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Catatan">
+                            <field col="4" colspan="4" name="notes" nolabel="1"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_employee_form_inherit" model="ir.ui.view">
+            <field name="name">hr.employee.form</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//notebook/page[2]" position="after">
+                    <page string="Training">
+                    	<field col="4" colspan="4" name="training_ids" nolabel="1">
+                            <tree string="Training">
+                                <field name="training_id"/>
+				                <field name="point"/>
+                                <field name="keterangan"/>
+                                <field name="state"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+    	<record model="ir.actions.act_window" id="action_training_form">
+            <field name="name">Form Training</field>
+            <field name="res_model">hr.training</field>
+        </record>
+
+        <menuitem id="menu_train_main" parent="hr.menu_hr_root" name="Training" action="action_training_form" sequence="10"/>
+
+
+</odoo>

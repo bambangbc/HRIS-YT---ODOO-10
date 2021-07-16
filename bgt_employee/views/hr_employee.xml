@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="bgt_employee_form" model="ir.ui.view">
+            <field name="name">bgt.employee.form</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <field name="category_ids" position="replace">
+                    <field name="category_ids" widget="many2many_tags" placeholder="e.g. Part Time" options='{"no_create": 1, "no_create_edit": 1}'/>
+                </field>
+                <field name="user_id" position="replace">
+                    <field name="user_id" options='{"no_create": 1, "no_create_edit": 1}'/>
+                </field>
+                <field name="country_id" position="replace">
+                    <field name="country_id" invisible="1"/>
+                </field>
+                <field name="country_id" position="before">
+                    <field name="nik"/>
+                    <field name="absen_id"/>
+                    <field name="no_mesin"/>
+                    <field name="npwp" invisible="1"/>
+                    <field name="ptkp_id" options='{"no_create": 1, "no_create_edit": 1}' invisible="1"/>
+                    <field name="bpjs_kesehatan" invisible="1"/>
+                    <field name="bpjs_ketenagakerjaan" invisible="1"/>
+                </field>
+                <field name="gender" position="before">
+                    <field name="religion_id" options='{"no_create": 1, "no_create_edit": 1}'/>
+                </field>
+                <field name="department_id" position="after">
+                    <field name="level_id" options='{"no_create": 1, "no_open": 1}'/>
+                    <field name="status_karyawan" options='{"no_create": 1,"no_open": 1}'/>
+                </field>
+                <field name="address_home_id" position="before">
+                    <field name="alamat_domisili"/>
+                    <field name="alamat_ktp"/>
+                    <field name="provinsi_id" options='{"no_create": 1, "no_create_edit": 1}' invisible="1"/>
+                    <field name="kota_id" options='{"no_create": 1, "no_create_edit": 1}'/>
+                    <field name="kecamatan_id" domain="[('kota_id','=',kota_id)]" options='{"no_create": 1, "no_create_edit": 1}' invisible="1"/>
+                    <!-- <field name="kelurahan_id" domain="[('kecamatan_id','=',kecamatan_id)]" options='{"no_create": 1, "no_create_edit": 1}'/> -->
+                    <field name="no_telepon" invisible="1"/>
+                    <field name="no_hp"/>
+                    <field name="email" invisible="1"/>
+                </field>
+                <field name="bank_account_id" position="after">
+                    <field name="bank_account"/>
+                    <field name="bank_number"/>
+                    <field name="work_date"/>
+                </field>
+                <xpath expr="//notebook/page[2]/group/group[4]" position="after">
+                    <group string="Education" colspan="2">
+                        <group>
+                            <field name="jenjang" options='{"no_create": 1, "no_create_edit": 1}'/>
+                            <field name="school_name" invisible="1"/>
+                            <field name="jurusan" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="status_ijazah"/>
+                            <field name="no_seri_ijazah"/>
+                            <field name="end_year"/>
+                            <field name="tanggal_terima_ijazah"/>
+                        </group>
+                    </group>
+                <!--group string="Employee's Detail Information" colspan="2">
+                    <notebook>
+                        <page string="Pendidikan Formal">
+                            <field name="education_formal_ids" mode="tree">
+                                <tree editable="bottom">
+                                    <field name="jenjang" options='{"no_create": 1, "no_create_edit": 1}'/>
+                                    <field name="name"/>
+                                    <field name="lokasi"/>
+                                    <field name="jurusan"/>
+                                    <field name="start_year"/>
+                                    <field name="end_year"/>
+                                    <field name="ipk"/>
+                                    <field name="sertifikat"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Pendidikan Non-Formal">
+                            <field name="education_nonformal_ids" mode="tree">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="lokasi"/>
+                                    <field name="keterampilan"/>
+                                    <field name="tahun"/>
+                                    <field name="sertifikat"/>
+                                    <field name="keterangan"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Keterampilan">
+                            <field name="skill_ids" mode="tree">
+                                <tree string="Employee Skills" editable="bottom">
+                                    <field name="jenis_keterampilan"/>
+                                    <field name="keterampilan"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Pengalaman Organisasi">
+                            <field name="organization_ids" mode="tree">
+                                <tree string="employee Organization" editable="bottom">
+                                    <field name="name"/>
+                                    <field name="jabatan"/>
+                                    <field name="kegiatan"/>
+                                    <field name="usia"/>
+                                    <field name="periode"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Beasiswa">
+                            <field name="scholarship_ids" mode="tree">
+                                <tree string="employee Scholarship" editable="bottom">
+                                    <field name="jenjang" options='{"no_create": 1, "no_create_edit": 1}'/>
+                                    <field name="lembaga"/>
+                                    <field name="tahun"/>
+                                    <field name="ikatan_dinas"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Riwayat Keluarga">
+                            <field name="family_ids" mode="tree">
+                                <tree string="employee Family" editable="bottom">
+                                        <field name="family"/>
+                                        <field name="name"/>
+                                        <field name="jenis_kelamin"/>
+                                        <field name="jenjang"/>
+                                        <field name="age"/>
+                                        <field name="address"/>
+                                        <field name="work"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Pengalaman Bekerja">
+                            <field name="work_ids" mode="tree">
+                                <tree string="Work Experience" editable="bottom">
+                                    <field name="name"/>
+                                    <field name="bidang"/>
+                                    <field name="alamat"/>
+                                    <field name="jabatan"/>
+                                    <field name="deskripsi"/>
+                                    <field name="periode"/>
+                                    <field name="alasan_resign"/>
+                                    <field name="last_salary"/>
+                                    <field name="sertifikat"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </group-->
+            </xpath>
+                <xpath expr="//notebook/page[2]" position="after">
+                    <page string="Surat Peringatan" groups="hr.group_hr_user,hr.group_hr_manager">
+                        <field name="sp_ids" mode="tree">
+                            <tree string="Surat Peringatan" editable="bottom">
+                                <field name="sp"/>
+                                <field name="keterangan"/>
+                                <field name="konsekuensi"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="bgt_employee_tree" model="ir.ui.view">
+            <field name="name">bgt.employee.tree</field>
+            <field name="model">hr.employee</field>
+            <field name="type">tree</field>
+            <field name="inherit_id" ref="hr.view_employee_tree"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <field name="name" position="before">
+                    <field name="nik"/>
+                </field>
+                <field name="job_id" position="after">
+                    <field name="status_karyawan"/>
+                </field>
+                <field name="parent_id" position="replace">
+                    <field name="parent_id" invisible="1"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>

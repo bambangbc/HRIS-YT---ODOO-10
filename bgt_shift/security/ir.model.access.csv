@@ -1,0 +1,4 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"hr_rolling_shift","hr_rolling_shift","model_hr_rolling_shift","","1","1","1","1"
+"hr_rolling_shift_detail","hr_rolling_shift_detail","model_hr_rolling_shift_detail","","1","1","1","1"
+"hr_contract_detail","hr_contract_detail","model_hr_contract_detail","","1","1","1","1"

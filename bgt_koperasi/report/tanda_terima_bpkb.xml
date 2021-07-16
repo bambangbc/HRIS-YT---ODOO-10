@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <report
+        id="bgt_tanda_terima_report"
+        string="Tanda Terima BPKB"
+        model="hr.koperasi"
+        report_type="qweb-pdf"
+        file="bgt_koperasi.report_tanda_terima"
+        name="bgt_koperasi.report_tanda_terima"
+    />
+
+    <template id="report_tanda_terima_document">
+        <t t-call="report.html_container">
+            <t t-foreach="docs" t-as="o">
+                <div class="page">
+                    <div class="row" style="font-size:16px">
+                        <table width="100%" style="font-size:16px">
+                            <tr>
+                                <td width="100%" align="center"><strong>TANDA TERIMA </strong></td>
+                            </tr>
+                        </table>
+                        <p/>
+                            Telah diterima Buku Pemilik Kendaraan Bermotor (BPKB) sebagai jaminan pinjaman Koperasi dari :
+                        <p/>
+                        <table width="100%" style="font-size:15px">
+                            <tr>
+                                <td width="40%" style="text-align: left;">Nama</td>
+                                <td width="2%">:</td>
+                                <td width="58%"><span t-field="o.employee_id.name"/></td>
+                            </tr>
+                            <tr>
+                                <td width="40%" style="text-align: left;">NIK</td>
+                                <td width="2%">:</td>
+                                <td width="58%"><span t-field="o.employee_id.nik"/></td>
+                            </tr>
+                            <tr>
+                                <td width="40%" style="text-align: left;">Divisi</td>
+                                <td width="2%">:</td>
+                                <td width="58%"><span t-field="o.employee_id.department_id.name"/></td>
+                            </tr>
+                            <tr>
+                                <td width="40%" style="text-align: left;">Tanggal Penyerahan</td>
+                                <td width="2%">:</td>
+                                <td width="58%"><span t-field="o.tanggal_penyerahan"/></td>
+                            </tr>
+                            <tr>
+                                <td width="40%" style="text-align: left;">No BPKB</td>
+                                <td width="2%">:</td>
+                                <td width="58%"><span t-field="o.no_jaminan"/></td>
+                            </tr>
+                            <tr>
+                                <td width="40%" style="text-align: left;">Nama Yang Tertera Di BPKB</td>
+                                <td width="2%">:</td>
+                                <td width="58%"><span t-field="o.name_jaminan"/></td>
+                            </tr>
+                            <tr>
+                                <td width="40%" style="text-align: left;">Alamat Yang Tertera Di BPKB</td>
+                                <td width="2%">:</td>
+                                <td width="58%"><span t-field="o.alamat_jaminan"/></td>
+                            </tr>
+                        </table>
+                        <br/>
+                        <br/>
+
+                        <table width="100%" style="font-size:15px">
+                            <tr>
+                                <td style="width:50%" align="left">Yang Menerima, </td>
+                                <td style="width:50%" align="right">Yang Menyerahkan,</td>
+                            </tr>
+                        </table>
+                        <p><span style="color: #ffffff;">a</span></p>
+                        <p><span style="color: #ffffff;">a</span></p>
+                        <p><span style="color: #ffffff;">a</span></p>
+                        <table width="100%" style="font-size:10px">
+                            <tr>
+                                <td style="width:50%" align="left">(<span style="color: #ffffff;">aaaaaaaaaaaaaaaaaaa</span>)</td>
+                                <td style="width:50%" align="right">(<span style="color: #ffffff;">aaaaaaaaaaaaaaaaaaa</span>)</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <template id="report_tanda_terima">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="bgt_koperasi.report_tanda_terima_document" t-lang="o.create_uid.partner_id.lang"/>
+        </t>
+    </template>
+
+
+    <record id="bgt_tanda_terima_report" model="ir.actions.report.xml">
+        <field name="paperformat_id" ref="bgt_koperasi.paperformat_koperasi"/>
+    </record>
+
+</odoo>

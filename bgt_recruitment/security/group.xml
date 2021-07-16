@@ -1,0 +1,31 @@
+
+<odoo noupdate="1">
+
+        <record id="group_recruitment_dept_head" model="res.groups">
+            <field name="name">Recruitment Dept Head</field>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+	    <record id="recruitment_dept_head_rule" model="ir.rule">
+	        <field name="name">Recruitment Dept Head</field>
+	        <field name="model_id" ref="model_hr_applicant"/>
+	        <field name="groups" eval="[(4, [ref('group_recruitment_dept_head')])]"/>
+	        <field name="perm_read" eval="True"/>
+	        <field name="perm_write" eval="True"/>
+	        <field name="perm_create" eval="True"/>
+	        <field name="perm_unlink" eval="True"/>
+	        <field name="domain_force">[('job_id.user_id.id','=',user.id)]</field>
+	    </record>
+
+	    <record id="recruitment_dept_head_job_rule" model="ir.rule">
+	        <field name="name">Recruitment Dept Head Job</field>
+	        <field name="model_id" ref="hr.model_hr_job"/>
+	        <field name="groups" eval="[(4, [ref('group_recruitment_dept_head')])]"/>
+	        <field name="perm_read" eval="True"/>
+	        <field name="perm_write" eval="True"/>
+	        <field name="perm_create" eval="True"/>
+	        <field name="perm_unlink" eval="True"/>
+	        <field name="domain_force">[('user_id.id','=',user.id)]</field>
+	    </record>
+
+</odoo>

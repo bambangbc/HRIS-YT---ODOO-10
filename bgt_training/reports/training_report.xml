@@ -1,0 +1,197 @@
+<?xml version="1.0"?>
+<odoo>
+
+	<report 
+	    id="bgt_training_report"
+	    string="Training"
+	    model="hr.training" 
+	    report_type="qweb-pdf"
+	    file="bgt_training.report_training" 
+	    name="bgt_training.report_training" 
+	/>
+
+	<template id="report_training_document">
+		<t t-call="report.html_container">
+			<t t-foreach="docs" t-as="o">
+				<div class="page">
+					<div class="row" style="font-size:15px">
+						<table width="100%">
+							<tr>
+							<td width="100%" align="center"><img src="/bgt_training/static/src/image/training_header.png" class="img img-responsive" /></td>
+							</tr>
+						</table>
+						<p/>
+						<p/>
+						<table width="100%" style="font-size:14px">
+							<tr>
+								<td width="100%" align="center"><strong>USULAN PELATIHAN</strong></td>
+							</tr>
+							<tr>
+								<td width="100%" align="center"><strong>NO : <span t-field="o.name"/></strong></td>
+							</tr>
+						</table>
+						<p/>
+	                    <table width="100%" style="font-size:14px">
+							<tr t-if="o.register">
+								<td width="60%"></td>
+								<td width="20%">No. Registrasi</td>
+								<td width="20%" align="right"><span t-field="o.register"/></td>
+							</tr>
+							<tr>
+								<td width="60%"></td>
+								<td width="20%">Tanggal Berlaku</td>
+								<td width="20%" align="right"><span t-field="o.tgl_berlaku"/></td>
+							</tr>
+							<tr t-if="o.tgl_revisi">
+								<td width="60%"></td>
+								<td width="20%">Tanggal Revisi</td>
+								<td width="20%" align="right"><span t-field="o.tgl_revisi"/></td>
+							</tr>
+						</table>
+						<p/>
+							Kepada
+						<br/>
+							Yth. Pimpinan Perusahaan
+						<br/>
+							Di Tempat
+						<p/>
+						<p/>
+							Dengan ini kami mohon diadakan pelatihan dengan penjelasan sebagai berikut :
+						<p/>
+						<p/>
+						<table width="100%" style="font-size:14px">
+							<tr>
+								<td width="20%">Rencana Pelatihan</td>
+								<td width="2%">:</td>
+								<td width="78%"><span t-field="o.tgl_training"/></td>
+							</tr>
+							<tr>
+								<td width="20%">Jenis Pelatihan</td>
+								<td width="2%">:</td>
+								<td width="78%"><span t-field="o.jenis_training"/></td>
+							</tr>
+							<tr>
+								<td width="20%">Topik Pelatihan</td>
+								<td width="2%">:</td>
+								<td width="78%"><span t-field="o.topik"/></td>
+							</tr>
+							
+							<tr>
+								<td width="20%">Alasan Pemilihan Topik</td>
+								<td width="2%">:</td>
+								<td width="78%"><span t-field="o.alasan"/></td>
+							</tr>
+						</table>
+	                    <p/>
+						<table width="100%" style="font-size:14px">
+							<tr>
+								<td width="20%">Type Pelatihan</td>
+								<td width="2%">:</td>
+								<td width="78%"><span t-field="o.type"/></td>
+							</tr>
+							<tr>
+								<td width="20%">Instruktur</td>
+								<td width="2%">:</td>
+								<td width="78%"><span t-field="o.jenis_training"/></td>
+							</tr>
+							<tr>
+								<td width="20%">Tempat Pelatihan</td>
+								<td width="2%">:</td>
+								<td width="78%"><span t-field="o.topik"/></td>
+							</tr>
+							<tr t-if="o.type == 'internal'">
+								<td width="20%">Department</td>
+								<td width="2%">:</td>
+								<td width="78%"><span t-field="o.department_id.name"/></td>
+							</tr>
+							<tr t-if="o.type == 'eksternal'">
+								<td width="20%">Instansi</td>
+								<td width="2%">:</td>
+								<td width="78%"><span t-field="o.instansi"/></td>
+							</tr>
+							<tr t-if="o.type == 'eksternal' and o.keterangan">
+								<td width="20%">Keterangan</td>
+								<td width="2%">:</td>
+								<td width="78%"><span t-field="o.keterangan"/></td>
+							</tr>
+						</table>
+						<p/>
+
+						<p/>
+							<strong>Peserta Training</strong>
+						<p/>
+						<table width="100%" style="font-size:14px">
+			                <thead>
+			                    <tr>
+			                        <th>No</th>
+			                        <th class="text-left">NIK</th>
+			                        <th class="text-left">Nama</th>
+			                        <th class="text-left">Divisi</th>
+			                        <th class="text-left">Posisi</th>
+			                    </tr>
+			                </thead>
+			                <tbody >
+			                	<t t-set="no" t-value="1"/>
+			                    <tr t-foreach="o.employee_ids" t-as="l">
+			                    	<td ><t t-esc="no"/></td>
+			                        <td><span t-field="l.employee_id.nik"/></td>
+			                        <td><span t-field="l.employee_id.name"/></td>
+			                        <td><span t-field="l.employee_id.department_id.name"/></td>
+			                        <td><span t-field="l.employee_id.job_id.name"/></td>
+			                        <t t-set="no" t-value="no + 1"/>
+			                    </tr>
+			                </tbody>
+			            </table>
+						<br/>
+						<br/>
+						<table width="100%" style="font-size:15px">
+							<tr>
+								<td style="width:33%" align="center">HRD,</td>
+								<td style="width:33%" />
+								<td style="width:33%" align="center">Menyetujui,</td>
+							</tr>
+						</table>
+						<p><span style="color: #ffffff;">a</span></p>
+						<p><span style="color: #ffffff;">a</span></p>
+						<p><span style="color: #ffffff;">a</span></p>
+						<p><span style="color: #ffffff;">a</span></p>
+						<table width="100%" style="font-size:15px">
+							<tr>
+								<td style="width:33%" align="center"><span t-field="o.user_id.name"/></td>
+								<td style="width:33%" />
+								<td style="width:33%" align="center"><span t-field="o.user_id.company_id.direktur_id.name"/></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</t>
+		</t>
+	</template>
+
+	<template id="report_training">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="bgt_training.report_training_document" t-lang="o.user_id.partner_id.lang"/>
+        </t>
+    </template>
+
+
+    <record id="paperformat_training" model="report.paperformat">
+        <field name="name">Training</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">10</field>
+        <field name="margin_bottom">20</field>
+        <field name="margin_left">20</field>
+        <field name="margin_right">20</field>
+        <field name="header_line" eval="False" />
+        <field name="header_spacing">0</field>
+        <field name="dpi">96</field>
+    </record>
+
+
+    <record id="bgt_training_report" model="ir.actions.report.xml">
+      <field name="paperformat_id" ref="bgt_training.paperformat_training"/>
+    </record>
+
+</odoo>

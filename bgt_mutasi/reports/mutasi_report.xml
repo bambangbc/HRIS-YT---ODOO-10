@@ -1,0 +1,158 @@
+<?xml version="1.0"?>
+<odoo>
+
+	<report
+	    id="bgt_mutasi_report"
+	    string="Mutasi"
+	    model="hr.mutasi"
+	    report_type="qweb-pdf"
+	    file="bgt_mutasi.report_mutasi"
+	    name="bgt_mutasi.report_mutasi"
+	/>
+
+	<template id="report_mutasi_document">
+		<t t-call="report.html_container">
+			<t t-foreach="docs" t-as="o">
+				<div class="page">
+					<div class="row" style="font-size:15px">
+						<table width="100%">
+							<tr>
+							<td width="100%" align="center"><img src="/bgt_mutasi/static/src/image/mutasi_header.png" class="img img-responsive" /></td>
+							</tr>
+						</table>
+						<p/>
+						<p/>
+						<table width="100%" style="font-size:14px">
+							<tr>
+								<td width="100%" align="center"><strong>SURAT MUTASI KETERANGAN KERJA</strong></td>
+							</tr>
+							<tr>
+								<td width="100%" align="center"><strong>NO : <span t-field="o.name"/></strong></td>
+							</tr>
+						</table>
+						<p/>
+							<strong>MEMUTUSKAN</strong>
+						<p/>
+						<table width="100%" style="font-size:14px">
+							<!--tr>
+								<td width="18%">NIK</td>
+								<td width="2%">:</td>
+								<td width="80%"><span t-field="o.employee_id.nik"/></td>
+							</tr-->
+							<tr>
+								<td width="25%">Nama</td>
+								<td width="2%">:</td>
+								<td width="73%"><span t-field="o.employee_id.name"/></td>
+							</tr>
+							<tr>
+								<td width="25%">Jenis Kelamin</td>
+								<td width="2%">:</td>
+								<td width="73%" ><span t-field="o.employee_id.gender"/></td>
+							</tr>
+							<tr>
+								<td width="25%">Tempat/Tanggal Lahir</td>
+								<td width="2%">:</td>
+								<td width="73%" style="text-align: justify;"><span t-field="o.employee_id.place_of_birth"/>, <span t-field="o.employee_id.birthday" t-field-options="{&quot;format&quot;: &quot;dd-MM-y&quot;}"/></td>
+							</tr>
+							<tr>
+								<td width="25%">Divisi Asal</td>
+								<td width="2%">:</td>
+								<td width="73%" ><span t-field="o.department_id.name"/></td>
+							</tr>
+							<tr>
+								<td width="25%">Posisi Asal</td>
+								<td width="2%">:</td>
+								<td width="73%" ><span t-field="o.job_id.name"/></td>
+							</tr>
+						</table>
+						<p/>
+							Mulai tanggal <span t-field="o.date_mutation" t-field-options="{&quot;format&quot;: &quot;dd MMMM y&quot;}"/>, berpindah ke
+						<p/>
+						<table width="100%" style="font-size:14px">
+							<tr>
+								<td width="25%">Divisi Tujuan</td>
+								<td width="2%">:</td>
+								<td width="73%" ><span t-field="o.new_department_id.name"/></td>
+							</tr>
+							<tr>
+								<td width="25%">Posisi Tujuan</td>
+								<td width="2%">:</td>
+								<td width="73%" ><span t-field="o.new_job_id.name"/></td>
+							</tr>
+						</table>
+						<br/>
+						<br/>
+						<table width="100%" style="font-size:15px">
+							<tr>
+								<td style="width:20%;border: 1px solid black;" align="center" rowspan="2">Karyawan Ybs</td>
+								<td style="width:40%;border: 1px solid black;" align="center" colspan="2">Menyetujui</td>
+								<td style="width:20%;border: 1px solid black;" align="center">Mengetahui</td>
+								<td style="width:20%;border: 1px solid black;" align="center">Mengetahui</td>
+							</tr>
+							<tr>
+								<td style="width:20%;border: 1px solid black;" align="center"><span t-field="o.department_id.name"/></td>
+								<td style="width:20%;border: 1px solid black;" align="center"><span t-field="o.new_department_id.name"/></td>
+								<td style="width:20%;border: 1px solid black;" align="center" rowspan="2"><i>General Manager</i></td>
+							    <td style="width:20%;border: 1px solid black;" align="center" rowspan="2"><i>HRD</i></td>
+							</tr>
+							<tr>
+								<td style="width:20%;border: 1px solid black;" align="center" rowspan="6"></td>
+								<td style="width:20%;border: 1px solid black;" align="center"><i>Manager</i></td>
+								<td style="width:20%;border: 1px solid black;" align="center"><i>Manager</i></td>
+							</tr>
+							<tr>
+								<td style="width:20%;color: #ffffff;border: 1px solid black;" align="center" ><br/>.</td>
+								<td style="width:20%;color: #ffffff;border: 1px solid black;" align="center" ><br/>.</td>
+							    <td style="width:20%;color: #ffffff;border: 1px solid black;" align="center" rowspan="5">.</td>
+								<td style="width:20%;color: #ffffff;border: 1px solid black;" align="center" rowspan="5">.</td>
+							</tr>
+							<tr>
+								<td style="width:20%;border: 1px solid black;" align="center"><i>Group Leader</i></td>
+								<td style="width:20%;border: 1px solid black;" align="center"><i>Group Leader</i></td>
+							</tr>
+							<tr>
+								<td style="width:20%;color: #ffffff;border: 1px solid black;" align="center"><br/>.</td>
+								<td style="width:20%;color: #ffffff;border: 1px solid black;" align="center"><br/>.</td>
+							</tr>
+						</table>
+						<p/>
+						<table width="100%" style="font-size:10px">
+							<tr>
+								<td style="width:20%" align="left">Printed : <span t-field="o.hari_tanggal"/></td>
+								<td style="width:80%" align="center"/>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</t>
+		</t>
+	</template>
+
+
+	<template id="report_mutasi">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="bgt_mutasi.report_mutasi_document" t-lang="o.user_id.partner_id.lang"/>
+        </t>
+    </template>
+
+
+    <record id="paperformat_mutasi" model="report.paperformat">
+        <field name="name">Mutasi</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">10</field>
+        <field name="margin_bottom">20</field>
+        <field name="margin_left">20</field>
+        <field name="margin_right">20</field>
+        <field name="header_line" eval="False" />
+        <field name="header_spacing">0</field>
+        <field name="dpi">96</field>
+    </record>
+
+
+    <record id="bgt_mutasi_report" model="ir.actions.report.xml">
+      	<field name="paperformat_id" ref="bgt_mutasi.paperformat_mutasi"/>
+    </record>
+
+</odoo>

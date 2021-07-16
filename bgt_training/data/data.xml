@@ -1,0 +1,13 @@
+<odoo>
+
+	<record id="training_sequence" model="ir.sequence">
+		<field name="name">Training</field>
+		<field name="code">hr.training</field>
+		<field name="prefix"></field>
+		<field name="suffix">/TRN/YT/%(year)s</field>
+		<field name="padding">4</field>
+		<field eval="1" name="number_next"/>
+        <field eval="1" name="number_increment"/>
+	</record>
+
+</odoo>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<!--     <record id="hr_payroll_report2_filter" model="ir.ui.view">
+        <field name="name">hr.payroll.report2.search</field>
+        <field name="model">hr.payroll.report2</field>
+        <field name="arch" type="xml">
+            <search string="Search report">
+                <field name="bank"/>
+                <field name="contract_type_id"/>
+                <field name="level_id"/>
+                <field name="department_id"/>
+                <group string="Group By">
+                    <filter name="bank" string="Payment Methode" context="{'group_by':'bank'}"/>
+                    <filter name="contract_type_id" string="Contract Type" context="{'group_by':'contract_type_id'}"/>
+                    <filter name="level_id" string="Job Level" context="{'group_by':'level_id'}"/>
+                    <filter name="department_id" string="Department" context="{'group_by':'department_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record> -->
+
+     <record id="view_hr_payroll_report2_tree" model="ir.ui.view">
+        <field name="name">hr.payroll.report2.tree</field>
+        <field name="model">hr.payroll.report2</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Report List" create="false" edit="false" delete="false">
+                <field name="sequence" widget="handle"/>
+                <field name="bank" invisible="1"/>
+                <field name="contract_type_id" invisible="1"/>
+                <field name="level_id" invisible="1"/>
+                <field name="department_id" invisible="1"/>
+                <field name="name"/>
+                <field name="tunjangan" />
+                <field name="lembur" />
+                <field name="upah" />
+                <field name="total" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_hr_payroll_report2" model="ir.actions.act_window">
+        <field name="name">Result</field>
+        <field name="res_model">hr.payroll.report2</field>
+        <field name="view_type">form</field>
+        <field name="view_id" ref="view_hr_payroll_report2_tree"/>
+        <!-- <field name="search_id" ref="hr_payroll_report2_filter"/> -->
+    </record>
+
+    <record id="action_payroll_report" model="ir.actions.act_window">
+        <field name="name">Payroll Summary</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">payroll.report.wizard</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="bgt_payroll_report.payroll_report_form_view"/>
+        <field name="target">new</field>
+    </record>
+
+
+    <menuitem id="menu_hr_report_payroll" parent="hr_payroll.menu_hr_payroll_root" sequence="50" name="Reports" groups="hr.group_hr_manager"/>
+    <menuitem id="sub_menu_report2" parent="menu_hr_report_payroll" sequence="20" name="Cara Bayar"/>
+    <menuitem action="show_payroll_report2_wizard" id="sub_menu_report2_query" parent="sub_menu_report2" sequence="10"/>
+    <menuitem action="action_hr_payroll_report2" id="sub_menu_report2_result" parent="sub_menu_report2" sequence="20"/>
+
+        <menuitem id="menu_payroll_report"
+            name="Payroll Summary"
+            action="action_payroll_report"
+            parent="menu_hr_report_payroll"
+            sequence="0"/>
+
+</odoo>

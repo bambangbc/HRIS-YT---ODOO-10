@@ -1,0 +1,205 @@
+<?xml version="1.0"?>
+<odoo>
+
+	<report
+	    id="bgt_kesepakatan_upah_report"
+	    string="Kesepakatan Upah"
+	    model="hr.contract"
+	    report_type="qweb-pdf"
+	    file="bgt_contract.report_kesepakatan_upah"
+	    name="bgt_contract.report_kesepakatan_upah"
+	/>
+
+	<template id="report_kesepakatan_upah_document">
+		<t t-call="report.html_container">
+			<t t-foreach="docs" t-as="o">
+				<div class="page">
+					<div class="row" style="font-size:15px">
+						<table width="100%">
+							<tr>
+							<td width="100%" align="center"><img src="/bgt_contract/static/src/image/pkwt_header.png" class="img img-responsive" /></td>
+							</tr>
+						</table>
+						<p/>
+						<p/>
+						<table width="100%" style="font-size:14px">
+							<tr>
+								<td width="100%" align="center"><strong>SURAT KESEPAKATAN UPAH</strong></td>
+							</tr>
+							<tr>
+								<td width="100%" align="center"><strong>NO : <span t-field="o.no_kesepakatan_upah"/></strong></td>
+							</tr>
+						</table>
+						<p/>
+						<table width="100%" style="font-size:14px">
+							<tr>
+								<td width="26%" style="text-align: center;">NIK</td>
+								<td width="2%"></td>
+								<td width="72%"/>
+							</tr>
+							<tr>
+								<td width="26%" style="text-align: center;"><span t-field="o.employee_id.nik"/></td>
+								<td width="2%"></td>
+								<td width="72%" />
+							</tr>
+							<tr>
+								<td width="26%">Nama</td>
+								<td width="2%">:</td>
+								<td width="72%"><span t-field="o.employee_id.name"/></td>
+							</tr>
+							<tr>
+								<td width="26%">Jenis Kelamin</td>
+								<td width="2%">:</td>
+								<td width="72%" ><span t-field="o.employee_id.gender"/></td>
+							</tr>
+							<tr>
+								<td width="26%">Tempat, Tanggal Lahir</td>
+								<td width="2%">:</td>
+								<td width="72%" style="text-align: justify;"><span t-field="o.employee_id.place_of_birth"/>, <span t-field="o.employee_id.birthday" t-field-options="{&quot;format&quot;: &quot;dd-MM-y&quot;}"/></td>
+							</tr>
+							<tr>
+								<td width="26%">Divisi</td>
+								<td width="2%">:</td>
+								<td width="72%" ><span t-field="o.employee_id.department_id.name"/></td>
+							</tr>
+							<tr>
+								<td width="26%">Posisi</td>
+								<td width="2%">:</td>
+								<td width="72%" ><span t-field="o.employee_id.job_id.name"/></td>
+							</tr>
+							<tr>
+								<td width="26%">Tanggal Mulai Kerja</td>
+								<td width="2%">:</td>
+								<td width="72%"><span t-field="o.date_start" t-field-options="{&quot;format&quot;: &quot;dd-MM-y&quot;}"/></td>
+							</tr>
+						</table>
+						<p/>
+						<p/>
+						<table width="100%" style="font-size:14px">
+							<tr>
+								<td width="26%" style="text-align: center;">Upah</td>
+								<td width="2%">:</td>
+								<td width="30%"><span t-field="o.wage"/></td>
+								<td width="26%">  Dibayarkan </td>
+								<td width="2%">:</td>
+								<td width="50%"><span t-field="o.pay_status_id.name"/></td>
+							</tr>
+						</table>
+						<p/>
+						<p/>
+						<table width="100%" style="font-size:14px">
+							<tr>
+								<td width="26%">Uang Saku</td>
+								<td width="2%">:</td>
+								<td width="28%" style="text-align: right;"><span t-field="o.uang_saku"/></td>
+								<td width="2%"/>
+								<td width="50%">perhari</td>
+							</tr>
+							<tr>
+								<td width="26%">Gaji Pokok</td>
+								<td width="2%">:</td>
+								<td width="28%" style="text-align: right;"><span t-field="o.gapok" /></td>
+								<td width="2%"/>
+								<td width="50%">perhari</td>
+							</tr>
+							<tr>
+								<td width="26%">Premi Hadir</td>
+								<td width="2%">:</td>
+								<td width="28%" style="text-align: right;"><span t-field="o.premi_hadir"/></td>
+								<td width="2%"/>
+								<td width="50%">perhari</td>
+							</tr>
+							<tr>
+								<td width="26%">Uang Transport</td>
+								<td width="2%">:</td>
+								<td width="28%" style="text-align: right;"><span t-field="o.uang_transport"/></td>
+								<td width="2%"/>
+								<td width="50%">perhari</td>
+							</tr>
+							<tr>
+								<td width="26%">Bonus Kehadiran</td>
+								<td width="2%">:</td>
+								<td width="28%" style="text-align: right;"><span t-field="o.bonus_kehadiran" /></td>
+								<td width="2%"/>
+								<td width="50%">perbulan</td>
+							</tr>
+							<tr>
+								<td width="26%">Tunjangan</td>
+								<td width="2%">:</td>
+								<td width="28%" style="text-align: right;"><span t-field="o.tunjangan"/></td>
+								<td width="2%"/>
+								<td width="50%">perbulan</td>
+							</tr>
+							<tr>
+								<td width="26%">Uang Makan</td>
+								<td width="2%">:</td>
+								<td width="28%" style="text-align: right;"><span t-field="o.meals"/></td>
+								<td width="2%"/>
+								<td width="50%">perhari</td>
+							</tr>
+							<tr>
+								<td width="26%">Upah Bersih</td>
+								<td width="2%">:</td>
+								<td width="28%" style="text-align: right;"><span t-field="o.upah_bersih"/></td>
+								<td width="2%"/>
+								<td width="50%">perhari</td>
+							</tr>
+						</table>
+						<br/>
+						<br/>
+
+						<table width="100%" style="font-size:15px">
+							<tr>
+								<td style="width:20%" align="center">Karyawan Ybs,</td>
+								<td style="width:20%" align="center">Group Leader,</td>
+								<td style="width:20%" align="center">Personalia,</td>
+								<td style="width:20%" align="center">General Manager,</td>
+								<td style="width:20%" align="center">Payroll,</td>
+							</tr>
+						</table>
+						<p><span style="color: #ffffff;">a</span></p>
+						<p><span style="color: #ffffff;">a</span></p>
+						<p><span style="color: #ffffff;">a</span></p>
+						<p><span style="color: #ffffff;">a</span></p>
+						<table width="100%" style="font-size:15px">
+							<tr>
+								<td style="width:20%" align="center">( <span t-field="o.employee_id.name"/>) </td>
+								<td style="width:20%" align="center">( <span t-field="o.employee_id.parent_id.name"/> )</td>
+								<td style="width:20%" align="center">(<span style="color: #ffffff;">aaaaaaaaaaaaaaa</span>)</td>
+								<td style="width:20%" align="center">(<span style="color: #ffffff;">aaaaaaaaaaaaaaa</span>)</td>
+								<td style="width:20%" align="center">(<span style="color: #ffffff;">aaaaaaaaaaaaaaa</span>)</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</t>
+		</t>
+	</template>
+
+	<template id="report_kesepakatan_upah">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="bgt_contract.report_kesepakatan_upah_document" t-lang="o.company_id.partner_id.lang"/>
+        </t>
+    </template>
+
+
+    <record id="paperformat_kesepakatan_upah" model="report.paperformat">
+        <field name="name">Kesepakatan Upah</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">10</field>
+        <field name="margin_bottom">20</field>
+        <field name="margin_left">20</field>
+        <field name="margin_right">20</field>
+        <field name="header_line" eval="False" />
+        <field name="header_spacing">0</field>
+        <field name="dpi">96</field>
+    </record>
+
+
+    <record id="bgt_kesepakatan_upah_report" model="ir.actions.report.xml">
+      	<field name="paperformat_id" ref="bgt_contract.paperformat_kesepakatan_upah"/>
+    </record>
+
+</odoo>

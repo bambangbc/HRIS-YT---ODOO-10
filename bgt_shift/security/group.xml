@@ -1,0 +1,42 @@
+<odoo noupdate="1">
+
+		<record id="group_user_shift" model="res.groups">
+			<field name="name">User Shift</field>
+			<field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+		</record>
+
+
+		<record id="property_rule_user_shift" model="ir.rule">
+			<field name="name">User Shift</field>
+			<field name="model_id" ref="model_hr_rolling_shift"/>
+	        <field name="groups" eval="[(4, [ref('group_user_shift')])]"/>
+	        <field name="perm_read" eval="True"/>
+	        <field name="perm_write" eval="True"/>
+	        <field name="perm_create" eval="True"/>
+	        <field name="perm_unlink" eval="True"/>
+	        <field name="domain_force">[('department_id.member_ids.user_id', 'in', [user.id])]</field>
+	    </record>
+
+		<!--record id="property_rule_general_manager_shift" model="ir.rule">
+			<field name="name">GM Shift</field>
+			<field name="model_id" ref="model_hr_rolling_shift"/>
+			<field name="groups" eval="[(4, ref('group_user_shift'))]"/>
+	        <field name="perm_read" eval="True"/>
+	        <field name="perm_write" eval="False"/>
+	        <field name="perm_create" eval="False"/>
+	        <field name="perm_unlink" eval="False"/>
+			<field name="domain_force">[(1,'=',1)]</field>
+		</record-->
+
+	    <record id="property_rule_hrd_shift" model="ir.rule">
+	        <field name="name">HR Shift</field>
+	        <field name="model_id" ref="model_hr_rolling_shift"/>
+	        <field name="groups" eval="[(4, [ref('hr.group_hr_user')]),(4, [ref('hr.group_hr_manager')])]"/>
+	        <field name="perm_read" eval="True"/>
+	        <field name="perm_write" eval="False"/>
+	        <field name="perm_create" eval="False"/>
+	        <field name="perm_unlink" eval="False"/>
+	        <field name="domain_force">[(1,'=',1)]</field>
+	    </record>
+
+</odoo>

@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_kenaikan_upah,access_hr_kenaikan_upah,model_hr_kenaikan_upah,hr.group_hr_user,1,1,1,1
+access_hr_kenaikan_upah_detail,access_hr_kenaikan_upah_detail,model_hr_kenaikan_upah_detail,hr.group_hr_user,1,1,1,1

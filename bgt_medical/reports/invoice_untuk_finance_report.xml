@@ -1,0 +1,145 @@
+<?xml version="1.0"?>
+<odoo>
+
+	<report 
+	    id="bgt_medical3_report"
+	    string="Invoice Untuk Finance"
+	    model="hr.medical" 
+	    report_type="qweb-pdf"
+	    file="bgt_medical.report_medical3" 
+	    name="bgt_medical.report_medical3" 
+	/>
+
+	<template id="report_medical3_document">
+		<t t-call="report.html_container">
+			<t t-foreach="docs" t-as="o">
+				<div class="page">
+					<div class="row" style="font-size:15px" t-if="o.state == 'done'">
+						<table width="100%">
+							<tr>
+							<td width="100%" align="center"><img src="/bgt_medical/static/src/image/medical_header.png" class="img img-responsive" /></td>
+							</tr>
+						</table>
+						<p/>
+						<p/>
+						<table width="100%" style="font-size:15px">
+							<tr>
+								<td width="100%" align="center"><strong>MEDICAL INVOICE</strong></td>
+							</tr>
+							<tr>
+								<td width="100%" align="center"><strong>NO : <span t-field="o.name"/></strong></td>
+							</tr>
+						</table>
+						<p/>
+						<p/>
+						<table width="100%" style="font-size:14px">
+							<tr>
+								<td width="26%">NIK</td>
+								<td width="2%">:</td>
+								<td width="72%"><span t-field="o.employee_id.nik"/></td>
+							</tr>
+							<tr>
+								<td width="26%">Nama</td>
+								<td width="2%">:</td>
+								<td width="72%"><span t-field="o.employee_id.name"/></td>
+							</tr>
+							<tr>
+								<td width="26%">Divisi</td>
+								<td width="2%">:</td>
+								<td width="72%" ><span t-field="o.employee_id.department_id.name"/></td>
+							</tr>
+							<tr>
+								<td width="26%">Jabatan</td>
+								<td width="2%">:</td>
+								<td width="72%" ><span t-field="o.employee_id.job_id.name"/></td>
+							</tr>
+						</table>
+						<p/>
+						<p/>
+						<table width="100%" style="font-size:14px">
+							<tr>
+								<td width="26%">Tanggal Berobat</td>
+								<td width="2%">:</td>
+								<td width="72%" ><span t-field="o.tanggal"/></td>
+							</tr>
+							<tr>
+								<td width="26%">Tanggal Diterima HRD</td>
+								<td width="2%">:</td>
+								<td width="72%"><span t-field="o.tanggal_berobat"/></td>
+							</tr>
+							
+						</table>
+						<p/>
+						<p/>
+						<table width="100%" style="font-size:15px">
+							<tr>
+								<td width="26%"><strong>Klaim Harga</strong></td>
+								<td width="2%">:</td>
+								<td width="72%" ><strong><span t-field="o.klaim_harga"/></strong></td>
+							</tr>
+						</table>
+						<p/>
+						<p/>
+						<p/>
+						<table width="100%" style="font-size:15px">
+							<tr>
+								<td style="width:30%" />
+								<td style="width:40%" />
+								<td style="width:30%" align="center">Salam Hormat,</td>
+							</tr>
+						</table>
+						<p><span style="color: #ffffff;">a</span></p>
+						<p><span style="color: #ffffff;">a</span></p>
+						<p><span style="color: #ffffff;">a</span></p>
+						<p><span style="color: #ffffff;">a</span></p>
+						<table width="100%" style="font-size:15px">
+							<tr>
+								<td style="width:30%" />
+								<td style="width:40%" />
+								<td style="width:30%" />
+							</tr>
+							<tr>
+								<td style="width:30%" />
+								<td style="width:40%" />
+								<td style="width:30%" align="center">Personalia</td>
+							</tr>
+						</table>
+					</div>
+					<div class="row" style="font-size:20px" t-if="o.state != 'done'">
+						<p/>
+							Invoice untuk finance ini hanya bisa diprint ketika berstatus "Done"
+						<p/>
+					</div>
+				</div>
+			</t>
+		</t>
+	</template>
+
+
+	<template id="report_medical3">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="bgt_medical.report_medical3_document" t-lang="o.user_id.partner_id.lang"/>
+        </t>
+    </template>
+
+
+    <record id="paperformat_medical3" model="report.paperformat">
+        <field name="name">Invoice untuk finance (Berobat)</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">10</field>
+        <field name="margin_bottom">20</field>
+        <field name="margin_left">20</field>
+        <field name="margin_right">20</field>
+        <field name="header_line" eval="False" />
+        <field name="header_spacing">0</field>
+        <field name="dpi">96</field>
+    </record>
+
+
+    <record id="bgt_medical3_report" model="ir.actions.report.xml">
+      	<field name="paperformat_id" ref="bgt_medical.paperformat_medical3"/>
+    </record>
+
+</odoo>

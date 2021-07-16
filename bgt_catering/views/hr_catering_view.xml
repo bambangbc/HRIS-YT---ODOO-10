@@ -1,0 +1,284 @@
+<odoo>
+
+        <record id="catering_search" model="ir.ui.view">
+            <field name="name">hr.catering.search</field>
+            <field name="model">hr.catering</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Catering">
+                    <field name="name" string="Number" />
+                    <field name="employee_id"/>
+                    <field name="nik"/>
+                    <field name="department_id" />
+                    <field name="schedule_id" />
+                    <filter name="today" string="Today" domain="[('date', '&gt;=', datetime.datetime.now().replace(hour=0, minute=0, second=0)),('date', '&lt;=', datetime.datetime.now().replace(hour=23, minute=59, second=59))]" />
+                    <filter name="yesterday" string="Yesterday" domain="[('yesterday', '&gt;=', datetime.datetime.now().replace(hour=0, minute=0, second=0)),('yesterday', '&lt;=', datetime.datetime.now().replace(hour=23, minute=59, second=59))]" />
+                    <group expand="0" string="Group By...">
+                        <filter string="Schedule"
+                                domain="[]"
+                                context="{'group_by':'schedule_id'}"/>
+                        <filter string="Responsible"
+                                domain="[]"
+                                context="{'group_by':'employee_id'}"/>
+                        <filter string="Department"
+                                domain="[]"
+                                context="{'group_by':'department_id'}"/>
+                        <filter string="Tanggal Catering"
+                                domain="[]"
+                                context="{'group_by':'date'}"/>
+                        <filter string="State"
+                                domain="[]"
+                                context="{'group_by':'state'}"/>
+                    </group>
+                </search>
+             </field>
+         </record>
+
+        <record id="catering_details_search" model="ir.ui.view">
+            <field name="name">hr.catering.detail.search</field>
+            <field name="model">hr.catering.detail</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="Catering report">
+                    <field name="employee_id"/>
+                    <field name="nik"/>
+                    <field name="job_id" />
+                    <field name="level_id" />
+                    <field name="department_id" />
+                    <field name="schedule_id" />
+                    <field name="uang_makan2"/>
+                    <filter name="today" string="Today" domain="[('date', '&gt;=', datetime.datetime.now().replace(hour=0, minute=0, second=0)),('date', '&lt;=', datetime.datetime.now().replace(hour=23, minute=59, second=59))]" />
+                    <filter name="yesterday" string="Yesterday" domain="[('yesterday', '&gt;=', datetime.datetime.now().replace(hour=0, minute=0, second=0)),('yesterday', '&lt;=', datetime.datetime.now().replace(hour=23, minute=59, second=59))]" />
+                    <filter string="Approved"
+                                name="approved"
+                                domain="[('state','=','approved')]"
+                                context="{}"/>
+                    <filter string="Received"
+                                name="received"
+                                domain="[('state','=','received')]"
+                                context="{}"/>
+                    <filter string="Done"
+                                name="done"
+                                domain="[('state','=','done')]"
+                                context="{}"/>
+                    <group expand="0" string="Group By...">
+                        <filter string="Schedule"
+                                name="schedule_id"
+                                domain="[]"
+                                context="{'group_by':'schedule_id'}"/>
+                        <filter string="Department"
+                                name="department_id"
+                                domain="[]"
+                                context="{'group_by':'department_id'}"/>
+                        <filter string="Job Level"
+                                domain="[]"
+                                context="{'group_by':'level_id'}"/>
+                        <filter string="Job Title"
+                                domain="[]"
+                                context="{'group_by':'job_id'}"/>
+                        <filter string="Responsible"
+                                domain="[]"
+                                context="{'group_by':'employee_id'}"/>
+                        <filter string="Tanggal Catering"
+                                domain="[]"
+                                context="{'group_by':'date'}"/>
+                        <filter string="Uang Makan"
+                                domain="[]"
+                                context="{'group_by':'uang_makan2'}"/>
+                        <filter string="State"
+                                domain="[]"
+                                context="{'group_by':'state'}"/>
+                    </group>
+                </search>
+             </field>
+         </record>
+
+        <record id="view_catering_tree" model="ir.ui.view">
+            <field name="name">hr.catering.tree</field>
+            <field name="model">hr.catering</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Catering List">
+                    <field name="name"/>
+                    <field name="nik"/>
+                    <field name="employee_id"/>
+                    <!--field name="schedule_id" /-->
+                    <field name="date"/>
+                    <field name="date_from"/>
+                    <field name="date_to"/>
+                    <field name="yesterday" invisible="1"/>
+                    <field name="user_id" invisible="1"/>
+                    <!--field name="department_id"/>
+                    <field name="notes" /-->
+                    <field name="state" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_catering_details_tree" model="ir.ui.view">
+            <field name="name">hr.catering.detail.tree</field>
+            <field name="model">hr.catering.detail</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Catering List" create="0" edit="0" delete="0">
+                    <field name="nik"/>
+                    <field name="employee_id"/>
+                    <field name="schedule_id" />
+                    <field name="date"/>
+                    <field name="yesterday" invisible="1"/>
+                    <field name="department_id"/>
+                    <field name="uang_makan" invisible="1"/>
+                    <field name="uang_makan2"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_catering_form" model="ir.ui.view">
+            <field name="name">hr.catering.form</field>
+            <field name="model">hr.catering</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+            <form string="Catering Form">
+                <header>
+                    <button name="create_catering"
+                            state="draft"
+                            string="Generate Catering"
+                            type="object"
+                            class="oe_highlight"
+                            />
+                    <button name="button_approve"
+                            states="draft"
+                            string="Approve"
+                            type="object"
+                            class="oe_highlight"
+                            />
+
+                    <button name="button_receive"
+                            states="approved"
+                            string="Receive"
+                            type="object"
+                            group="hr.group_hr_user,hr.group_hr_manager"
+                           />
+
+                    <button name="button_done"
+                            states="received"
+                            string="Validate"
+                            type="object"
+                            class="oe_highlight"
+                            groups="hr.group_hr_user,hr.group_hr_manager"
+                           />
+
+                    <button name="action_print"
+                            string="Print Excel"
+                            type="object"
+                            class="oe_highlight"
+                            groups="hr.group_hr_user,hr.group_hr_manager"
+                           />
+
+                    <field name="state" widget="statusbar" statusbar_visible="draft,approved,received,done" statusbar_colors='{"draft":"red","approved":"blue"}' readonly="1"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <div class="oe_title">
+                                <h1><field name="name" string="Number" nolabel="1" readonly="1"/></h1>
+                            </div>
+                        </group>
+                        <group>
+                            <field name="user_id" invisible="1"/>
+                            <field name="yesterday" invisible="1"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <field name="employee_id" options="{'no_create':True}" />
+                            <field name="nik" readonly="1"/>
+                            <field name="department_id" readonly="1"/>
+                        </group>
+                        <group>
+                            <field name="date" readonly="1"/>
+                            <!--field name="schedule_id" attrs="{'readonly':[('state','!=','draft')]}" options="{'no_create':True}"/-->
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                            <field name="total_level" />
+                        </group>
+                    </group>
+                    <notebook colspan="5">
+                        <page string="Karyawan">
+                            <field col="4" colspan="4" name="employee_ids" nolabel="1" widget="one2many_list">
+                                <tree string="Karyawan" editable="bottom">
+                                    <field name="employee_id" options="{'no_create':True}"/>
+                                    <field name="nik" readonly="1"/>
+                                    <field name="department_id" invisible="0"/>
+                                    <field name="uang_makan" invisible="1"/>
+                                    <field name="level_id" invisible="0"/>
+                                    <field name="job_id" readonly="0"/>
+                                    <field name="schedule_id" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                    <field name="notes" placeholder="Notes.."/>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+            </field>
+        </record>
+
+
+        <record id="action_catering" model="ir.actions.act_window">
+            <field name="name">Catering</field>
+            <field name="res_model">hr.catering</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field eval="False" name="view_id"/>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+            <field name="search_view_id" ref="catering_search"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+                Click to add an data
+              </p><p>
+                klik tombol create untuk menambahkan data catering
+              </p>
+            </field>
+        </record>
+
+        <record id="action_catering_detail" model="ir.actions.act_window">
+            <field name="name">Catering Report</field>
+            <field name="res_model">hr.catering.detail</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,graph</field>
+            <field name="view_id" ref="view_catering_details_tree"/>
+            <field name="domain">[('state','in',('approved','received','done'))]</field>
+            <field name="context">{'search_default_yesterday':1}</field>
+            <field name="search_view_id" ref="catering_details_search"/>
+            <field name="help" type="html">
+              <p class="oe_view_nocontent_create">
+
+              </p><p>
+
+              </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_hr_catering_root"
+            name="Catering" sequence="95"/>
+
+        <menuitem id="catering_menu"
+                name="Catering"
+                parent="menu_hr_catering_root"
+                sequence="10"
+                action="action_catering"/>
+        <menuitem id="catering_detail_menu"
+                name="Catering Report"
+                parent="menu_hr_catering_root"
+                sequence="20"
+                groups="hr.group_hr_user,hr.group_hr_manager"
+                action="action_catering_detail"/>
+
+</odoo>

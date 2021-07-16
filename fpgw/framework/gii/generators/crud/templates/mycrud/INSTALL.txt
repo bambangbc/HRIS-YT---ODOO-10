@@ -1,0 +1,2 @@
+simpan folder mycrud di yii/framework/gii/generators/crud/templates/
+

@@ -1,0 +1,13 @@
+<odoo>
+
+	<record id="kenaikan_upah_sequence" model="ir.sequence">
+		<field name="name">Kenaikan Upah Tahunan</field>
+		<field name="code">hr.kenaikan.upah</field>
+		<field name="prefix">UT/YT/</field>
+		<field name="suffix"></field>
+		<field name="padding">4</field>
+		<field eval="1" name="number_next"/>
+        <field eval="1" name="number_increment"/>
+	</record>
+
+</odoo>

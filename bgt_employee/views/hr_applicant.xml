@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_applicant_additional_form" model="ir.ui.view">
+            <field name="name">hr.applicant.additional.form</field>
+            <field name="model">hr.applicant</field>
+            <field name="inherit_id" ref="hr_recruitment.crm_case_form_view_job"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <field name="categ_ids" position="replace">
+                    <field name="categ_ids" invisible="1"/>
+                </field>
+                <field name="partner_id" position="replace">
+                    <field name="partner_id" invisible="1">
+                </field>
+                <field name="partner_id" position="before">
+                    <field name="nomor_ktp"/>
+                    <field name="tempat_lahir"/>
+                    <field name="tanggal_lahir"/>
+                    <field name="status"/>
+                    <field name="jumlah_anak"/>
+                    <field name="alamat"/>
+                    <field name="alamat_ktp"/>
+                    <field name="religion"/>
+                </field>
+                <field name="hobi" position="replace">
+                    <field name="hobi" invisible="1"/>
+                </field>
+                <field name="country_id" position="replace">
+                    <field name="country_id" invisible="1"/>
+                </field>
+                <field name="email_from" position="after">
+                    <field name="jenis_kelamin"/>
+                </field>
+                <field name="user_id" position="before">
+                    <field name="tinggi_badan"/>
+                    <field name="berat_badan"/>
+                    <field name="kendaraan"/>
+                    <field name="sim_ids" widget="many2many_tags"/>
+                    <field name="bank_id"/>
+                    <field name="nomor_rekening"/>
+                    <field name="npwp"/>
+                </field>
+                <field name="reference" position="after">
+                    <field name="is_phl"/>
+                </field>
+                <!--xpath expr="//form/sheet/separator" position="before">
+                    <separator string="Applicant's Detail Information"/>
+                    <notebook>
+                        <page string="Family Information">
+                            <group>
+                                <div>
+                                    Anak ke
+                                    <field name="anak_ke" nolabel="1" class="oe_inline"/>  dari
+                                    <field name="jumlah_saudara" nolabel="1" class="oe_inline"/>  bersaudara
+                                </div>
+                            </group>
+                            <field name="family_ids" mode="tree">
+                                <tree string="Applicant Family" editable="bottom">
+                                        <field name="family"/>
+                                        <field name="name"/>
+                                        <field name="place_of_birth"/>
+                                        <field name="birthday"/>
+                                        <field name="age"/>
+                                        <field name="work"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Education Information">
+                            <field name="education_ids" mode="tree">
+                                <tree string="Applicant Education" editable="bottom">
+                                    <field name="education"/>
+                                    <field name="name"/>
+                                    <field name="major"/>
+                                    <field name="city"/>
+                                    <field name="start_year"/>
+                                    <field name="end_year"/>
+                                    <field name="certificate"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Organization Experience">
+                            <field name="organization_ids" mode="tree">
+                                <tree string="Applicant Organization" editable="bottom">
+                                    <field name="name"/>
+                                    <field name="city"/>
+                                    <field name="major"/>
+                                    <field name="position"/>
+                                    <field name="start_year"/>
+                                    <field name="end_year"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Skills Information">
+                            <field name="skill_ids" mode="tree">
+                                <tree string="Applicant Skills" editable="bottom">
+                                    <field name="name"/>
+                                    <field name="level"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Work Experience">
+                            <field name="work_ids" mode="tree">
+                                <tree string="Work Experience" editable="bottom">
+                                    <field name="name"/>
+                                    <field name="position"/>
+                                    <field name="start_year"/>
+                                    <field name="end_year"/>
+                                    <field name="reasons_leaving_the_job"/>
+                                    <field name="last_salary"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Other Information">
+                            <label for="reference_ids" string="Sebutkan referensi orang yang dapat kami hubungi jika ingin mengetahui data lebih lengkap mengenai anda?"/>
+                            <field name="reference_ids" mode="tree">
+                                <tree string="Reference" editable="bottom">
+                                    <field name="name"/>
+                                    <field name="position"/>
+                                    <field name="phone"/>
+                                </tree>
+                            </field>
+                            <label for="guardian_ids" string="Sebutkan nama dan nomor telepon yang dapat kami hubungi untuk memberitahukan jika Anda mengalami musibah?"/>
+                            <field name="guardian_ids" mode="tree">
+                                <tree string="Guardian" editable="bottom">
+                                    <field name="name"/>
+                                    <field name="phone"/>
+                                    <field name="relation"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+            </xpath-->
+            </field>
+        </record>
+
+        <record id="view_hr_applicant_group" model="ir.ui.view">
+            <field name="name">new.hr.applicant.grouping.view</field>
+            <field name="model">hr.applicant</field>
+            <field name="inherit_id" ref="hr_recruitment.view_crm_case_jobs_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//search/group" position="inside">
+                    <filter string="Nomor KTP" domain="[]"
+                                context="{'group_by':'nomor_ktp'}"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</openerp>

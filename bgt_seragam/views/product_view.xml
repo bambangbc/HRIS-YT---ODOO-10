@@ -1,0 +1,40 @@
+<odoo>
+
+		<record id="view_product_form_inherit_seragam" model="ir.ui.view">
+			<field name="name">product.form.inherit.seragam</field>
+			<field name="model">product.template</field>
+			<field name="inherit_id" ref="product.product_template_form_view" />
+			<field name="arch" type="xml">
+				<div name="options" position="inside">
+                    <div>
+                        <field name="seragam"/>
+                        <label for="seragam"/>
+                    </div>
+                </div> 
+			</field>
+		</record>
+
+		<record id="view_template_property_form_seragam" model="ir.ui.view">
+			<field name="name">product.form.inherit.stock.seragam</field>
+			<field name="model">product.template</field>
+			<field name="inherit_id" ref="stock.view_template_property_form" />
+			<field name="arch" type="xml">
+				<group name="sale_condition" position="inside">
+                    <label for="min_order" attrs="{'invisible':[('seragam','=',False)]}"/>
+                    <div attrs="{'invisible':[('seragam','=',False)]}">
+                        <field name="min_order" class="oe_inline" style="vertical-align:baseline"/>
+                    </div>
+                    <label for="disc" attrs="{'invisible':[('seragam','=',False)]}"/>
+                    <div attrs="{'invisible':[('seragam','=',False)]}">
+                        <field name="disc" class="oe_inline" style="vertical-align:baseline"/> %
+                    </div>
+                    <label for="days" attrs="{'invisible':[('seragam','=',False)]}"/>
+                    <div attrs="{'invisible':[('seragam','=',False)]}">
+                        <field name="days" class="oe_inline" style="vertical-align:baseline"/> Days
+                    </div>
+                </group> 
+			</field>
+		</record>
+
+		
+</odoo>
